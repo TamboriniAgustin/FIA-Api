@@ -201,7 +201,7 @@
       return $valorCarrera;
     }
     function calcularPuntos($posicion, $temporada){
-      if($temporada >= 2015){
+      if($temporada >= 2013){
         switch ($posicion) {
           case 1: return 25;
           case 2: return 18;

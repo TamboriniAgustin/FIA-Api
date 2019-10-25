@@ -6,7 +6,10 @@
 
     <?php include('templates/header.php') ?>
 
-    <?php include('funcionesf1.php'); ?>    
+    <?php include('funcionesf1.php'); ?>
+
+    <!-- Establezco las temporadas que tendran 22 pilotos -->
+    <?php $temporadaCon22Pilotos = array(2016, 2014, 2013); ?>    
 
     <!-- Conecto a la base de datos y cargo las temporadas -->
     <?php 
@@ -177,9 +180,10 @@
               </select>
           </form>
           
+          <!-- Establezco la cantidad de pilotos que participan por carrera -->
           <?php 
             $cantidadPilotos = 20;
-            if($temporadaActual == 2016) $cantidadPilotos = 22;
+            if(in_array($temporadaActual, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
           ?>
 
           <!-- Australia -->

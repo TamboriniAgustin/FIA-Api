@@ -45,6 +45,13 @@ function agregarPilotos(pilotosActuales, pilotosNuevos){
     return resultado.replace('"', '').replace('"', '').replace('[', '{').replace(']', '}');
 }
 
+function temporadaCon22Pilotos(temporada){
+    if(temporada == 2016) return true;
+    if(temporada == 2014) return true;
+    if(temporada == 2013) return true;
+    return false;
+}
+
 /*********************************************************/
 
 function leerFormulario(formulario, nombreFormulario){
@@ -97,7 +104,7 @@ function leerFormulario(formulario, nombreFormulario){
         const posEscuderias = new Array();
 
         var cantidadPilotos = 20;
-        if(temporada == 2016) cantidadPilotos = 22;
+        if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
 
         for (let i = 1; i <= cantidadPilotos; i++) {
             let idPilotos = "#posicion" + i + "-Piloto";
