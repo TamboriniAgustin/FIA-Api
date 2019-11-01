@@ -107,7 +107,7 @@
           </div>
         </form>
 
-        <!-- Agregar una carrera -->
+        <!-- Crear una Temporada -->
         <h3 class="text-center">Crear una Temporada</h3>
         <form class="crear-temporada" method="POST" action="#">
           <div class="form-group row">
@@ -123,6 +123,81 @@
               </div>
             </div>
           </div> 
+          <div class="form-group row">
+            <div class="offset-4 col-8 text-center">
+              <button name="submit" type="submit" class="btn btn-primary">Crear</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Crear una Pista -->
+        <h3 class="text-center">Crear una Pista</h3>
+        <form class="crear-pista" method="POST" action="#">
+          <div class="form-group row">
+            <label for="pais" class="col-4 col-form-label">País</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="pais" name="pais" placeholder="Ingrese el país de la pista a agregar..." type="text" required="required" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="ciudad" class="col-4 col-form-label">Ciudad</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="ciudad" name="ciudad" placeholder="Ingrese la ciudad de la pista a agregar..." type="text" required="required" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colorP" class="col-4 col-form-label">Color Principal</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="colorP" name="colorP" type="color" required="required" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="textoP" class="col-4 col-form-label">Texto Principal</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="textoP" name="textoP" type="color" required="required" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="textoS" class="col-4 col-form-label">Texto Secundario</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="textoS" name="textoS" type="color" required="required" class="form-control">
+              </div>
+            </div>
+          </div>  
           <div class="form-group row">
             <div class="offset-4 col-8 text-center">
               <button name="submit" type="submit" class="btn btn-primary">Crear</button>

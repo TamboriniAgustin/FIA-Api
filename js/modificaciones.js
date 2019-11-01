@@ -29,6 +29,25 @@ function leerFormulario(formulario, nombreFormulario){
         datos.append('accion', 'editar');
         modificarBD(datos, nombreFormulario);
     }
+    if(nombreFormulario == "pista"){
+        //Tomamos los valores insertados en el formulario
+        const id = $("#idPista").val();
+        const pais = $("#pais").val();
+        const ciudad = $("#ciudad").val();
+        const colorP = $("#colorP").val();
+        const textoP = $("#textoP").val();
+        const textoS = $("#textoS").val();
+        //Generamos en objeto con los datos del formulario
+        const datos = new FormData();
+        datos.append('id', id);
+        datos.append('pais', pais);
+        datos.append('ciudad', ciudad);
+        datos.append('color_principal', colorP);
+        datos.append('texto_principal', textoP);
+        datos.append('texto_secundario', textoS);
+        datos.append('accion', 'editar');
+        modificarBD(datos, nombreFormulario);
+    }
 }
 
 function modificarBD(datos, nombreFormulario){
@@ -61,6 +80,22 @@ function modificarBD(datos, nombreFormulario){
             },
             error: function (respuesta) {
                 alert('La escuderia no pudo ser modificada');
+            }
+        });
+    }
+    if(nombreFormulario == "pista"){
+        //Llamo a AJAX
+        $.ajax({
+            url: "db/pistas.php",
+            type: "POST",
+            data: datos,
+            processData: false,
+            contentType: false,
+            success: function (respuesta) {
+                alert('La pista fue modificada con éxito');
+            },
+            error: function (respuesta) {
+                alert('La pista no pudo ser modificada');
             }
         });
     }
@@ -116,6 +151,21 @@ function eliminarBD(e){
                 }
             });
         }
+        if(tipo == "pista" && confirmacion){
+            $.ajax({
+                url: `db/pistas.php?id=${clave}&&accion=borrar`,
+                type: "GET",
+                processData: false,
+                contentType: false,
+                success: function (respuesta) {
+                    e.target.parentElement.parentElement.remove(); //Eliminamos el elemento del DOM
+                    alert('La pista fue borrada con éxito');
+                },
+                error: function (respuesta) {
+                    alert('La pista no pudo ser borrada');
+                }
+            });
+        }
     }
 }
 
@@ -129,6 +179,10 @@ $(document).ready(function () {
     /* Eliminar Temporada */
     const tablaTemporadas = document.querySelector('#tablaTemporadas tbody');
     if(tablaTemporadas) tablaTemporadas.addEventListener("click", eliminarBD);
+    /* Eliminar Pista */
+    const tablaPistas = document.querySelector('#tablaPistas tbody');
+    if(tablaPistas) tablaPistas.addEventListener("click", eliminarBD);
+    
     /* Modificar Piloto */
     const formularioPiloto = $('#modificar_piloto');
     if(formularioPiloto){
@@ -142,6 +196,14 @@ $(document).ready(function () {
     if(formularioEscuderia){
         $(formularioEscuderia).on('submit', function () {
             leerFormulario(formularioEscuderia, "escuderia");
+            return false;
+        });
+    }
+    /* Modificar Pista */
+    const formularioPista = $('#modificar_pista');
+    if(formularioPista){
+        $(formularioPista).on('submit', function () {
+            leerFormulario(formularioPista, "pista");
             return false;
         });
     }

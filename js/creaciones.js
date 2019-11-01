@@ -34,6 +34,23 @@ function leerFormulario(formulario, nombreFormulario){
         datos.append('accion', 'nuevo');
         insertarEnBD(datos, nombreFormulario);
     }
+    if(nombreFormulario == "pista"){
+        //Tomamos los valores insertados en el formulario
+        const pais = $("#pais").val();
+        const ciudad = $("#ciudad").val();
+        const colorP = $("#colorP").val();
+        const textoP = $("#textoP").val();
+        const textoS = $("#textoS").val();
+        //Generamos en objeto con los datos del formulario
+        const datos = new FormData();
+        datos.append('pais', pais);
+        datos.append('ciudad', ciudad);
+        datos.append('color_principal', colorP);
+        datos.append('texto_principal', textoP);
+        datos.append('texto_secundario', textoS);
+        datos.append('accion', 'nuevo');
+        insertarEnBD(datos, nombreFormulario);
+    }
 }
 
 function insertarEnBD(datos, nombreFormulario){
@@ -85,6 +102,22 @@ function insertarEnBD(datos, nombreFormulario){
             }
         });
     }
+    if(nombreFormulario == "pista"){
+        //Llamo a AJAX
+        $.ajax({
+            url: "db/pistas.php",
+            type: "POST",
+            data: datos,
+            processData: false,
+            contentType: false,
+            success: function (respuesta) {
+                alert('La pista fue creada con éxito');
+            },
+            error: function (respuesta) {
+                alert('La pista no pudo ser creada');
+            }
+        });
+    }
 }
 
 $(document).ready(function () {
@@ -104,6 +137,12 @@ $(document).ready(function () {
     const formularioTemporada = $('.crear-temporada');
     $(formularioTemporada).on('submit', function () {
         leerFormulario(formularioTemporada, "temporada");
+        return false;
+    });
+    /* Crear Pista */
+    const formularioPista = $('.crear-pista');
+    $(formularioPista).on('submit', function () {
+        leerFormulario(formularioPista, "pista");
         return false;
     });
 });

@@ -15,6 +15,7 @@
     if(strpos($nombrePagina, 'modificaciones') != false) echo '<script src="js/modificaciones.js"></script>';
     if(strpos($nombrePagina, 'modificar-piloto') != false) echo '<script src="js/modificaciones.js"></script>';
     if(strpos($nombrePagina, 'modificar-escuderia') != false) echo '<script src="js/modificaciones.js"></script>';
+    if(strpos($nombrePagina, 'modificar-pista') != false) echo '<script src="js/modificaciones.js"></script>';
     if(strpos($nombrePagina, 'configuracion') != false) echo '<script src="js/configuracion-temporada.js"></script>';
     if(strpos($nombrePagina, 'historiaf1') != false) echo '<script src="js/historiaf1.js"></script>';
     if(strpos($nombrePagina, 'historiaf2') != false) echo '<script src="js/historiaf2.js"></script>';

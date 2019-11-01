@@ -15,6 +15,10 @@
         $imagen = 'images/pilotos.jpg';
         $encabezado = 'Modificar Piloto';
     }
+    if(strpos($nombrePagina, 'modificar-pista') != false){
+        $imagen = 'images/pilotos.jpg';
+        $encabezado = 'Modificar Pista';
+    }
     if(strpos($nombrePagina, 'historiaf1') != false){
         $imagen = 'images/pilotos.jpg';
         $encabezado = 'Historia de la Fórmula 1';

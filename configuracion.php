@@ -44,6 +44,9 @@
 
         $cargarEscuderias = ' SELECT * FROM escuderias ORDER BY nombre ASC';
         $resultadoEscuderias = $con->query($cargarEscuderias);
+
+        $cargarPistas = ' SELECT * FROM pistas ORDER BY pais';
+        $resultadoPistas = $con->query($cargarPistas);
       } catch (\Exception $e) {
         $error = $e->getMessage();
       }
@@ -118,29 +121,14 @@
               <div class="col-8" style="margin-bottom: 50px;">
                 <select id="carrera" name="carrera" class="custom-select" required="required">
                   <option selected disabled>-- Selecciona una Carrera --</option>
-                  <option value="Alemania - Hockenheim">Alemania - Hockenheim</option>
-                  <option value="Australia - Melbourne">Australia - Melbourne</option>
-                  <option value="Austria - Spielberg">Austria - Spielberg</option>
-                  <option value="Azerbaiyan - Baku">Azerbaiyan - Baku</option>
-                  <option value="Bahrein - Sahkir">Bahrein - Sahkir</option>
-                  <option value="Belgica - Spa">Belgica - Spa</option>
-                  <option value="Brasil - Sao Pablo">Brasil - Sao Pablo</option>
-                  <option value="Canada - Montreal">Canada - Montreal</option>
-                  <option value="China - Shangai">China - Shangai</option>
-                  <option value="EEUU - Texas">EEUU - Texas</option>
-                  <option value="Emiratos Arabes - Abu Dhabi">Emiratos Arabes - Abu Dhabi</option>
-                  <option value="España - Catalunya">España - Catalunya</option>
-                  <option value="España - Jerez">España - Jerez</option>
-                  <option value="Francia - Le Castellet">Francia - Le Castellet</option>
-                  <option value="Gran Bretaña - Silverstone">Gran Bretaña - Silverstone</option>
-                  <option value="Hungria - Mogyrod">Hungria - Mogyrod</option>
-                  <option value="Italia - Monza">Italia - Monza</option>
-                  <option value="Japon - Suzuka">Japon - Suzuka</option>
-                  <option value="Malasia - Kuala Lampur">Malasia - Kuala Lampur</option>
-                  <option value="Mexico - Mexico DF">Mexico - Mexico DF</option>
-                  <option value="Monaco - Montecarlo">Monaco - Montecarlo</option>
-                  <option value="Rusia - Sochi">Rusia - Sochi</option>
-                  <option value="Singapur - Marina Bay">Singapur - Marina Bay</option>
+                  <?php
+                    while ($pistas = $resultadoPistas->fetch_assoc()) {
+                      $nombrePista = $pistas['pais'] . ' - ' . $pistas['ciudad'];
+                  ?>
+                        <option value="<?php echo $nombrePista; ?>"><?php echo $nombrePista; ?></option>
+                  <?php 
+                    }
+                  ?>
                 </select>
                 <div class="text-center">
                     <div class="form-check form-check-inline">

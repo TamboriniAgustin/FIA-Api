@@ -6,7 +6,7 @@
 
     <?php include('templates/header.php') ?>
 
-    <!-- Conecto a la base de datos y cargo los pilotos, escuderias y temporadas -->
+    <!-- Conecto a la base de datos y cargo los pilotos, escuderias, pistas y temporadas -->
     <?php 
       try {
         require('db/conexion.php');
@@ -19,6 +19,9 @@
 
         $cargarTemporadas = ' SELECT * FROM temporadas ORDER BY año DESC';
         $resultadoTemporadas = $con->query($cargarTemporadas);
+
+        $cargarPistas = ' SELECT * FROM pistas ORDER BY pais ';
+        $resultadoPistas = $con->query($cargarPistas);
       } catch (\Exception $e) {
         $error = $e->getMessage();
       }
@@ -101,6 +104,34 @@
                   <th scope="row"><?php echo $anioTemporada ?></th>
                   <td>
                     <button data-name="temporada" data-id="<?php echo $idTemporada ?>" class="btn btn-danger">Eliminar</button>
+                  </td>
+                </tr>
+              <?php 
+                }
+              ?>
+            </tbody>
+        </table>
+
+        <!-- Modificar Pista -->
+        <h3 class="text-center">Modificar Pista</h3>
+        <table class="table" id="tablaPistas">
+            <thead class="text-center" style="color:white;">
+              <tr>
+                <th scope="col" width="50%" style="background-color:#dc3545;">Pista</th>
+                <th scope="col" style="background-color:#007bff;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <?php 
+                while ($pistas = $resultadoPistas->fetch_assoc()) {
+                  $idPista = $pistas['id'];
+                  $nombrePista = $pistas['pais'] . ' - ' . $pistas['ciudad'];
+              ?>
+                <tr>
+                  <th scope="row"><?php echo $nombrePista; ?></th>
+                  <td>
+                    <a href="modificar-pista.php?id=<?php echo $idPista ?>"><button class="btn btn-success">Modificar</button></a>
+                    <button data-name="pista" data-id="<?php echo $idPista ?>" class="btn btn-danger">Eliminar</button>
                   </td>
                 </tr>
               <?php 

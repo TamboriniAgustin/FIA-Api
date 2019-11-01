@@ -7,10 +7,9 @@ function mostrarTemporada(Temporada){
 function mostrarCarrera(Carrera) {
     if(Carrera != "Selecciona una carrera"){
         let carrera = '.' + Carrera;
-        console.log(carrera);
         $('.Melbourne').hide(); $('.Sahkir').hide(); $('.Shangai').hide(); $('.Baku').hide();
         $('.Catalunya').hide(); $('.Montecarlo').hide(); $('.Montreal').hide(); $('.LeCastellet').hide();
-        $('.Spielberg').hide(); $('.Silverstone').hide(); $('.Hockenheim').hide(); $('.Mogyrod').hide();
+        $('.Spielberg').hide(); $('.Silverstone').hide(); $('.Hockenheim').hide(); $('.Budapest').hide();
         $('.Spa').hide(); $('.Monza').hide(); $('.MarinaBay').hide(); $('.Sochi').hide();
         $('.Suzuka').hide(); $('.MexicoDF').hide(); $('.Texas').hide(); $('.SaoPablo').hide();
         $('.AbuDhabi').hide(); $('.KualaLampur').hide(); $('.Jerez').hide();
