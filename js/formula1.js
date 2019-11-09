@@ -11,8 +11,9 @@ function mostrarCarrera(Carrera) {
         $('.Catalunya').hide(); $('.Montecarlo').hide(); $('.Montreal').hide(); $('.LeCastellet').hide();
         $('.Spielberg').hide(); $('.Silverstone').hide(); $('.Hockenheim').hide(); $('.Budapest').hide();
         $('.Spa').hide(); $('.Monza').hide(); $('.MarinaBay').hide(); $('.Sochi').hide();
-        $('.Suzuka').hide(); $('.MexicoDF').hide(); $('.Texas').hide(); $('.SaoPablo').hide();
-        $('.AbuDhabi').hide(); $('.KualaLampur').hide(); $('.Jerez').hide();
+        $('.Suzuka').hide(); $('.MexicoDF').hide(); $('.Texas').hide(); $('.Interlagos').hide();
+        $('.AbuDhabi').hide(); $('.KualaLampur').hide(); $('.Jerez').hide(); $('.Nurburg').hide();
+        $('.Yeongam').hide(); $('.Buddh').hide(); $('.Valencia').hide(); $('.Estambul').hide();
 
         $(carrera).show();
     }

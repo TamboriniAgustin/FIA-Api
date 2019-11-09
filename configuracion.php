@@ -14,8 +14,11 @@
 
     <?php include('templates/header.php') ?>
 
-    <!-- Establezco las temporadas que tendran 22 pilotos -->
-    <?php $temporadaCon22Pilotos = array(2016, 2014, 2013); ?>
+    <!-- Establezco las temporadas que tendran 22 y 24 pilotos -->
+    <?php 
+      $temporadaCon22Pilotos = array(2016, 2014, 2013); 
+      $temporadaCon24Pilotos = array(2012, 2011, 2010);
+    ?>
 
     <!-- Conecto a la base de datos y cargo los pilotos y escuderias, y ademas la temporada actual -->
     <?php 
@@ -144,6 +147,7 @@
 
               <?php
                 if(in_array($temporada, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
+                else if(in_array($temporada, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
                 else $cantidadPilotos = 20;
 
                 for ($i=1; $i <= $cantidadPilotos; $i++){ 

@@ -8,8 +8,11 @@
 
     <?php include('funcionesf1.php'); ?>
 
-    <!-- Establezco las temporadas que tendran 22 pilotos -->
-    <?php $temporadaCon22Pilotos = array(2016, 2014, 2013); ?>    
+    <!-- Establezco las temporadas que tendran 22 y 24 pilotos -->
+    <?php 
+      $temporadaCon22Pilotos = array(2016, 2014, 2013);
+      $temporadaCon24Pilotos = array(2012, 2011, 2010);
+    ?>    
 
     <!-- Conecto a la base de datos y cargo las temporadas -->
     <?php 
@@ -187,6 +190,7 @@
           <?php 
             $cantidadPilotos = 20;
             if(in_array($temporadaActual, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
+            else if(in_array($temporadaActual, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
           ?>
 
           <!-- Carreras -->

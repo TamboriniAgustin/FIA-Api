@@ -52,6 +52,13 @@ function temporadaCon22Pilotos(temporada){
     return false;
 }
 
+function temporadaCon24Pilotos(temporada){
+    if(temporada == 2012) return true;
+    if(temporada == 2011) return true;
+    if(temporada == 2010) return true;
+    return false;
+}
+
 /*********************************************************/
 
 function leerFormulario(formulario, nombreFormulario){
@@ -105,6 +112,7 @@ function leerFormulario(formulario, nombreFormulario){
 
         var cantidadPilotos = 20;
         if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
+        if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
 
         for (let i = 1; i <= cantidadPilotos; i++) {
             let idPilotos = "#posicion" + i + "-Piloto";
