@@ -49,6 +49,9 @@ function temporadaCon22Pilotos(temporada){
     if(temporada == 2016) return true;
     if(temporada == 2014) return true;
     if(temporada == 2013) return true;
+    if(temporada == 2008) return true;
+    if(temporada == 2007) return true;
+    if(temporada == 2006) return true;
     return false;
 }
 

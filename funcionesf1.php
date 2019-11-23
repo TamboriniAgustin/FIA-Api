@@ -14,16 +14,29 @@
           while($carreras = $resultadoCarreras->fetch_assoc()){
             $posicionesCarrera = $carreras['posiciones_pilotos'];
             $posicionesCarrera = json_decode($posicionesCarrera, true);
-            if(strpos($piloto, $posicionesCarrera[1]) != false || $piloto == $posicionesCarrera[1]) $puntos = $puntos + 25;
-            if(strpos($piloto, $posicionesCarrera[2]) != false || $piloto == $posicionesCarrera[2]) $puntos = $puntos + 18;
-            if(strpos($piloto, $posicionesCarrera[3]) != false || $piloto == $posicionesCarrera[3]) $puntos = $puntos + 15;
-            if(strpos($piloto, $posicionesCarrera[4]) != false || $piloto == $posicionesCarrera[4]) $puntos = $puntos + 12;
-            if(strpos($piloto, $posicionesCarrera[5]) != false || $piloto == $posicionesCarrera[5]) $puntos = $puntos + 10;
-            if(strpos($piloto, $posicionesCarrera[6]) != false || $piloto == $posicionesCarrera[6]) $puntos = $puntos + 8;
-            if(strpos($piloto, $posicionesCarrera[7]) != false || $piloto == $posicionesCarrera[7]) $puntos = $puntos + 6;
-            if(strpos($piloto, $posicionesCarrera[8]) != false || $piloto == $posicionesCarrera[8]) $puntos = $puntos + 4;
-            if(strpos($piloto, $posicionesCarrera[9]) != false || $piloto == $posicionesCarrera[9]) $puntos = $puntos + 2;
-            if(strpos($piloto, $posicionesCarrera[10]) != false || $piloto == $posicionesCarrera[10]) $puntos = $puntos + 1;
+            if($temporada >= 2010){
+              if(strpos($piloto, $posicionesCarrera[1]) != false || $piloto == $posicionesCarrera[1]) $puntos = $puntos + 25;
+              if(strpos($piloto, $posicionesCarrera[2]) != false || $piloto == $posicionesCarrera[2]) $puntos = $puntos + 18;
+              if(strpos($piloto, $posicionesCarrera[3]) != false || $piloto == $posicionesCarrera[3]) $puntos = $puntos + 15;
+              if(strpos($piloto, $posicionesCarrera[4]) != false || $piloto == $posicionesCarrera[4]) $puntos = $puntos + 12;
+              if(strpos($piloto, $posicionesCarrera[5]) != false || $piloto == $posicionesCarrera[5]) $puntos = $puntos + 10;
+              if(strpos($piloto, $posicionesCarrera[6]) != false || $piloto == $posicionesCarrera[6]) $puntos = $puntos + 8;
+              if(strpos($piloto, $posicionesCarrera[7]) != false || $piloto == $posicionesCarrera[7]) $puntos = $puntos + 6;
+              if(strpos($piloto, $posicionesCarrera[8]) != false || $piloto == $posicionesCarrera[8]) $puntos = $puntos + 4;
+              if(strpos($piloto, $posicionesCarrera[9]) != false || $piloto == $posicionesCarrera[9]) $puntos = $puntos + 2;
+              if(strpos($piloto, $posicionesCarrera[10]) != false || $piloto == $posicionesCarrera[10]) $puntos = $puntos + 1;
+          
+            }
+            else{
+              if(strpos($piloto, $posicionesCarrera[1]) != false || $piloto == $posicionesCarrera[1]) $puntos = $puntos + 10;
+              if(strpos($piloto, $posicionesCarrera[2]) != false || $piloto == $posicionesCarrera[2]) $puntos = $puntos + 8;
+              if(strpos($piloto, $posicionesCarrera[3]) != false || $piloto == $posicionesCarrera[3]) $puntos = $puntos + 6;
+              if(strpos($piloto, $posicionesCarrera[4]) != false || $piloto == $posicionesCarrera[4]) $puntos = $puntos + 5;
+              if(strpos($piloto, $posicionesCarrera[5]) != false || $piloto == $posicionesCarrera[5]) $puntos = $puntos + 4;
+              if(strpos($piloto, $posicionesCarrera[6]) != false || $piloto == $posicionesCarrera[6]) $puntos = $puntos + 3;
+              if(strpos($piloto, $posicionesCarrera[7]) != false || $piloto == $posicionesCarrera[7]) $puntos = $puntos + 2;
+              if(strpos($piloto, $posicionesCarrera[8]) != false || $piloto == $posicionesCarrera[8]) $puntos = $puntos + 1;
+            }
           }
           return $puntos;
     }
@@ -107,16 +120,28 @@
         while($carreras = $resultadoCarreras->fetch_assoc()){
           $posicionesCarrera = $carreras['posiciones_escuderias'];
           $posicionesCarrera = json_decode($posicionesCarrera, true);
-          if(strpos($escuderia, $posicionesCarrera[1]) != false || $escuderia == $posicionesCarrera[1]) $puntos = $puntos + 25;
-          if(strpos($escuderia, $posicionesCarrera[2]) != false || $escuderia == $posicionesCarrera[2]) $puntos = $puntos + 18;
-          if(strpos($escuderia, $posicionesCarrera[3]) != false || $escuderia == $posicionesCarrera[3]) $puntos = $puntos + 15;
-          if(strpos($escuderia, $posicionesCarrera[4]) != false || $escuderia == $posicionesCarrera[4]) $puntos = $puntos + 12;
-          if(strpos($escuderia, $posicionesCarrera[5]) != false || $escuderia == $posicionesCarrera[5]) $puntos = $puntos + 10;
-          if(strpos($escuderia, $posicionesCarrera[6]) != false || $escuderia == $posicionesCarrera[6]) $puntos = $puntos + 8;
-          if(strpos($escuderia, $posicionesCarrera[7]) != false || $escuderia == $posicionesCarrera[7]) $puntos = $puntos + 6;
-          if(strpos($escuderia, $posicionesCarrera[8]) != false || $escuderia == $posicionesCarrera[8]) $puntos = $puntos + 4;
-          if(strpos($escuderia, $posicionesCarrera[9]) != false || $escuderia == $posicionesCarrera[9]) $puntos = $puntos + 2;
-          if(strpos($escuderia, $posicionesCarrera[10]) != false || $escuderia == $posicionesCarrera[10]) $puntos = $puntos + 1;
+          if($temporada >= 2010){
+            if(strpos($escuderia, $posicionesCarrera[1]) != false || $escuderia == $posicionesCarrera[1]) $puntos = $puntos + 25;
+            if(strpos($escuderia, $posicionesCarrera[2]) != false || $escuderia == $posicionesCarrera[2]) $puntos = $puntos + 18;
+            if(strpos($escuderia, $posicionesCarrera[3]) != false || $escuderia == $posicionesCarrera[3]) $puntos = $puntos + 15;
+            if(strpos($escuderia, $posicionesCarrera[4]) != false || $escuderia == $posicionesCarrera[4]) $puntos = $puntos + 12;
+            if(strpos($escuderia, $posicionesCarrera[5]) != false || $escuderia == $posicionesCarrera[5]) $puntos = $puntos + 10;
+            if(strpos($escuderia, $posicionesCarrera[6]) != false || $escuderia == $posicionesCarrera[6]) $puntos = $puntos + 8;
+            if(strpos($escuderia, $posicionesCarrera[7]) != false || $escuderia == $posicionesCarrera[7]) $puntos = $puntos + 6;
+            if(strpos($escuderia, $posicionesCarrera[8]) != false || $escuderia == $posicionesCarrera[8]) $puntos = $puntos + 4;
+            if(strpos($escuderia, $posicionesCarrera[9]) != false || $escuderia == $posicionesCarrera[9]) $puntos = $puntos + 2;
+            if(strpos($escuderia, $posicionesCarrera[10]) != false || $escuderia == $posicionesCarrera[10]) $puntos = $puntos + 1;
+          }
+          else{
+            if(strpos($escuderia, $posicionesCarrera[1]) != false || $escuderia == $posicionesCarrera[1]) $puntos = $puntos + 10;
+            if(strpos($escuderia, $posicionesCarrera[2]) != false || $escuderia == $posicionesCarrera[2]) $puntos = $puntos + 8;
+            if(strpos($escuderia, $posicionesCarrera[3]) != false || $escuderia == $posicionesCarrera[3]) $puntos = $puntos + 6;
+            if(strpos($escuderia, $posicionesCarrera[4]) != false || $escuderia == $posicionesCarrera[4]) $puntos = $puntos + 5;
+            if(strpos($escuderia, $posicionesCarrera[5]) != false || $escuderia == $posicionesCarrera[5]) $puntos = $puntos + 4;
+            if(strpos($escuderia, $posicionesCarrera[6]) != false || $escuderia == $posicionesCarrera[6]) $puntos = $puntos + 3;
+            if(strpos($escuderia, $posicionesCarrera[7]) != false || $escuderia == $posicionesCarrera[7]) $puntos = $puntos + 2;
+            if(strpos($escuderia, $posicionesCarrera[8]) != false || $escuderia == $posicionesCarrera[8]) $puntos = $puntos + 1;
+          }
         }
         return $puntos;
     }
@@ -213,6 +238,19 @@
           case 8: return 4;
           case 9: return 2;
           case 10: return 1;
+          default: return 0;
+        }
+      }
+      else{
+        switch ($posicion) {
+          case 1: return 10;
+          case 2: return 8;
+          case 3: return 6;
+          case 4: return 5;
+          case 5: return 4;
+          case 6: return 3;
+          case 7: return 2;
+          case 8: return 1;
           default: return 0;
         }
       }

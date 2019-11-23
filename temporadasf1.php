@@ -10,7 +10,7 @@
 
     <!-- Establezco las temporadas que tendran 22 y 24 pilotos -->
     <?php 
-      $temporadaCon22Pilotos = array(2016, 2014, 2013);
+      $temporadaCon22Pilotos = array(2016, 2014, 2013, 2008, 2007, 2006);
       $temporadaCon24Pilotos = array(2012, 2011, 2010);
     ?>    
 
