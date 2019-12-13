@@ -7,6 +7,7 @@
 <script src="js/aos.js"></script>
 <script src="js/scrollax.min.js"></script>
 <script src="js/sorter.js"></script>
+<script src="js/fancyTable.js"></script>
 <script src="js/main.js"></script>
 <?php
     if(strpos($nombrePagina, 'temporadasf1') != false) echo '<script src="js/formula1.js"></script>';

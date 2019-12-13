@@ -1,7 +1,12 @@
 $(document).ready(function () {
     // Pilotos
-    let pilotos = $('.tabla-pilotos-sorter');
-    pilotos.tablesorter();
+    $("#tabla-pilotos").fancyTable({
+      pagination: true,
+      paginationClass: "btn btn-primary active",
+	  paginationClassActive: "active",
+      perPage:10
+    });
+    $("#tabla-pilotos").tablesorter();
 
     const botonPilotos = $('#boton_pilotos');
     const piloto1 = $('#piloto1');
@@ -21,8 +26,13 @@ $(document).ready(function () {
         }
     });
     // Escuderias
-    let escuderias = $('.tabla-escuderias-sorter');
-    escuderias.tablesorter();
+    $("#tabla-escuderias").fancyTable({
+        pagination: true,
+        paginationClass: "btn btn-primary active",
+	    paginationClassActive: "active",
+		perPage:10
+    });
+    $("#tabla-escuderias").tablesorter();
 
     const botonEscuderias = $('#boton_escuderias');
     const escuderia1 = $('#escuderia1');

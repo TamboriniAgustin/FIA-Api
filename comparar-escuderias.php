@@ -15,6 +15,41 @@
 
     <?php if($categoria == 'f1') include('funcionesf1.php'); else include('funcionesf2.php'); ?> 
 
+    <!-- Cargo las temporadas que hayan formado parte de la historia -->
+    <?php 
+         try {
+            require('db/conexion.php');
+  
+            $cargarTemporadas = " SELECT * FROM temporadas ";
+            $resultadoTemporada = $con->query($cargarTemporadas);
+  
+          } catch (\Exception $e) {
+            $error = $e->getMessage();
+          }
+
+          $temporadas = array();
+          while ($temporada = $resultadoTemporada->fetch_assoc()) {
+            array_push($temporadas, $temporada);
+          }
+    ?>
+    <!-- Cargo las carreras que hayan formado parte de la historia -->
+    <?php 
+         try {
+            require('db/conexion.php');
+  
+            $cargarCarreras = " SELECT * FROM carreras WHERE categoria = '$categoria' ORDER BY temporada DESC ";
+            $resultadoCarrera = $con->query($cargarCarreras);
+  
+          } catch (\Exception $e) {
+            $error = $e->getMessage();
+          }
+
+          $carreras = array();
+          while ($carrera = $resultadoCarrera->fetch_assoc()) {
+            array_push($carreras, $carrera);
+          }
+    ?>
+    <!-- Cargo las escuderias que participaron en la temporada -->
     <?php 
          $escuderia1 = $_GET['escuderia1'];
          $escuderia2 = $_GET['escuderia2'];
@@ -33,11 +68,11 @@
           $contador = 0;
           while ($escuderias = $resultadoTemporada->fetch_assoc()) {
             if($categoria == 'f1'){
-              $esEscuderiaDeF1 = corrioEnF1($escuderias['nombre'], 'escuderia');
+              $esEscuderiaDeF1 = corrioEnF1($escuderias['nombre'], 'escuderia', $carreras);
               if($esEscuderiaDeF1) array_push($escuderiasComparacion, $escuderias);
             }
             else{
-              $esEscuderiaDeF2 = corrioEnF2($escuderias['nombre'], 'escuderia');
+              $esEscuderiaDeF2 = corrioEnF2($escuderias['nombre'], 'escuderia', $carreras);
               if($esEscuderiaDeF2) array_push($escuderiasComparacion, $escuderias);
             }
             $contador++;
@@ -48,7 +83,7 @@
         <!-- Escuderias -->
         <h3 class="text-center">Escuderias</h3>
             <div class="tabla-escuderias">
-                <table class="table tabla-escuderias-sorter">
+                <table class="table">
                     <thead class="text-center" style="color:white; background-color:<?php echo $colorPagina; ?>;">
                         <tr>
                         <th scope="col" width="75%">Escuderia</th>
@@ -71,15 +106,15 @@
                                 <tr>
                                     <th scope="row"><?php echo $escuderia['nombre']; ?></th>
                                     <th scope="row"><?php echo $escuderia['nacionalidad']; ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo carrerasEnF1($escuderia['nombre'], 'escuderia'); else echo carrerasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo polesEnF1($escuderia['nombre'], 'escuderia'); else echo polesEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo podiosEnF1($escuderia['nombre'], 'escuderia'); else echo podiosEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo vueltasRapidasEnF1($escuderia['nombre'], 'escuderia'); else echo vueltasRapidasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo abandonosEnF1($escuderia['nombre'], 'escuderia'); else echo abandonosEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo maximaCantidadDePuntosDeF1($escuderia['nombre'], 'escuderia'); else echo maximaCantidadDePuntosDeF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo puntosTotalesDeF1($escuderia['nombre'], 'escuderia'); else echo puntosTotalesDeF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo victoriasEnF1($escuderia['nombre'], 'escuderia'); else echo victoriasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo mundialesDeF1($escuderia['nombre'], 'escuderia'); else echo mundialesDeF2($escuderia['nombre'], 'escuderia'); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo carrerasEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo carrerasEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo polesEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo polesEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo podiosEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo podiosEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo vueltasRapidasEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo vueltasRapidasEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo abandonosEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo abandonosEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo maximaCantidadDePuntosDeF1($escuderia['nombre'], 'escuderia', $temporadas); else echo maximaCantidadDePuntosDeF2($escuderia['nombre'], 'escuderia', $temporadas); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo puntosTotalesDeF1($escuderia['nombre'], 'escuderia', $temporadas); else echo puntosTotalesDeF2($escuderia['nombre'], 'escuderia', $temporadas); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo victoriasEnF1($escuderia['nombre'], 'escuderia', $carreras); else echo victoriasEnF2($escuderia['nombre'], 'escuderia', $carreras); ?></th>
+                                    <th scope="row"><?php if($categoria == 'f1') echo mundialesDeF1($escuderia['nombre'], 'escuderia', $temporadas); else echo mundialesDeF2($escuderia['nombre'], 'escuderia', $temporadas); ?></th>
                                 </tr>
                         <?php 
                             }

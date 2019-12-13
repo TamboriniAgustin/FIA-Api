@@ -8,6 +8,41 @@
 
     <?php include('funcionesf2.php'); ?> 
 
+    <!-- Cargo las temporadas que hayan formado parte de la historia de la F2 -->
+    <?php 
+         try {
+            require('db/conexion.php');
+  
+            $cargarTemporadas = " SELECT * FROM temporadas ";
+            $resultadoTemporada = $con->query($cargarTemporadas);
+  
+          } catch (\Exception $e) {
+            $error = $e->getMessage();
+          }
+
+          $temporadasF2 = array();
+          while ($temporadas = $resultadoTemporada->fetch_assoc()) {
+            array_push($temporadasF2, $temporadas);
+          }
+    ?>
+    <!-- Cargo las carreras que hayan formado parte de la historia de la F2 -->
+    <?php 
+         try {
+            require('db/conexion.php');
+  
+            $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ORDER BY temporada DESC ";
+            $resultadoCarrera = $con->query($cargarCarreras);
+  
+          } catch (\Exception $e) {
+            $error = $e->getMessage();
+          }
+
+          $carrerasF2 = array();
+          while ($carreras = $resultadoCarrera->fetch_assoc()) {
+            array_push($carrerasF2, $carreras);
+          }
+    ?>
+    <!-- Cargo los pilotos que participaron en alguna temporada de F2 -->
     <?php 
          try {
             require('db/conexion.php');
@@ -19,17 +54,15 @@
             $error = $e->getMessage();
           }
 
-          $contador = 0;
           $pilotosF2 = array();
           while ($pilotos = $resultadoTemporada->fetch_assoc()) {
-            $esPilotoDeF2 = corrioEnF2($pilotos['nombre'] . ' ' . $pilotos['apellido'], 'piloto');
+            $esPilotoDeF2 = corrioEnF2($pilotos['nombre'] . ' ' . $pilotos['apellido'], 'piloto', $carrerasF2);
             if($esPilotoDeF2){
                 array_push($pilotosF2, $pilotos);
             }
-            $contador++;
           }
     ?>
-
+    <!-- Cargo las escuderias que participaron en alguna temporada de F2 -->
     <?php 
          try {
             require('db/conexion.php');
@@ -41,22 +74,20 @@
             $error = $e->getMessage();
           }
 
-          $contador = 0;
           $escuderiasF2 = array();
           while ($escuderias = $resultadoTemporada->fetch_assoc()) {
-            $esEscuderiaDeF2 = corrioEnF2($escuderias['nombre'], 'escuderia');
+            $esEscuderiaDeF2 = corrioEnF2($escuderias['nombre'], 'escuderia', $carrerasF2);
             if($esEscuderiaDeF2){
                 array_push($escuderiasF2, $escuderias);
             }
-            $contador++;
           }
     ?>
 
-    <div class="container" style="margin-top: 50px;">
+    <div style="margin-top: 50px;">
         <!-- Pilotos -->
         <h3 class="text-center">Pilotos</h3>
             <div class="tabla-pilotos">
-                <table class="table tabla-pilotos-sorter">
+                <table id="tabla-pilotos" class="table">
                     <thead class="text-center" style="color:white; background-color:#007bff;">
                         <tr>
                         <th scope="col" width="75%">Piloto</th>
@@ -65,6 +96,7 @@
                         <th scope="col">Podios</th>
                         <th scope="col">Vueltas Rápidas</th>
                         <th scope="col">Abandonos</th>
+                        <th scope="col">Puntos Totales</th>
                         <th scope="col">Victorias</th>
                         <th scope="col">Campeonatos del Mundo</th>
                         <th scope="col">Última Participación</th>
@@ -77,14 +109,15 @@
                         ?>
                                 <tr>
                                     <th scope="row"><?php echo $nombrePiloto; ?></th>
-                                    <th scope="row"><?php echo carrerasEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo polesEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo podiosEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo vueltasRapidasEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo abandonosEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo victoriasEnF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo mundialesDeF2($nombrePiloto, 'piloto'); ?></th>
-                                    <th scope="row"><?php echo ultimaParticipacionEnF2($nombrePiloto, 'piloto'); ?></th>
+                                    <th scope="row"><?php echo carrerasEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo polesEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo podiosEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo vueltasRapidasEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo abandonosEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo puntosTotalesDeF2($nombrePiloto, 'piloto', $temporadasF2); ?></th>
+                                    <th scope="row"><?php echo victoriasEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
+                                    <th scope="row"><?php echo mundialesDeF2($nombrePiloto, 'piloto', $temporadasF2); ?></th>
+                                    <th scope="row"><?php echo ultimaParticipacionEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
                                 </tr>
                         <?php 
                             }
@@ -128,7 +161,7 @@
         <!-- Escuderias -->
         <h3 class="text-center">Escuderias</h3>
             <div class="tabla-escuderias">
-                <table class="table tabla-escuderias-sorter">
+                <table id="tabla-escuderias" class="table">
                     <thead class="text-center" style="color:white; background-color:#007bff;">
                         <tr>
                         <th scope="col" width="75%">Escuderia</th>
@@ -148,16 +181,16 @@
                         foreach ($escuderiasF2 as $escuderia) {
                     ?>
                             <tr>
-                                <th scope="row"><?php echo $escuderia['nombre']; ?></th>
-                                <th scope="row"><?php echo carrerasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo polesEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo podiosEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo vueltasRapidasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo abandonosEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo puntosTotalesDeF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo victoriasEnF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo mundialesDeF2($escuderia['nombre'], 'escuderia'); ?></th>
-                                <th scope="row"><?php echo ultimaParticipacionEnF2($escuderia['nombre'], 'escuderia'); ?></th>
+                            <th scope="row"><?php echo $escuderia['nombre']; ?></th>
+                                <th scope="row"><?php echo carrerasEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo polesEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo podiosEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo vueltasRapidasEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo abandonosEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo puntosTotalesDeF2($escuderia['nombre'], 'escuderia', $temporadasF2); ?></th>
+                                <th scope="row"><?php echo victoriasEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
+                                <th scope="row"><?php echo mundialesDeF2($escuderia['nombre'], 'escuderia', $temporadasF2); ?></th>
+                                <th scope="row"><?php echo ultimaParticipacionEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
                             </tr>
                     <?php 
                         }

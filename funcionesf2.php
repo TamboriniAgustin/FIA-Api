@@ -1,4 +1,5 @@
 <?php
+    //***** Funciones para el calculo de puntos en el campeonato *****\\
     //Funciones para calculo de puntos de pilotos en el campeonato
     function calcularPuntosPiloto($piloto, $temporada){
         try {
@@ -122,7 +123,7 @@
           }
           return $abandonos;
     }
-    // //Funciones para calculo de puntos de escuderias en el campeonato
+    //Funciones para calculo de puntos de escuderias en el campeonato
     function calcularPuntosEscuderia($escuderia, $temporada){
       try {
           require('db/conexion.php');
@@ -292,75 +293,45 @@
         }
       }
     }
-    //Funciones para almacenar las estadisticas generales
-    function corrioEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
 
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $posicionesCarrera = $carreras['posiciones_pilotos'];
-          else $posicionesCarrera = $carreras['posiciones_escuderias'];
+    //***** Funciones para calcular las estadisticas generales *****\\
+    function corrioEnF2($nombre, $tipo, $listaCarreras){  
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $posicionesCarrera = $carrera['posiciones_pilotos'];
+          else $posicionesCarrera = $carrera['posiciones_escuderias'];
+
           $posicionesCarrera = json_decode($posicionesCarrera, true);
           if(in_array($nombre, $posicionesCarrera)) return true;
         }
         return false;
     }
-    function carrerasEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function carrerasEnF2($nombre, $tipo, $listaCarreras){
         $cantidadCarreras = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $posicionesCarrera = $carreras['posiciones_pilotos'];
-          else $posicionesCarrera = $carreras['posiciones_escuderias'];
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $posicionesCarrera = $carrera['posiciones_pilotos'];
+          else $posicionesCarrera = $carrera['posiciones_escuderias'];
+
           $posicionesCarrera = json_decode($posicionesCarrera, true);
           if(in_array($nombre, $posicionesCarrera)) $cantidadCarreras++;
         }
         return $cantidadCarreras;
     }
-    function polesEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' AND tipo = 'Feature' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function polesEnF2($nombre, $tipo, $listaCarreras){      
         $poles = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $poleCarrera = $carreras['pole'];
-          else $poleCarrera = $carreras['pole_escuderia'];
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $poleCarrera = $carrera['pole'];
+          else $poleCarrera = $carrera['pole_escuderia'];
+
           if(strpos($nombre, $poleCarrera) != false || $nombre == $poleCarrera) $poles++;
         }
         return $poles;
     }
-    function podiosEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function podiosEnF2($nombre, $tipo, $listaCarreras){
         $podios = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $posicionesCarrera = $carreras['posiciones_pilotos'];
-          else $posicionesCarrera = $carreras['posiciones_escuderias'];
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $posicionesCarrera = $carrera['posiciones_pilotos'];
+          else $posicionesCarrera = $carrera['posiciones_escuderias'];
+
           $posicionesCarrera = json_decode($posicionesCarrera, true);
           if(strpos($nombre, $posicionesCarrera[1]) != false || $nombre == $posicionesCarrera[1]) $podios++;
           else if(strpos($nombre, $posicionesCarrera[2]) != false || $nombre == $posicionesCarrera[2]) $podios++;
@@ -368,99 +339,64 @@
         }
         return $podios;
     }
-    function vueltasRapidasEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function vueltasRapidasEnF2($nombre, $tipo, $listaCarreras){
         $vueltasRapidas = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $vueltaRapidaCarrera = $carreras['vuelta_rapida'];
-          else $vueltaRapidaCarrera = $carreras['vuelta_rapida_escuderia'];
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $vueltaRapidaCarrera = $carrera['vuelta_rapida'];
+          else $vueltaRapidaCarrera = $carrera['vuelta_rapida_escuderia'];
+
           if(strpos($nombre, $vueltaRapidaCarrera) != false || $nombre == $vueltaRapidaCarrera) $vueltasRapidas++;
         }
         return $vueltasRapidas;
     }
-    function abandonosEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function abandonosEnF2($nombre, $tipo, $listaCarreras){ 
         $abandonos = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $abandonosCarrera = '{ ' . str_replace(',', ' ', $carreras['abandonos']) . ' }';
-          else $abandonosCarrera = '{ ' . str_replace(',', ' ', $carreras['abandonos_escuderias']) . ' }';
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $abandonosCarrera = '{ ' . str_replace(',', ' ', $carrera['abandonos']) . ' }';
+          else $abandonosCarrera = '{ ' . str_replace(',', ' ', $carrera['abandonos_escuderias']) . ' }';
+
           if(strpos($abandonosCarrera, $nombre) != false) $abandonos++;
         }
         return $abandonos;
     }
-    function victoriasEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function victoriasEnF2($nombre, $tipo, $listaCarreras){
         $victorias = 0;
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $posicionesCarrera = $carreras['posiciones_pilotos'];
-          else $posicionesCarrera = $carreras['posiciones_escuderias'];
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $posicionesCarrera = $carrera['posiciones_pilotos'];
+          else $posicionesCarrera = $carrera['posiciones_escuderias'];
+
           $posicionesCarrera = json_decode($posicionesCarrera, true);
           if(strpos($nombre, $posicionesCarrera[1]) != false || $nombre == $posicionesCarrera[1]) $victorias++;
         }
         return $victorias;
     }
-    function mundialesDeF2($nombre, $tipo){
-        try {
-          require('db/conexion.php');
-          $cargarTemporadas = " SELECT * FROM temporadas ";
-          $resultadoTemporadas = $con->query($cargarTemporadas);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
+    function mundialesDeF2($nombre, $tipo, $listaTemporadas){      
         $mundiales = 0;
-        while($temporadas = $resultadoTemporadas->fetch_assoc()){
-          if($tipo == 'piloto') $campeon = $temporadas['campeon_pilotos_f2'];
-          else $campeon = $temporadas['campeon_escuderias_f2'];
+        foreach($listaTemporadas as $temporada){
+          if($tipo == 'piloto') $campeon = $temporada['campeon_pilotos_f2'];
+          else $campeon = $temporada['campeon_escuderias_f2'];
+
           if($nombre == $campeon) $mundiales++;
         }
         return $mundiales;
     }
-    function maximaCantidadDePuntosDeF2($nombre, $tipo){
-      try {
-        require('db/conexion.php');
-        $cargarTemporadas = " SELECT * FROM temporadas ";
-        $resultadoTemporadas = $con->query($cargarTemporadas);
-      } catch (\Exception $e) {
-        $error = $e->getMessage();
-      }
-    
+    function maximaCantidadDePuntosDeF2($nombre, $tipo, $listaTemporadas){    
       $maximo = 0;
-      while($temporadas = $resultadoTemporadas->fetch_assoc()){
-        if($tipo == 'piloto') $participantesTemporada = $temporadas['pilotosF2'];
-        else $participantesTemporada = $temporadas['escuderiasF2'];
+      foreach($listaTemporadas as $temporada){
+        if($tipo == 'piloto') $participantesTemporada = $temporada['pilotosF2'];
+        else $participantesTemporada = $temporada['escuderiasF2'];
+
         if(strpos($participantesTemporada, $nombre) != false){
           $puntosTemporada = 0;
           if($tipo == 'piloto'){
-            if($temporadas['año'] >= 2018) $puntosTemporada = calcularPuntosPiloto($nombre, $temporadas['año']) + (2 * cantidadVueltasRapidasPiloto($nombre, $temporadas['año']) + (4 * cantidadPolesPiloto($nombre, $temporadas['año'])));
-            else $puntosTemporada = calcularPuntosPiloto($nombre, $temporadas['año']);
+            if($temporada['año'] >= 2018) $puntosTemporada = calcularPuntosPiloto($nombre, $temporada['año']) + (2 * cantidadVueltasRapidasPiloto($nombre, $temporada['año']) + (4 * cantidadPolesPiloto($nombre, $temporada['año'])));
+            else $puntosTemporada = calcularPuntosPiloto($nombre, $temporada['año']);
             
             if($puntosTemporada > $maximo) $maximo = $puntosTemporada;
           }
           else{
-            if($temporadas['año'] >= 2018) $puntosTemporada = calcularPuntosEscuderia($nombre, $temporadas['año']) + (2 * cantidadVueltasRapidasEscuderia($nombre, $temporadas['año']) + (4 * cantidadPolesEscuderia($nombre, $temporadas['año'])));
-            else $puntosTemporada = calcularPuntosEscuderia($nombre, $temporadas['año']);
+            if($temporada['año'] >= 2018) $puntosTemporada = calcularPuntosEscuderia($nombre, $temporada['año']) + (2 * cantidadVueltasRapidasEscuderia($nombre, $temporada['año']) + (4 * cantidadPolesEscuderia($nombre, $temporada['año'])));
+            else $puntosTemporada = calcularPuntosEscuderia($nombre, $temporada['año']);
 
             if($puntosTemporada > $maximo) $maximo = $puntosTemporada;
           }
@@ -468,30 +404,23 @@
       }
       return $maximo;
     }
-    function puntosTotalesDeF2($nombre, $tipo){
-      try {
-        require('db/conexion.php');
-        $cargarTemporadas = " SELECT * FROM temporadas ";
-        $resultadoTemporadas = $con->query($cargarTemporadas);
-      } catch (\Exception $e) {
-        $error = $e->getMessage();
-      }
-    
+    function puntosTotalesDeF2($nombre, $tipo, $listaTemporadas){
       $puntosTotales = 0;
-      while($temporadas = $resultadoTemporadas->fetch_assoc()){
-        if($tipo == 'piloto') $participantesTemporada = $temporadas['pilotosF2'];
-        else $participantesTemporada = $temporadas['escuderiasF2'];
+      foreach($listaTemporadas as $temporada){
+        if($tipo == 'piloto') $participantesTemporada = $temporada['pilotosF2'];
+        else $participantesTemporada = $temporada['escuderiasF2'];
+
         if(strpos($participantesTemporada, $nombre) != false){
           $puntosTemporada = 0;
           if($tipo == 'piloto'){
-            if($temporadas['año'] >= 2018) $puntosTemporada = calcularPuntosPiloto($nombre, $temporadas['año']) + (2 * cantidadVueltasRapidasPiloto($nombre, $temporadas['año']) + (4 * cantidadPolesPiloto($nombre, $temporadas['año'])));
-            else $puntosTemporada = calcularPuntosPiloto($nombre, $temporadas['año']);
+            if($temporada['año'] >= 2018) $puntosTemporada = calcularPuntosPiloto($nombre, $temporada['año']) + (2 * cantidadVueltasRapidasPiloto($nombre, $temporada['año']) + (4 * cantidadPolesPiloto($nombre, $temporada['año'])));
+            else $puntosTemporada = calcularPuntosPiloto($nombre, $temporada['año']);
             
             $puntosTotales = $puntosTotales + $puntosTemporada;
           }
           else{
-            if($temporadas['año'] >= 2018) $puntosTemporada = calcularPuntosEscuderia($nombre, $temporadas['año']) + (2 * cantidadVueltasRapidasEscuderia($nombre, $temporadas['año']) + (4 * cantidadPolesEscuderia($nombre, $temporadas['año'])));
-            else $puntosTemporada = calcularPuntosEscuderia($nombre, $temporadas['año']);
+            if($temporada['año'] >= 2018) $puntosTemporada = calcularPuntosEscuderia($nombre, $temporada['año']) + (2 * cantidadVueltasRapidasEscuderia($nombre, $temporada['año']) + (4 * cantidadPolesEscuderia($nombre, $temporada['año'])));
+            else $puntosTemporada = calcularPuntosEscuderia($nombre, $temporada['año']);
 
             $puntosTotales = $puntosTotales + $puntosTemporada;
           }
@@ -499,21 +428,13 @@
       }
       return $puntosTotales;
     }
-    function ultimaParticipacionEnF2($nombre, $tipo){
-      try {
-          require('db/conexion.php');
+    function ultimaParticipacionEnF2($nombre, $tipo, $listaCarreras){      
+        foreach($listaCarreras as $carrera){
+          if($tipo == 'piloto') $posicionesCarrera = $carrera['posiciones_pilotos'];
+          else $posicionesCarrera = $carrera['posiciones_escuderias'];
 
-          $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' ORDER BY temporada DESC ";
-          $resultadoCarreras = $con->query($cargarCarreras);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
-        }
-      
-        while($carreras = $resultadoCarreras->fetch_assoc()){
-          if($tipo == 'piloto') $posicionesCarrera = $carreras['posiciones_pilotos'];
-          else $posicionesCarrera = $carreras['posiciones_escuderias'];
           $posicionesCarrera = json_decode($posicionesCarrera, true);
-          if(in_array($nombre, $posicionesCarrera)) return $carreras['temporada'];
+          if(in_array($nombre, $posicionesCarrera)) return $carrera['temporada'];
         }
         return "Error";
     }
