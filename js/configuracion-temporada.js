@@ -1,4 +1,4 @@
-function sacarElementoDelArray ( arr, item ) {
+function sacarElementoDelArray (arr, item) {
     var i = arr.indexOf( item );
     arr.splice( i, 1 );
 }
@@ -20,7 +20,10 @@ function convertirARRAYenJSON(array) {
   }
 
 function agregarEscuderias(escuderiasActuales, escuderiasNuevas){
-    if(escuderiasActuales=="{}") var resultado = JSON.stringify(escuderiasNuevas);
+    if(escuderiasActuales=="{}"){
+        var resultado = JSON.stringify(escuderiasNuevas);
+        resultado = '{' + resultado + '}';
+    }
     else{
         let resultadoA = escuderiasActuales;
         resultadoA = resultadoA.replace('{', '').replace('}', ', ');
@@ -33,7 +36,10 @@ function agregarEscuderias(escuderiasActuales, escuderiasNuevas){
 }
 
 function agregarPilotos(pilotosActuales, pilotosNuevos){
-    if(pilotosActuales=="{}") var resultado = JSON.stringify(pilotosNuevos);
+    if(pilotosActuales=="{}"){
+        var resultado = JSON.stringify(pilotosNuevos);
+        resultado = '{' + resultado + '}';
+    }
     else{
         let resultadoA = pilotosActuales;
         resultadoA = resultadoA.replace('{', '').replace('}', ', ');
@@ -56,6 +62,8 @@ function temporadaCon22Pilotos(temporada){
     if(temporada == 2001) return true;
     if(temporada == 2000) return true;
     if(temporada == 1999) return true;
+    if(temporada == 1998) return true;
+    if(temporada == 1996) return true;
     return false;
 }
 
@@ -63,6 +71,7 @@ function temporadaCon24Pilotos(temporada){
     if(temporada == 2012) return true;
     if(temporada == 2011) return true;
     if(temporada == 2010) return true;
+    if(temporada == 1997) return true;
     return false;
 }
 

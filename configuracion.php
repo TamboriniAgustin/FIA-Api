@@ -18,9 +18,11 @@
     <?php 
       $temporadaCon22Pilotos =  array(
                                   2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
-                                  1999
+                                  1999, 1998, 1996
                                 ); 
-      $temporadaCon24Pilotos = array(2012, 2011, 2010);
+      $temporadaCon24Pilotos = array(
+                                  2012, 2011, 2010, 1997
+                                );
     ?>
 
     <!-- Conecto a la base de datos y cargo los pilotos y escuderias, y ademas la temporada actual -->
@@ -64,7 +66,7 @@
             <div class="form-group row">
               <label class="col-4 col-form-label" for="nuevo_piloto">Añadir Escuderia</label> 
               <div class="col-8">
-                <select id="nueva_escuderia" name="nueva_escuderia" class="custom-select" required="required" multiple="multiple">
+                <select id="nueva_escuderia" name="nueva_escuderia" class="selectpicker" required="required" data-live-search="true" title="Seleccione una escuderia...">
                   <?php
                     while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
                       $idEscuderia = $escuderias['id'];
@@ -94,7 +96,7 @@
             <div class="form-group row">
               <label class="col-4 col-form-label" for="nuevo_piloto">Añadir Piloto</label> 
               <div class="col-8">
-                <select id="nuevo_piloto" name="nuevo_piloto" class="custom-select" required="required" multiple="multiple">
+                <select id="nuevo_piloto" name="nuevo_piloto" class="selectpicker" required="required" data-live-search="true" title="Seleccione un piloto...">
                   <?php
                     while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                       $idPiloto = $pilotos['id'];
@@ -157,7 +159,7 @@
               ?>
                 <label for="posicion<?php echo $i?>-Piloto" class="col-4 col-form-label">Posicion <?php echo $i?></label> 
                 <div class="col-8 d-flex justify-content-between">
-                  <select id="posicion<?php echo $i?>-Piloto" class="custom-select" required="required">
+                  <select id="posicion<?php echo $i?>-Piloto" class="custom-select">
                     <option selected disabled>-- Selecciona un Piloto --</option>
                     <?php
                       $resultadoPilotos = $con->query($cargarPilotos);
@@ -174,7 +176,7 @@
                     ?>
                   </select>
 
-                  <select id="posicion<?php echo $i?>-Escuderia" class="custom-select" required="required">
+                  <select id="posicion<?php echo $i?>-Escuderia" class="custom-select">
                     <option selected disabled>-- Selecciona una Escuderia --</option>
                     <?php
                       $resultadoEscuderias = $con->query($cargarEscuderias);
@@ -196,51 +198,53 @@
               ?>
 
               <label class="col-4 col-form-label" for="abandonos" style="margin-top: 50px;">Abandonos</label> 
-              <div class="col-8">
-                <select id="abandonos" name="abandonos" class="custom-select" style="margin-top: 50px;" required="required" multiple="multiple">
-                  <option value="Nadie">Sin abandonos</option>
-                  <option disabled>-------------------------------------------------------------------------------------</option>
-                  <?php
-                      $resultadoPilotos = $con->query($cargarPilotos);
-                      while ($pilotos = $resultadoPilotos->fetch_assoc()) {
-                        $idPiloto = $pilotos['id'];
-                        $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                        if(strpos($pilotosActuales, $nombrePiloto) != false){
-                  ?>
-                          <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
-                  <?php 
+              <div class="col-8" style="margin-top: 50px;">
+                <div class="d-flex justify-content-between">
+                  <select id="abandonos" name="abandonos" class="selectpicker" multiple data-live-search="true" title="Seleccione los pilotos que abandonaron...">
+                    <option value="Nadie">Sin abandonos</option>
+                    <option disabled>-------------------------------------------------------------------------------------</option>
+                    <?php
+                        $resultadoPilotos = $con->query($cargarPilotos);
+                        while ($pilotos = $resultadoPilotos->fetch_assoc()) {
+                          $idPiloto = $pilotos['id'];
+                          $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
+                          if(strpos($pilotosActuales, $nombrePiloto) != false){
+                    ?>
+                            <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
+                    <?php 
+                          }
                         }
-                      }
-                  ?>
-                </select>
-                <select id="abandonosEscuderia" name="abandonosEscuderia" class="custom-select" style="margin-top: 50px;" required="required" multiple="multiple">
-                  <option value="Nadie">Sin abandonos</option>
-                  <option disabled>-------------------------------------------------------------------------------------</option>
-                  <?php
-                      $resultadoEscuderias = $con->query($cargarEscuderias);
-                      while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
-                        $idEscuderia = $escuderias['id'];
-                        $nombreEscuderia = $escuderias['nombre'];
-                        if(strpos($escuderiasActuales, $nombreEscuderia) != false){
-                  ?>
-                          <option value="<?php echo $nombreEscuderia ?>"><?php echo $nombreEscuderia ?></option>
-                  <?php 
+                    ?>
+                  </select>
+                  <select id="abandonosEscuderia" name="abandonosEscuderia" class="selectpicker" multiple data-live-search="true" title="Seleccione las escuderias que abandonaron...">
+                    <option value="Nadie">Sin abandonos</option>
+                    <option disabled>-------------------------------------------------------------------------------------</option>
+                    <?php
+                        $resultadoEscuderias = $con->query($cargarEscuderias);
+                        while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
+                          $idEscuderia = $escuderias['id'];
+                          $nombreEscuderia = $escuderias['nombre'];
+                          if(strpos($escuderiasActuales, $nombreEscuderia) != false){
+                    ?>
+                            <option value="<?php echo $nombreEscuderia ?>"><?php echo $nombreEscuderia ?></option>
+                    <?php 
+                          }
                         }
-                      }
-                  ?>
-                  <?php
-                      $resultadoEscuderias = $con->query($cargarEscuderias);
-                      while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
-                        $idEscuderia = $escuderias['id'];
-                        $nombreEscuderia = $escuderias['nombre'];
-                        if(strpos($escuderiasActuales, $nombreEscuderia) != false){
-                  ?>
-                          <option value="<?php echo $nombreEscuderia ?>"><?php echo $nombreEscuderia ?></option>
-                  <?php 
+                    ?>
+                    <?php
+                        $resultadoEscuderias = $con->query($cargarEscuderias);
+                        while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
+                          $idEscuderia = $escuderias['id'];
+                          $nombreEscuderia = $escuderias['nombre'];
+                          if(strpos($escuderiasActuales, $nombreEscuderia) != false){
+                    ?>
+                            <option value="<?php echo $nombreEscuderia ?>"><?php echo $nombreEscuderia ?></option>
+                    <?php 
+                          }
                         }
-                      }
-                  ?>
-                </select>
+                    ?>
+                  </select>
+                </div>
               </div>
 
               <label for="pole" class="col-4 col-form-label" style="margin-top: 50px;">Pole</label> 

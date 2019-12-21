@@ -96,7 +96,6 @@
                         <th scope="col">Podios</th>
                         <th scope="col">Vueltas Rápidas</th>
                         <th scope="col">Abandonos</th>
-                        <th scope="col">Puntos Totales</th>
                         <th scope="col">Victorias</th>
                         <th scope="col">Campeonatos del Mundo</th>
                         <th scope="col">Última Participación</th>
@@ -114,7 +113,6 @@
                                     <th scope="row"><?php echo podiosEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
                                     <th scope="row"><?php echo vueltasRapidasEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
                                     <th scope="row"><?php echo abandonosEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
-                                    <th scope="row"><?php echo puntosTotalesDeF2($nombrePiloto, 'piloto', $temporadasF2); ?></th>
                                     <th scope="row"><?php echo victoriasEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
                                     <th scope="row"><?php echo mundialesDeF2($nombrePiloto, 'piloto', $temporadasF2); ?></th>
                                     <th scope="row"><?php echo ultimaParticipacionEnF2($nombrePiloto, 'piloto', $carrerasF2); ?></th>
@@ -164,16 +162,15 @@
                 <table id="tabla-escuderias" class="table">
                     <thead class="text-center" style="color:white; background-color:#007bff;">
                         <tr>
-                        <th scope="col" width="75%">Escuderia</th>
-                        <th scope="col">Carreras Corridas</th>
-                        <th scope="col">Poles</th>
-                        <th scope="col">Podios</th>
-                        <th scope="col">Vueltas Rápidas</th>
-                        <th scope="col">Abandonos</th>
-                        <th scope="col">Puntos Totales</th>
-                        <th scope="col">Victorias</th>
-                        <th scope="col">Campeonatos del Mundo</th>
-                        <th scope="col">Última Participación</th>
+                            <th scope="col" width="75%">Escuderia</th>
+                            <th scope="col">Carreras Corridas</th>
+                            <th scope="col">Poles</th>
+                            <th scope="col">Podios</th>
+                            <th scope="col">Vueltas Rápidas</th>
+                            <th scope="col">Abandonos</th>
+                            <th scope="col">Victorias</th>
+                            <th scope="col">Campeonatos del Mundo</th>
+                            <th scope="col">Última Participación</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -187,7 +184,6 @@
                                 <th scope="row"><?php echo podiosEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
                                 <th scope="row"><?php echo vueltasRapidasEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
                                 <th scope="row"><?php echo abandonosEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
-                                <th scope="row"><?php echo puntosTotalesDeF2($escuderia['nombre'], 'escuderia', $temporadasF2); ?></th>
                                 <th scope="row"><?php echo victoriasEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>
                                 <th scope="row"><?php echo mundialesDeF2($escuderia['nombre'], 'escuderia', $temporadasF2); ?></th>
                                 <th scope="row"><?php echo ultimaParticipacionEnF2($escuderia['nombre'], 'escuderia', $carrerasF2); ?></th>

@@ -170,6 +170,46 @@ function eliminarBD(e){
 }
 
 $(document).ready(function () {
+    const formatoTablaPilotos = $('#tablaPilotos');
+    if(formatoTablaPilotos.length){
+        $("#tablaPilotos").fancyTable({
+            pagination: true,
+            paginationClass: "btn btn-primary active",
+            paginationClassActive: "active",
+            perPage:5,
+            searchable:false
+        });
+    }
+    const formatoTablaEscuderias = $('#tablaEscuderias');
+    if(formatoTablaEscuderias.length){
+        $("#tablaEscuderias").fancyTable({
+            pagination: true,
+            paginationClass: "btn btn-primary active",
+            paginationClassActive: "active",
+            perPage:5,
+            searchable:false
+        });
+    }
+    const formatoTablaPistas = $('#tablaPistas');
+    if(formatoTablaPistas.length){
+        $("#tablaPistas").fancyTable({
+            pagination: true,
+            paginationClass: "btn btn-primary active",
+            paginationClassActive: "active",
+            perPage:5,
+            searchable:false
+        });
+    }
+    const formatoTablaTemporadas = $('#tablaTemporadas');
+    if(formatoTablaTemporadas.length){
+        $("#tablaTemporadas").fancyTable({
+            pagination: true,
+            paginationClass: "btn btn-primary active",
+            paginationClassActive: "active",
+            perPage:5,
+            searchable:false
+        });
+    }
     /* Eliminar Piloto */
     const tablaPilotos = document.querySelector('#tablaPilotos tbody');
     if(tablaPilotos) tablaPilotos.addEventListener("click", eliminarBD);

@@ -15,6 +15,8 @@ function mostrarCarrera(Carrera) {
         $('.AbuDhabi').hide(); $('.KualaLampur').hide(); $('.Jerez').hide(); $('.Nurburg').hide();
         $('.Yeongam').hide(); $('.Buddh').hide(); $('.Valencia').hide(); $('.Estambul').hide();
         $('.Nevers').hide(); $('.Fuji').hide(); $('.Indianapolis').hide(); $('.Imola').hide();
+        $('.BuenosAires').hide(); $('.SuzukaCorto').hide(); $('.TexasCorto').hide();
+        $('.Estoril').hide();
 
         $(carrera).show();
     }

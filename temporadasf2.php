@@ -62,6 +62,33 @@
           $error = $e->getMessage();
         }
     ?>
+    <!-- Conecto a la base de datos y cargo las carreras - Generando un array por cada una -->
+    <?php 
+      try {
+        require('db/conexion.php');
+
+        $cargarCarreras = "SELECT * FROM carreras WHERE categoria = 'f2' AND temporada = $temporadaActual";
+        $resultadoCarreras = $con->query($cargarCarreras);
+
+        $cargarPistas = "SELECT * FROM pistas";
+        $resultadoPistas = $con->query($cargarPistas);
+      } catch (\Exception $e) {
+        $error = $e->getMessage();
+      }
+
+      $carrerasF2 = array();
+
+      while($carreras = $resultadoCarreras->fetch_assoc()){
+        if($carrerasTemporada[$carreras['nombre']]){
+          $carrerasTemporada[$carreras['nombre']][2] = $carreras;
+          array_push($carrerasF2, $carreras);
+        }
+        else{
+          $carrerasTemporada[$carreras['nombre']][1] = $carreras;
+          array_push($carrerasF2, $carreras);
+        }
+      }
+    ?>
 
         <div class="container contenido">
           <!-- Tabla de Posiciones del Mundial -->
@@ -83,17 +110,11 @@
               ?>
                   <tr>
                     <td><?php echo $piloto ?></td>
-                    <?php 
-                      if($temporadaActual >= 2017){
-                    ?>
-                        <td><?php echo calcularPuntosPiloto($piloto, $temporadaActual) + (2 * cantidadVueltasRapidasPiloto($piloto, $temporadaActual)) + (4 * cantidadPolesPiloto($piloto, $temporadaActual)); ?></td>
-                    <?php 
-                      }
-                    ?>
-                    <td><?php echo cantidadVictoriasPiloto($piloto, $temporadaActual); ?></td>
-                    <td><?php echo cantidadVueltasRapidasPiloto($piloto, $temporadaActual); ?></td>
-                    <td><?php echo cantidadPolesPiloto($piloto, $temporadaActual); ?></td>
-                    <td><?php echo cantidadAbandonosPiloto($piloto, $temporadaActual); ?></td>
+                    <td><?php echo calcularPuntosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
+                    <td><?php echo cantidadVictoriasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
+                    <td><?php echo cantidadVueltasRapidasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
+                    <td><?php echo cantidadPolesTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
+                    <td><?php echo cantidadAbandonosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
                   </tr>
               <?php 
                 }
@@ -119,48 +140,17 @@
             ?>
                 <tr>
                   <td><?php echo $escuderia; ?></td>
-                  <?php 
-                    if($temporadaActual >= 2017){
-                  ?>
-                      <td><?php echo calcularPuntosEscuderia($escuderia, $temporadaActual) + (2 * cantidadVueltasRapidasEscuderia($escuderia, $temporadaActual)) + (4 * cantidadPolesEscuderia($escuderia, $temporadaActual)); ?></td>
-                  <?php 
-                    }
-                  ?>
-                  <td><?php echo cantidadVictoriasEscuderia($escuderia, $temporadaActual) ?></td>
-                  <td><?php echo cantidadVueltasRapidasEscuderia($escuderia, $temporadaActual); ?></td>
-                  <td><?php echo cantidadPolesEscuderia($escuderia, $temporadaActual); ?></td>
-                  <td><?php echo cantidadAbandonosEscuderia($escuderia, $temporadaActual); ?></td>
+                  <td><?php echo calcularPuntosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
+                  <td><?php echo cantidadVictoriasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
+                  <td><?php echo cantidadVueltasRapidasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
+                  <td><?php echo cantidadPolesTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
+                  <td><?php echo cantidadAbandonosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
                 </tr>
             <?php 
               }
             ?>
             </tbody>
           </table>
-
-          <!-- Conecto a la base de datos y cargo las carreras - Generando un array por cada una -->
-          <?php 
-            try {
-              require('db/conexion.php');
-
-              $cargarCarreras = "SELECT * FROM carreras WHERE categoria = 'f2' AND temporada = $temporadaActual";
-              $resultadoCarreras = $con->query($cargarCarreras);
-
-              $cargarPistas = "SELECT * FROM pistas";
-              $resultadoPistas = $con->query($cargarPistas);
-            } catch (\Exception $e) {
-              $error = $e->getMessage();
-            }
-
-            while($carreras = $resultadoCarreras->fetch_assoc()){
-              //var_dump ($carreras);
-              if($carrerasTemporada[$carreras['nombre']]){
-                $carrerasTemporada[$carreras['nombre']][2] = $carreras;
-              }
-              else{
-                $carrerasTemporada[$carreras['nombre']][1] = $carreras;
-              }
-            }
-          ?>
 
           <!-- Seleccionar Carrera -->
           <form action="#" id="elegirCarrera" method="GET" style="padding: 50px 0 50px 0;">

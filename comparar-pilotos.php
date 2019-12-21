@@ -97,8 +97,6 @@
                         <th scope="col">Podios</th>
                         <th scope="col">Vueltas Rápidas</th>
                         <th scope="col">Abandonos</th>
-                        <th scope="col">Mayor Cantidad de Puntos en Temporada</th>
-                        <th scope="col">Puntos Totales</th>
                         <th scope="col">Victorias</th>
                         <th scope="col">Campeonatos del Mundo</th>
                         </tr>
@@ -117,8 +115,6 @@
                                     <th scope="row"><?php if($categoria == 'f1') echo podiosEnF1($nombrePiloto, 'piloto', $carreras); else echo podiosEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
                                     <th scope="row"><?php if($categoria == 'f1') echo vueltasRapidasEnF1($nombrePiloto, 'piloto', $carreras); else echo vueltasRapidasEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
                                     <th scope="row"><?php if($categoria == 'f1') echo abandonosEnF1($nombrePiloto, 'piloto', $carreras); else echo abandonosEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo maximaCantidadDePuntosDeF1($nombrePiloto, 'piloto', $temporadas); else echo maximaCantidadDePuntosDeF2($nombrePiloto, 'piloto', $temporadas); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo puntosTotalesDeF1($nombrePiloto, 'piloto', $temporadas); else echo puntosTotalesDeF2($nombrePiloto, 'piloto', $temporadas); ?></th>
                                     <th scope="row"><?php if($categoria == 'f1') echo victoriasEnF1($nombrePiloto, 'piloto', $carreras); else echo victoriasEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
                                     <th scope="row"><?php if($categoria == 'f1') echo mundialesDeF1($nombrePiloto, 'piloto', $temporadas); else echo mundialesDeF2($nombrePiloto, 'piloto', $temporadas); ?></th>
                                 </tr>

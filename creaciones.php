@@ -107,29 +107,6 @@
           </div>
         </form>
 
-        <!-- Crear una Temporada -->
-        <h3 class="text-center">Crear una Temporada</h3>
-        <form class="crear-temporada" method="POST" action="#">
-          <div class="form-group row">
-            <label for="año" class="col-4 col-form-label">Año</label> 
-            <div class="col-8">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <i class="fa fa-address-book-o"></i>
-                  </div>
-                </div> 
-                <input id="año" name="año" placeholder="Ingrese el año de la temporada a agregar..." type="text" required="required" class="form-control">
-              </div>
-            </div>
-          </div> 
-          <div class="form-group row">
-            <div class="offset-4 col-8 text-center">
-              <button name="submit" type="submit" class="btn btn-primary">Crear</button>
-            </div>
-          </div>
-        </form>
-
         <!-- Crear una Pista -->
         <h3 class="text-center">Crear una Pista</h3>
         <form class="crear-pista" method="POST" action="#">
@@ -198,6 +175,29 @@
               </div>
             </div>
           </div>  
+          <div class="form-group row">
+            <div class="offset-4 col-8 text-center">
+              <button name="submit" type="submit" class="btn btn-primary">Crear</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Crear una Temporada -->
+        <h3 class="text-center">Crear una Temporada</h3>
+        <form class="crear-temporada" method="POST" action="#">
+          <div class="form-group row">
+            <label for="año" class="col-4 col-form-label">Año</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-address-book-o"></i>
+                  </div>
+                </div> 
+                <input id="año" name="año" placeholder="Ingrese el año de la temporada a agregar..." type="text" required="required" class="form-control">
+              </div>
+            </div>
+          </div> 
           <div class="form-group row">
             <div class="offset-4 col-8 text-center">
               <button name="submit" type="submit" class="btn btn-primary">Crear</button>
