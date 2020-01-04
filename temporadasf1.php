@@ -17,6 +17,22 @@
       $temporadaCon24Pilotos = array(
                                   2012, 2011, 2010, 1997
                                );
+      $temporadaCon26Pilotos = array(
+                                  1995, 1993
+                               );
+      $temporadaCon28Pilotos = array(
+                                  1994
+                               );
+      $temporadaCon32Pilotos = array(
+                                  1992
+                               );
+      $temporadaCon36Pilotos = array(
+                                  1991
+                               );
+      $temporadaCon38Pilotos = array(
+                                  1990
+                               );
+                                       
     ?>    
 
     <!-- Conecto a la base de datos y cargo las temporadas -->
@@ -31,25 +47,30 @@
       }
     ?>
     
-    <form action="#" id="elegirTemporada" method="GET">
-        <select class="form-control">
-            <option disabled selected>Selecciona una temporada</option>
-            <?php 
-              while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
-                $anioTemporada = $temporadas['año'];
-            ?>
-            <option value="<?php echo $anioTemporada ?>"><?php echo $anioTemporada ?></option>
-            <?php 
-              }
-            ?>
-        </select>
-    </form>
+    <div id="elegirTemporada" class="text-center">
+      <?php
+        $contador = 1;
+        $temporadaActual = $_GET['temporada']; 
+        $campeonPilotos = "";
+        $campeonEscuderias = "";
+        while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
+          if($temporadas['año'] == $temporadaActual){
+            $campeonPilotos = $temporadas['campeon_pilotos_f1'];
+            $campeonEscuderias = $temporadas['campeon_escuderias_f1'];
+          }
+      ?>
+          <a href="temporadasf1.php?categoria=f1&temporada=<?php echo $temporadas['año']; ?>"><span class="badge badge-pill badge-danger"><?php echo $temporadas['año']; ?></span></a>
+      <?php
+          if($contador % 20 == 0) echo "<br>";
+          $contador++; 
+        }
+      ?>
+    </div>
 
     <a id="configurarTemporada" href="#seleccionar_temporada"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
 
     <!-- Obtengo los pilotos que participaron en la temporada -->
-    <?php
-      $temporadaActual = $_GET['temporada']; 
+    <?php 
       if($temporadaActual){
         try {
           require('db/conexion.php');
@@ -112,7 +133,7 @@
               <?php
                 foreach ($pilotosTemporada as $piloto) {
               ?>
-                  <tr>
+                  <tr <?php if(($piloto == $campeonPilotos) || (strpos($piloto, $campeonPilotos) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                     <td><?php echo $piloto ?></td>
                     <td><?php echo calcularPuntosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF1);?></td>
                     <td><?php echo cantidadVictoriasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF1);?></td>
@@ -142,7 +163,7 @@
             <?php
                 foreach ($escuderiasTemporada as $escuderia) {
               ?>
-                  <tr>
+                  <tr <?php if(($escuderia == $campeonEscuderias) || (strpos($escuderia, $campeonEscuderias) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                     <td><?php echo $escuderia ?></td>
                     <td><?php echo calcularPuntosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF1);?></td>
                     <td><?php echo cantidadVictoriasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF1);?></td>
@@ -155,26 +176,41 @@
               ?>
             </tbody>
           </table>
+          <br>
+          <?php if($temporadaActual == "2007") echo "* McLaren ha sido descalificado del torneo por espionaje hacia ferrari." ?>
 
           <!-- Seleccionar Carrera -->
-          <form action="#" id="elegirCarrera" method="GET" style="padding: 50px 0 50px 0;">
-              <select class="form-control">
-                  <option disabled selected>Selecciona una carrera</option>
-                  <?php 
-                    foreach ($carrerasTemporada as $carrera) {
-                  ?>
-                      <option value="<?php echo valorCarrera($carrera['nombre']); ?>"><?php echo $carrera['nombre']; ?></option>
-                  <?php 
-                    }
-                  ?>
-              </select>
-          </form>
+          <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
+            <?php
+              $contador = 0; 
+              foreach ($carrerasTemporada as $carrera){
+                $paisCarrera = substr($carrera['nombre'], 0, strpos($carrera['nombre'], ' -'));
+                if(($contador % 6 == 0)) echo "<div class='row'>";
+            ?>
+                <div class="col-2 card text-center" style="width: 18rem;">
+                  <img style="border:solid .1rem grey; width:10rem;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                  <div class="card-body">
+                    <h5 class="card-title">Gran Premio de <?php echo $carrera['nombre']; ?></h5>
+                    <a id="mostrarCarrera" class="btn btn-danger active" data-id="<?php echo valorCarrera($carrera['nombre']); ?>">Ver</a>
+                  </div>
+                </div>
+            <?php
+                $contador++;
+                if(($contador % 6 == 0)) echo "</div>"; 
+              }
+            ?>
+          </div>
           
           <!-- Establezco la cantidad de pilotos que participan por carrera -->
           <?php 
             $cantidadPilotos = 20;
             if(in_array($temporadaActual, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
             else if(in_array($temporadaActual, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
+            else if(in_array($temporadaActual, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
+            else if(in_array($temporadaActual, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
+            else if(in_array($temporadaActual, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
+            else if(in_array($temporadaActual, $temporadaCon36Pilotos)) $cantidadPilotos = 36;
+            else if(in_array($temporadaActual, $temporadaCon38Pilotos)) $cantidadPilotos = 38;
           ?>
 
           <!-- Carreras -->
@@ -182,7 +218,7 @@
             while($pista = $resultadoPistas->fetch_assoc()){
               $nombrePista = $pista['pais'] . ' - ' . $pista['ciudad'];
           ?>
-              <table class="table <?php echo str_replace(' ', '', $pista['ciudad']); ?>" style="display: none">
+              <table class="table <?php echo str_replace(' ', '', $pista['ciudad']); ?>" style="display: none; margin-top:2rem;">
                 <thead class="text-center" style="background-color:<?php echo $pista['color_principal'] ?>;">
                   <tr>
                     <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal'] ?>;"><?php echo $pista['ciudad']; ?></h3></th>

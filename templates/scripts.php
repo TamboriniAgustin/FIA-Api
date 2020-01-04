@@ -23,4 +23,5 @@
     if(strpos($nombrePagina, 'configuracion') != false) echo '<script src="js/configuracion-temporada.js"></script>';
     if(strpos($nombrePagina, 'historiaf1') != false) echo '<script src="js/historiaf1.js"></script>';
     if(strpos($nombrePagina, 'historiaf2') != false) echo '<script src="js/historiaf2.js"></script>';
+    if(strpos($nombrePagina, 'comparar-pilotos') != false) echo '<script src="js/comparar-pilotos.js"></script>';
 ?>

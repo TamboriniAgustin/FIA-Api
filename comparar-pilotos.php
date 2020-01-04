@@ -12,7 +12,7 @@
 <html lang="en">
   <?php include('templates/head.php') ?>
   <body>
-    <a href="<?php if($categoria == 'f1') echo "historiaf1.php"; else echo "historiaf2.php"; ?>"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
+    <a href="index.php"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
 
     <?php include('templates/header.php') ?>
 
@@ -54,13 +54,10 @@
     ?>
     <!-- Cargo los pilotos que participaron en la temporada -->
     <?php
-         $piloto1 = $_GET['piloto1'];
-         $piloto2 = $_GET['piloto2'];
-
          try {
             require('db/conexion.php');
   
-            $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE id = $piloto1 OR id = $piloto2 ORDER BY apellido ";
+            $cargarPilotosTemporada = " SELECT * FROM pilotos ORDER BY apellido ";
             $resultadoTemporada = $con->query($cargarPilotosTemporada);
   
           } catch (\Exception $e) {
@@ -80,50 +77,145 @@
               }
               $contador++;
             }
+          //Hago un array con las IDS de los pilotos que se compararan
+          $idPilotos = array();
+          foreach($pilotosComparacion as $piloto){
+            array_push($idPilotos, $piloto['id']);
+          }
     ?>
+    <!-- Obtengo la informacion extra de los pilotos -->
+    <?php
+      $pilotos = array(); 
+      foreach($pilotosComparacion as $piloto){
+          if($categoria == 'f1'){
+            $piloto['grandes_premios'] =  carrerasEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['victorias'] =  victoriasEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['poles'] =  polesEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['podios'] =  podiosEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['vueltas_rapidas'] =  vueltasRapidasEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['abandonos'] =  abandonosEnF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['mundiales'] =  mundialesDeF1($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $temporadas);
+            $piloto['escuderias'] =  escuderiasDePiloto($piloto['nombre'] . ' ' . $piloto['apellido'], $carreras); 
+          }
+          else{
+            $piloto['grandes_premios'] =  carrerasEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['victorias'] =  victoriasEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['poles'] =  polesEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['podios'] =  podiosEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['vueltas_rapidas'] =  vueltasRapidasEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['abandonos'] =  abandonosEnF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $carreras);
+            $piloto['mundiales'] =  mundialesDeF2($piloto['nombre'] . ' ' . $piloto['apellido'], 'piloto', $temporadas);
+            $piloto['escuderias'] =  escuderiasDePiloto($piloto['nombre'] . ' ' . $piloto['apellido'], $carreras);
+          }
+          array_push($pilotos, $piloto);
+        }
+    ?>
+    <!-- Envio la cantidad de pilotos registrados a js -->
+    <input type="hidden" value="<?php echo max($idPilotos); ?>" id="pilotosTotales">
 
     <div style="margin: 50px;">
         <!-- Pilotos -->
         <h3 class="text-center">Pilotos</h3>
-            <div class="tabla-pilotos">
-                <table class="table">
-                    <thead class="text-center" style="color:white; background-color:<?php echo $colorPagina; ?>;">
-                        <tr>
-                        <th scope="col" width="75%">Piloto</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Nacionalidad</th>
-                        <th scope="col">Carreras Corridas</th>
-                        <th scope="col">Poles</th>
-                        <th scope="col">Podios</th>
-                        <th scope="col">Vueltas Rápidas</th>
-                        <th scope="col">Abandonos</th>
-                        <th scope="col">Victorias</th>
-                        <th scope="col">Campeonatos del Mundo</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php 
-                            foreach ($pilotosComparacion as $piloto) {
-                                $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
-                        ?>
-                                <tr>
-                                    <th scope="row"><?php echo $nombrePiloto; ?></th>
-                                    <th scope="row"><?php echo $piloto['edad']; ?></th>
-                                    <th scope="row"><?php echo $piloto['nacionalidad']; ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo carrerasEnF1($nombrePiloto, 'piloto', $carreras); else echo carrerasEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo polesEnF1($nombrePiloto, 'piloto', $carreras); else echo polesEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo podiosEnF1($nombrePiloto, 'piloto', $carreras); else echo podiosEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo vueltasRapidasEnF1($nombrePiloto, 'piloto', $carreras); else echo vueltasRapidasEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo abandonosEnF1($nombrePiloto, 'piloto', $carreras); else echo abandonosEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo victoriasEnF1($nombrePiloto, 'piloto', $carreras); else echo victoriasEnF2($nombrePiloto, 'piloto', $carreras); ?></th>
-                                    <th scope="row"><?php if($categoria == 'f1') echo mundialesDeF1($nombrePiloto, 'piloto', $temporadas); else echo mundialesDeF2($nombrePiloto, 'piloto', $temporadas); ?></th>
-                                </tr>
-                        <?php 
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>      
+        <div class="comparadorPilotos container">
+          <div class="row">
+            <div class="col-sm" style="border: solid .2rem <?php echo $colorPagina; ?>">
+              <div class="seleccionarPiloto form-group">
+                <label for="piloto1">Seleccione un piloto</label>
+                <select class="form-control" id="piloto1">
+                  <?php 
+                    foreach($pilotosComparacion as $piloto){
+                  ?>
+                      <option value="<?php echo $piloto['id'] ?>"><?php echo $piloto['apellido'] . ' ' . $piloto['nombre']; ?></option>
+                  <?php 
+                    }
+                  ?>
+                </select>
+              </div>
+              <?php 
+                foreach($pilotos as $piloto){
+              ?>
+                  <div class="formularioPiloto" id="fila1-piloto<?php echo $piloto['id']; ?>" style="display:none;">
+                        <p>Nacionalidad: <?php echo $piloto['nacionalidad']; ?></p>
+                        <p>Edad (última participación): <?php echo $piloto['edad']; ?></p>
+                        <p>Grandes Premios: <?php echo $piloto['grandes_premios']; ?></p>
+                        <p>Victorias: <?php echo $piloto['victorias']; ?></p>
+                        <p>Poles: <?php echo $piloto['poles'] ?></p>
+                        <p>Podios: <?php echo $piloto['podios']; ?></p>
+                        <p>Vueltas Rápidas: <?php echo $piloto['vueltas_rapidas']; ?></p>
+                        <p>Abandonos: <?php echo $piloto['abandonos']; ?></p>
+                        <p>Campeonatos del mundo: <?php echo $piloto['mundiales']; ?></p>
+                        <p>Escuderias: <?php echo $piloto['escuderias']; ?></p>
+                  </div>
+              <?php 
+                }
+              ?>
+            </div>
+            <div class="col-sm" style="border: solid .2rem <?php echo $colorPagina; ?>">
+              <div class="seleccionarPiloto form-group">
+                <label for="piloto2">Seleccione un piloto</label>
+                <select class="form-control" id="piloto2">
+                  <?php 
+                    foreach($pilotosComparacion as $piloto){
+                  ?>
+                      <option value="<?php echo $piloto['id'] ?>"><?php echo $piloto['apellido'] . ' ' . $piloto['nombre']; ?></option>
+                  <?php 
+                    }
+                  ?>
+                </select>
+              </div>
+              <?php 
+                foreach($pilotos as $piloto){
+              ?>
+                  <div class="formularioPiloto" id="fila2-piloto<?php echo $piloto['id']; ?>" style="display:none;">
+                        <p>Nacionalidad: <?php echo $piloto['nacionalidad']; ?></p>
+                        <p>Edad (última participación): <?php echo $piloto['edad']; ?></p>
+                        <p>Grandes Premios: <?php echo $piloto['grandes_premios']; ?></p>
+                        <p>Victorias: <?php echo $piloto['victorias']; ?></p>
+                        <p>Poles: <?php echo $piloto['poles'] ?></p>
+                        <p>Podios: <?php echo $piloto['podios']; ?></p>
+                        <p>Vueltas Rápidas: <?php echo $piloto['vueltas_rapidas']; ?></p>
+                        <p>Abandonos: <?php echo $piloto['abandonos']; ?></p>
+                        <p>Campeonatos del mundo: <?php echo $piloto['mundiales']; ?></p>
+                        <p>Escuderias: <?php echo $piloto['escuderias']; ?></p>
+                  </div>
+              <?php 
+                }
+              ?>
+            </div>
+            <div class="col-sm" style="border: solid .2rem <?php echo $colorPagina; ?>">
+              <div class="seleccionarPiloto form-group">
+                <label for="piloto3">Seleccione un piloto</label>
+                <select class="form-control" id="piloto3">
+                  <?php 
+                    foreach($pilotosComparacion as $piloto){
+                  ?>
+                      <option value="<?php echo $piloto['id'] ?>"><?php echo $piloto['apellido'] . ' ' . $piloto['nombre']; ?></option>
+                  <?php 
+                    }
+                  ?>
+                </select>
+              </div>
+              <?php 
+                foreach($pilotos as $piloto){
+              ?>
+                  <div class="formularioPiloto" id="fila3-piloto<?php echo $piloto['id']; ?>" style="display:none;">
+                        <p>Nacionalidad: <?php echo $piloto['nacionalidad']; ?></p>
+                        <p>Edad (última participación): <?php echo $piloto['edad']; ?></p>
+                        <p>Grandes Premios: <?php echo $piloto['grandes_premios']; ?></p>
+                        <p>Victorias: <?php echo $piloto['victorias']; ?></p>
+                        <p>Poles: <?php echo $piloto['poles'] ?></p>
+                        <p>Podios: <?php echo $piloto['podios']; ?></p>
+                        <p>Vueltas Rápidas: <?php echo $piloto['vueltas_rapidas']; ?></p>
+                        <p>Abandonos: <?php echo $piloto['abandonos']; ?></p>
+                        <p>Campeonatos del mundo: <?php echo $piloto['mundiales']; ?></p>
+                        <p>Escuderias: <?php echo $piloto['escuderias']; ?></p>
+                  </div>
+              <?php 
+                }
+              ?>
+            </div>
+          </div>
+        </div>   
     </div>
 
     <?php include('templates/scripts.php') ?>

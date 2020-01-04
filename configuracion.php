@@ -4,10 +4,9 @@
   <body>
     <?php 
       $categoria = $_GET['categoria'];
-      if($categoria == "f1") $paginaAnterior = "temporadasf1.php";
-      if($categoria == "f2") $paginaAnterior = "temporadasf2.php";
-
       $temporada = $_GET['temporada'];
+      if($categoria == "f1") $paginaAnterior = "temporadasf1.php?categoria=f1&temporada=" . $temporada;
+      if($categoria == "f2") $paginaAnterior = "temporadasf2.php?categoria=f2&temporada=" . $temporada;
     ?>
 
     <a href="<?php echo $paginaAnterior; ?>"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
@@ -22,6 +21,21 @@
                                 ); 
       $temporadaCon24Pilotos = array(
                                   2012, 2011, 2010, 1997
+                                );
+      $temporadaCon26Pilotos = array(
+                                  1995, 1993
+                                );
+      $temporadaCon28Pilotos = array(
+                                  1994
+                                );
+      $temporadaCon32Pilotos = array(
+                                  1992
+                                );
+      $temporadaCon36Pilotos = array(
+                                  1991
+                                );
+      $temporadaCon38Pilotos = array(
+                                  1990
                                 );
     ?>
 
@@ -153,6 +167,11 @@
               <?php
                 if(in_array($temporada, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
                 else if(in_array($temporada, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
+                else if(in_array($temporada, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
+                else if(in_array($temporada, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
+                else if(in_array($temporada, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
+                else if(in_array($temporada, $temporadaCon36Pilotos)) $cantidadPilotos = 36;
+                else if(in_array($temporada, $temporadaCon38Pilotos)) $cantidadPilotos = 38;
                 else $cantidadPilotos = 20;
 
                 for ($i=1; $i <= $cantidadPilotos; $i++){ 

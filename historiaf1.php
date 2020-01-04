@@ -124,38 +124,6 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-between" style="margin-bottom:30px; margin-top:30px;">
-                <div class="piloto1">
-                    <select id="piloto1" class="browser-default custom-select">
-                        <option value="nada" disabled selected>Selecciona un piloto</option>
-                        <?php 
-                            foreach ($pilotosF1 as $piloto) {
-                            $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
-                        ?>
-                                <option value="<?php echo $piloto['id']; ?>"><?php echo $nombrePiloto; ?></option>
-                        <?php 
-                            }
-                        ?>
-                    </select>
-                </div>
-                <div class="enviar">
-                    <button type="button" id="boton_pilotos" class="btn btn-danger" disabled>Enviar</button>
-                </div>
-                <div class="piloto2">
-                    <select id="piloto2" class="browser-default custom-select">
-                        <option value="nada" disabled selected>Selecciona un piloto</option>
-                        <?php 
-                        foreach ($pilotosF1 as $piloto) {
-                            $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
-                        ?>
-                            <option value="<?php echo $piloto['id']; ?>"><?php echo $nombrePiloto; ?></option>
-                        <?php 
-                            }
-                        ?>
-                    </select>
-                </div>
-            </div>
-
         <!-- Escuderias -->
         <h3 class="text-center">Escuderias</h3>
             <div class="tabla-escuderias">
@@ -193,38 +161,7 @@
                     ?>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="d-flex justify-content-between" style="margin-bottom:30px; margin-top:30px;">
-                <div class="escuderia1">
-                    <select id="escuderia1" class="browser-default custom-select">
-                        <option value="" disabled selected>Selecciona una escuderia</option>
-                        <?php 
-                            foreach ($escuderiasF1 as $escuderia) {
-                        ?>
-                                <option value="<?php echo $escuderia['id'] ?>"><?php echo $escuderia['nombre']; ?></option>
-                        <?php 
-                            }
-                        ?>
-                    </select>
-                </div>
-                <div class="enviar">
-                    <button id="boton_escuderias" type="button" class="btn btn-danger" disabled>Enviar</button>
-                </div>
-                <div class="escuderia2">
-                    <select id="escuderia2" class="browser-default custom-select">
-                        <option value="" disabled selected>Selecciona una escuderia</option>
-                        <?php 
-                            foreach ($escuderiasF1 as $escuderia) {
-                        ?>
-                                <option value="<?php echo $escuderia['id'] ?>"><?php echo $escuderia['nombre']; ?></option>
-                        <?php 
-                            }
-                        ?>
-                    </select>
-                </div>
-            </div>
-        
+            </div>    
     </div>
 
     <?php include('templates/scripts.php') ?>

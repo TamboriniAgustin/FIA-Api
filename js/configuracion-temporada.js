@@ -75,6 +75,32 @@ function temporadaCon24Pilotos(temporada){
     return false;
 }
 
+function temporadaCon26Pilotos(temporada){
+    if(temporada == 1995) return true;
+    if(temporada == 1993) return true;
+    return false;
+}
+
+function temporadaCon28Pilotos(temporada){
+    if(temporada == 1994) return true;
+    return false;
+}
+
+function temporadaCon32Pilotos(temporada){
+    if(temporada == 1992) return true;
+    return false;
+}
+
+function temporadaCon36Pilotos(temporada){
+    if(temporada == 1991) return true;
+    return false;
+}
+
+function temporadaCon38Pilotos(temporada){
+    if(temporada == 1990) return true;
+    return false;
+}
+
 /*********************************************************/
 
 function leerFormulario(formulario, nombreFormulario){
@@ -129,6 +155,11 @@ function leerFormulario(formulario, nombreFormulario){
         var cantidadPilotos = 20;
         if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
         if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
+        if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
+        if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
+        if(temporadaCon32Pilotos(temporada)) cantidadPilotos = 32;
+        if(temporadaCon36Pilotos(temporada)) cantidadPilotos = 36;
+        if(temporadaCon38Pilotos(temporada)) cantidadPilotos = 38;
 
         for (let i = 1; i <= cantidadPilotos; i++) {
             let idPilotos = "#posicion" + i + "-Piloto";

@@ -23,7 +23,8 @@
               <h1 class="mb-4 mt-5">Formula 1</h1>
               <p>
                   <a href="historiaf1.php" class="btn btn-danger p-3 px-xl-4 py-xl-3">Historia</a>
-                  <a href="temporadasf1.php" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Temporadas</a> 
+                  <a href="temporadasf1.php" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Temporadas</a>
+                  <a href="comparar-pilotos.php?categoria=f1" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>  
               </p>
             </div>
           </div>
@@ -38,7 +39,8 @@
               <h1 class="mb-4 mt-5">Formula 2</h1>
               <p>
                   <a href="historiaf2.php" class="btn btn-primary p-3 px-xl-4 py-xl-3">Historia</a>
-                  <a href="temporadasf2.php" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Temporadas</a> 
+                  <a href="temporadasf2.php" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Temporadas</a>
+                  <a href="comparar-pilotos.php?categoria=f2" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>  
               </p>
             </div>
           </div>

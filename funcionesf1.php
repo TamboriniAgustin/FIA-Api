@@ -40,9 +40,20 @@
           default: return 0;
         }
       }
-      else{
+      else if($temporada >= 1991){
         switch ($posicion) {
           case 1: return 10;
+          case 2: return 6;
+          case 3: return 4;
+          case 4: return 3;
+          case 5: return 2;
+          case 6: return 1;
+          default: return 0;
+        }
+      }
+      else{
+        switch ($posicion) {
+          case 1: return 9;
           case 2: return 6;
           case 3: return 4;
           case 4: return 3;
@@ -93,8 +104,16 @@
           if(strpos($nombre, $posicionesCarrera[7]) != false || $nombre == $posicionesCarrera[7]) $puntos = $puntos + 2;
           if(strpos($nombre, $posicionesCarrera[8]) != false || $nombre == $posicionesCarrera[8]) $puntos = $puntos + 1;
         }
-        else{
+        else if($temporada >= 1991){
           if(strpos($nombre, $posicionesCarrera[1]) != false || $nombre == $posicionesCarrera[1]) $puntos = $puntos + 10;
+          if(strpos($nombre, $posicionesCarrera[2]) != false || $nombre == $posicionesCarrera[2]) $puntos = $puntos + 6;
+          if(strpos($nombre, $posicionesCarrera[3]) != false || $nombre == $posicionesCarrera[3]) $puntos = $puntos + 4;
+          if(strpos($nombre, $posicionesCarrera[4]) != false || $nombre == $posicionesCarrera[4]) $puntos = $puntos + 3;
+          if(strpos($nombre, $posicionesCarrera[5]) != false || $nombre == $posicionesCarrera[5]) $puntos = $puntos + 2;
+          if(strpos($nombre, $posicionesCarrera[6]) != false || $nombre == $posicionesCarrera[6]) $puntos = $puntos + 1;
+        }
+        else{
+          if(strpos($nombre, $posicionesCarrera[1]) != false || $nombre == $posicionesCarrera[1]) $puntos = $puntos + 9;
           if(strpos($nombre, $posicionesCarrera[2]) != false || $nombre == $posicionesCarrera[2]) $puntos = $puntos + 6;
           if(strpos($nombre, $posicionesCarrera[3]) != false || $nombre == $posicionesCarrera[3]) $puntos = $puntos + 4;
           if(strpos($nombre, $posicionesCarrera[4]) != false || $nombre == $posicionesCarrera[4]) $puntos = $puntos + 3;
@@ -248,5 +267,29 @@
           if(in_array($nombre, $posicionesCarrera)) return $carrera['temporada'];
         }
         return "Error";
+    }
+    function escuderiasDePiloto($nombre, $listaCarreras){
+      $escuderias = array();
+      foreach($listaCarreras as $carrera){
+        $posicionesPilotos = json_decode($carrera['posiciones_pilotos'], true);
+        $posicionesEscuderias = json_decode($carrera['posiciones_escuderias'], true);
+        //Si el piloto participó de la carrera obtengo la escuderia en la que estuvo
+        if(in_array($nombre, $posicionesPilotos)){
+          //Obtengo la posición del piloto
+          $posicionPiloto = 0;
+          for($i=1;$i<count($posicionesPilotos);$i++){
+            if($posicionesPilotos[$i] == $nombre) $posicionPiloto = $i; 
+          }
+          //Verifico que la escuderia no este ya incluida en el array
+          if($posicionPiloto > 0){
+            array_push($escuderias, $posicionesEscuderias[$posicionPiloto]);
+          }
+        }
+      }
+      $escuderias = array_unique($escuderias);
+      $escuderias = array_reverse($escuderias);
+      //Convierto las escuderias en un string
+      $escuderias = implode(', ', $escuderias);
+      return $escuderias;
     }
 ?>

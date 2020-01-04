@@ -1,9 +1,3 @@
-function mostrarTemporada(Temporada){
-    if(Temporada != "Selecciona una temporada"){
-        window.location = 'temporadasf1.php?categoria=f1&temporada=' + Temporada;
-    }
-}
-
 function mostrarCarrera(Carrera) {
     if(Carrera != "Selecciona una carrera"){
         let carrera = '.' + Carrera;
@@ -16,7 +10,8 @@ function mostrarCarrera(Carrera) {
         $('.Yeongam').hide(); $('.Buddh').hide(); $('.Valencia').hide(); $('.Estambul').hide();
         $('.Nevers').hide(); $('.Fuji').hide(); $('.Indianapolis').hide(); $('.Imola').hide();
         $('.BuenosAires').hide(); $('.SuzukaCorto').hide(); $('.TexasCorto').hide();
-        $('.Estoril').hide();
+        $('.Estoril').hide(); $('.Okayama').hide(); $('.Adelaida').hide();
+        $('.Kyalami').hide(); $('.Phoenix').hide();
 
         $(carrera).show();
     }
@@ -33,15 +28,9 @@ $(document).ready(function () {
     let mundialEscuderias = $('.table-posicionesE');
     mundialEscuderias.tablesorter();
 
-    let seleccionTemporada = $('#elegirTemporada');
-    $(seleccionTemporada).on('click', function () {
-        temporadaSeleccionada = seleccionTemporada[0][0].value;
-        mostrarTemporada(temporadaSeleccionada);
-    });
-
-    let seleccionCarrera = $('#elegirCarrera');
+    let seleccionCarrera = $('.card #mostrarCarrera');
     $(seleccionCarrera).on('click', function () {
-        carreraSeleccionada = seleccionCarrera[0][0].value;
+        carreraSeleccionada = $(this).attr('data-id');
         mostrarCarrera(carreraSeleccionada);
     });
 

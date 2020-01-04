@@ -236,4 +236,28 @@
         }
         return "Error";
     }
+    function escuderiasDePiloto($nombre, $listaCarreras){
+      $escuderias = array();
+      foreach($listaCarreras as $carrera){
+        $posicionesPilotos = json_decode($carrera['posiciones_pilotos'], true);
+        $posicionesEscuderias = json_decode($carrera['posiciones_escuderias'], true);
+        //Si el piloto participó de la carrera obtengo la escuderia en la que estuvo
+        if(in_array($nombre, $posicionesPilotos)){
+          //Obtengo la posición del piloto
+          $posicionPiloto = 0;
+          for($i=1;$i<count($posicionesPilotos);$i++){
+            if($posicionesPilotos[$i] == $nombre) $posicionPiloto = $i; 
+          }
+          //Verifico que la escuderia no este ya incluida en el array
+          if($posicionPiloto > 0){
+            array_push($escuderias, $posicionesEscuderias[$posicionPiloto]);
+          }
+        }
+      }
+      $escuderias = array_unique($escuderias);
+      $escuderias = array_reverse($escuderias);
+      //Convierto las escuderias en un string
+      $escuderias = implode(', ', $escuderias);
+      return $escuderias;
+    }
 ?>

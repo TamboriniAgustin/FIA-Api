@@ -20,25 +20,30 @@
       }
     ?>
 
-    <form action="#" id="elegirTemporada" method="GET">
-        <select class="form-control">
-            <option disabled selected>Selecciona una temporada</option>
-            <?php 
-              while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
-                $anioTemporada = $temporadas['año'];
-            ?>
-                  <option value="<?php echo $anioTemporada ?>"><?php echo $anioTemporada ?></option>
-            <?php
-              }
-            ?>
-        </select>
-    </form>
+    <div id="elegirTemporada" class="text-center">
+      <?php
+        $contador = 1;
+        $temporadaActual = $_GET['temporada'];
+        $campeonPilotos = "";
+        $campeonEscuderias = "";
+        while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
+          if($temporadas['año'] == $temporadaActual){
+            $campeonPilotos = $temporadas['campeon_pilotos_f2'];
+            $campeonEscuderias = $temporadas['campeon_escuderias_f2'];
+          }
+      ?>
+          <a href="temporadasf2.php?categoria=f2&temporada=<?php echo $temporadas['año']; ?>"><span class="badge badge-pill badge-primary"><?php echo $temporadas['año']; ?></span></a>
+      <?php
+          if($contador % 20 == 0) echo "<br>";
+          $contador++; 
+        }
+      ?>
+    </div>
 
     <a id="configurarTemporada" href="#seleccionar_temporada"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
     
     <!-- Obtengo los pilotos que participaron en la temporada -->
-    <?php
-      $temporadaActual = $_GET['temporada']; 
+    <?php 
       if($temporadaActual){
         try {
           require('db/conexion.php');
@@ -108,7 +113,7 @@
               <?php 
                 foreach ($pilotosTemporada as $piloto) {
               ?>
-                  <tr>
+                  <tr <?php if(($piloto == $campeonPilotos) || (strpos($piloto, $campeonPilotos) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                     <td><?php echo $piloto ?></td>
                     <td><?php echo calcularPuntosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
                     <td><?php echo cantidadVictoriasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
@@ -138,7 +143,7 @@
             <?php 
               foreach ($escuderiasTemporada as $escuderia){
             ?>
-                <tr>
+                <tr <?php if(($escuderia == $campeonEscuderias) || (strpos($escuderia, $campeonEscuderias) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                   <td><?php echo $escuderia; ?></td>
                   <td><?php echo calcularPuntosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
                   <td><?php echo cantidadVictoriasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
@@ -153,18 +158,26 @@
           </table>
 
           <!-- Seleccionar Carrera -->
-          <form action="#" id="elegirCarrera" method="GET" style="padding: 50px 0 50px 0;">
-            <select class="form-control">
-                <option disabled selected>Selecciona una carrera</option>
-                <?php 
-                  foreach ($carrerasTemporada as $carrera) {
-                ?>
-                    <option value="<?php echo valorCarrera($carrera[1]['nombre']); ?>"><?php echo $carrera[1]['nombre']; ?></option>
-                <?php 
-                  }
-                ?>
-            </select>
-          </form>
+          <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
+            <?php
+              $contador = 0; 
+              foreach ($carrerasTemporada as $carrera){
+                $paisCarrera = substr($carrera[1]['nombre'], 0, strpos($carrera[1]['nombre'], ' -'));
+                if(($contador % 6 == 0)) echo "<div class='row'>";
+            ?>
+                <div class="col-2 card text-center" style="width: 18rem;">
+                  <img style="border:solid .1rem grey; width:10rem;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                  <div class="card-body">
+                    <h5 class="card-title">Gran Premio de <?php echo $carrera[1]['nombre']; ?></h5>
+                    <a id="mostrarCarrera" class="btn btn-primary active" data-id="<?php echo valorCarrera($carrera[1]['nombre']); ?>">Ver</a>
+                  </div>
+                </div>
+            <?php
+                $contador++;
+                if(($contador % 6 == 0)) echo "</div>"; 
+              }
+            ?>
+          </div>
 
           <!-- Carreras -->
           <?php 
