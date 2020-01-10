@@ -11,7 +11,8 @@ function mostrarCarrera(Carrera) {
         $('.Nevers').hide(); $('.Fuji').hide(); $('.Indianapolis').hide(); $('.Imola').hide();
         $('.BuenosAires').hide(); $('.SuzukaCorto').hide(); $('.TexasCorto').hide();
         $('.Estoril').hide(); $('.Okayama').hide(); $('.Adelaida').hide();
-        $('.Kyalami').hide(); $('.Phoenix').hide();
+        $('.Kyalami').hide(); $('.Phoenix').hide(); $('.RioDeJaneiro').hide();
+        $('.Michigan').hide();
 
         $(carrera).show();
     }

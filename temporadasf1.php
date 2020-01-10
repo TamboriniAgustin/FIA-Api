@@ -27,12 +27,14 @@
                                   1992
                                );
       $temporadaCon36Pilotos = array(
-                                  1991
+                                  1991, 1988
                                );
       $temporadaCon38Pilotos = array(
                                   1990
                                );
-                                       
+      $temporadaCon40Pilotos = array(
+                                  1989
+                               );                                 
     ?>    
 
     <!-- Conecto a la base de datos y cargo las temporadas -->
@@ -178,7 +180,7 @@
           </table>
           <br>
           <?php if($temporadaActual == "2007") echo "* McLaren ha sido descalificado del torneo por espionaje hacia ferrari." ?>
-
+          <?php if($temporadaActual == "1988") echo "* Para la cuenta final del campeonato sólo se contaron los 11 mejores resultados de 16 posibles." ?>
           <!-- Seleccionar Carrera -->
           <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
             <?php
@@ -211,6 +213,7 @@
             else if(in_array($temporadaActual, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
             else if(in_array($temporadaActual, $temporadaCon36Pilotos)) $cantidadPilotos = 36;
             else if(in_array($temporadaActual, $temporadaCon38Pilotos)) $cantidadPilotos = 38;
+            else if(in_array($temporadaActual, $temporadaCon40Pilotos)) $cantidadPilotos = 40;
           ?>
 
           <!-- Carreras -->
