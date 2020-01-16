@@ -12,7 +12,7 @@ function mostrarCarrera(Carrera) {
         $('.BuenosAires').hide(); $('.SuzukaCorto').hide(); $('.TexasCorto').hide();
         $('.Estoril').hide(); $('.Okayama').hide(); $('.Adelaida').hide();
         $('.Kyalami').hide(); $('.Phoenix').hide(); $('.RioDeJaneiro').hide();
-        $('.Michigan').hide();
+        $('.Michigan').hide(); $('.Kent').hide();
 
         $(carrera).show();
     }

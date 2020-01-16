@@ -83,11 +83,13 @@ function temporadaCon26Pilotos(temporada){
 
 function temporadaCon28Pilotos(temporada){
     if(temporada == 1994) return true;
+    if(temporada == 1986) return true;
     return false;
 }
 
 function temporadaCon32Pilotos(temporada){
     if(temporada == 1992) return true;
+    if(temporada == 1987) return true;
     return false;
 }
 
