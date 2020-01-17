@@ -31,6 +31,9 @@
       $temporadaCon32Pilotos = array(
                                   1992, 1987
                                 );
+      $temporadaCon34Pilotos = array(
+                                  1985
+                                );
       $temporadaCon36Pilotos = array(
                                   1991, 1988
                                 );
@@ -173,6 +176,7 @@
                 else if(in_array($temporada, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
                 else if(in_array($temporada, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
                 else if(in_array($temporada, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
+                else if(in_array($temporada, $temporadaCon34Pilotos)) $cantidadPilotos = 34;
                 else if(in_array($temporada, $temporadaCon36Pilotos)) $cantidadPilotos = 36;
                 else if(in_array($temporada, $temporadaCon38Pilotos)) $cantidadPilotos = 38;
                 else if(in_array($temporada, $temporadaCon40Pilotos)) $cantidadPilotos = 40;

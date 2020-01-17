@@ -93,6 +93,11 @@ function temporadaCon32Pilotos(temporada){
     return false;
 }
 
+function temporadaCon34Pilotos(temporada){
+    if(temporada == 1985) return true;
+    return false;
+}
+
 function temporadaCon36Pilotos(temporada){
     if(temporada == 1991) return true;
     if(temporada == 1988) return true;
@@ -166,6 +171,7 @@ function leerFormulario(formulario, nombreFormulario){
         if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
         if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
         if(temporadaCon32Pilotos(temporada)) cantidadPilotos = 32;
+        if(temporadaCon34Pilotos(temporada)) cantidadPilotos = 34;
         if(temporadaCon36Pilotos(temporada)) cantidadPilotos = 36;
         if(temporadaCon38Pilotos(temporada)) cantidadPilotos = 38;
         if(temporadaCon40Pilotos(temporada)) cantidadPilotos = 40;

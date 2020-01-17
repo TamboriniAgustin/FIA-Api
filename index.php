@@ -24,7 +24,8 @@
               <p>
                   <a href="historiaf1.php" class="btn btn-danger p-3 px-xl-4 py-xl-3">Historia</a>
                   <a href="temporadasf1.php" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Temporadas</a>
-                  <a href="comparar-pilotos.php?categoria=f1" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>  
+                  <a href="comparar-pilotos.php?categoria=f1" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>
+                  <a href="comparar-escuderias.php?categoria=f1" class="btn btn-outline-danger p-3 px-xl-4 py-xl-3">Comparar Escuderias</a>  
               </p>
             </div>
           </div>
@@ -40,7 +41,8 @@
               <p>
                   <a href="historiaf2.php" class="btn btn-primary p-3 px-xl-4 py-xl-3">Historia</a>
                   <a href="temporadasf2.php" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Temporadas</a>
-                  <a href="comparar-pilotos.php?categoria=f2" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>  
+                  <a href="comparar-pilotos.php?categoria=f2" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Comparar Pilotos</a>
+                  <a href="comparar-escuderias.php?categoria=f2" class="btn btn-outline-primary p-3 px-xl-4 py-xl-3">Comparar Escuderias</a>    
               </p>
             </div>
           </div>

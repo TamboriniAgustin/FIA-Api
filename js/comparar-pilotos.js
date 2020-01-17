@@ -1,7 +1,6 @@
 var pilotosTotales = $('#pilotosTotales').val();
 
 function mostrarPiloto(fila, piloto) {
-    //console.log($(`#fila${fila}-piloto${piloto}`));
     for (let idPiloto = 1; idPiloto < pilotosTotales; idPiloto++) {
         if(idPiloto == piloto) $(`#fila${fila}-piloto${piloto}`).show();
         else $(`#fila${fila}-piloto${idPiloto}`).hide();
