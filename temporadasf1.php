@@ -8,7 +8,7 @@
 
     <?php include('funcionesf1.php'); ?>
 
-    <!-- Establezco las temporadas que tendran 22 y 24 pilotos -->
+    <!-- Establezco la cantidad de pilotos de la temporada -->
     <?php 
       $temporadaCon22Pilotos =  array(
                                   2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
@@ -23,21 +23,24 @@
       $temporadaCon28Pilotos = array(
                                   1994, 1986
                                );
+      $temporadaCon30Pilotos = array(
+                                  1984
+                               );
       $temporadaCon32Pilotos = array(
-                                  1992, 1987
+                                  1992, 1987, 1983
                                );
       $temporadaCon34Pilotos = array(
-                                  1985
+                                  1985, 1982, 1981, 1980, 1978
                                );
       $temporadaCon36Pilotos = array(
-                                  1991, 1988
+                                  1991, 1988, 1979
                                );
       $temporadaCon38Pilotos = array(
                                   1990
                                );
       $temporadaCon40Pilotos = array(
-                                  1989
-                               );                                 
+                                  1989, 1977
+                               );                           
     ?>    
 
     <!-- Conecto a la base de datos y cargo las temporadas -->
@@ -184,6 +187,7 @@
           <br>
           <?php if($temporadaActual == "2007") echo "* McLaren ha sido descalificado del torneo por espionaje hacia ferrari." ?>
           <?php if($temporadaActual == "1988") echo "* Para la cuenta final del campeonato sólo se contaron los 11 mejores resultados de 16 posibles." ?>
+          <?php if($temporadaActual == "1984") echo "* En Mónaco los puntos se han dividido por dos ya que la carrera fue suspendida por mal clima. Tyrrell fue desclasificado del Campeonato Mundial de Pilotos y Campeonato Mundial de Constructores debido a una infracción técnica." ?>
           <!-- Seleccionar Carrera -->
           <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
             <?php
@@ -193,7 +197,7 @@
                 if(($contador % 6 == 0)) echo "<div class='row'>";
             ?>
                 <div class="col-2 card text-center" style="width: 18rem;">
-                  <img style="border:solid .1rem grey; width:10rem;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                  <img style="border:solid .1rem grey; width:10rem; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
                   <div class="card-body">
                     <h5 class="card-title">Gran Premio de <?php echo $carrera['nombre']; ?></h5>
                     <a id="mostrarCarrera" class="btn btn-danger active" data-id="<?php echo valorCarrera($carrera['nombre']); ?>">Ver</a>
@@ -213,6 +217,7 @@
             else if(in_array($temporadaActual, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
             else if(in_array($temporadaActual, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
             else if(in_array($temporadaActual, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
+            else if(in_array($temporadaActual, $temporadaCon30Pilotos)) $cantidadPilotos = 30;
             else if(in_array($temporadaActual, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
             else if(in_array($temporadaActual, $temporadaCon34Pilotos)) $cantidadPilotos = 34;
             else if(in_array($temporadaActual, $temporadaCon36Pilotos)) $cantidadPilotos = 36;

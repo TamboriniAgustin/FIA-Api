@@ -17,7 +17,7 @@ function convertirARRAYenJSON(array) {
     for (var i = 0; i < array.length; ++i)
       if(array[i] != "undefined") rv[i+1] = array[i];
     return rv;
-  }
+}
 
 function agregarEscuderias(escuderiasActuales, escuderiasNuevas){
     if(escuderiasActuales=="{}"){
@@ -87,20 +87,31 @@ function temporadaCon28Pilotos(temporada){
     return false;
 }
 
+function temporadaCon30Pilotos(temporada){
+    if(temporada == 1984) return true;
+    return false;
+}
+
 function temporadaCon32Pilotos(temporada){
     if(temporada == 1992) return true;
     if(temporada == 1987) return true;
+    if(temporada == 1983) return true;
     return false;
 }
 
 function temporadaCon34Pilotos(temporada){
     if(temporada == 1985) return true;
+    if(temporada == 1982) return true;
+    if(temporada == 1981) return true;
+    if(temporada == 1980) return true;
+    if(temporada == 1978) return true;
     return false;
 }
 
 function temporadaCon36Pilotos(temporada){
     if(temporada == 1991) return true;
     if(temporada == 1988) return true;
+    if(temporada == 1979) return true;
     return false;
 }
 
@@ -111,6 +122,7 @@ function temporadaCon38Pilotos(temporada){
 
 function temporadaCon40Pilotos(temporada){
     if(temporada == 1989) return true;
+    if(temporada == 1977) return true;
     return false;
 }
 
@@ -170,6 +182,7 @@ function leerFormulario(formulario, nombreFormulario){
         if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
         if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
         if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
+        if(temporadaCon30Pilotos(temporada)) cantidadPilotos = 30;
         if(temporadaCon32Pilotos(temporada)) cantidadPilotos = 32;
         if(temporadaCon34Pilotos(temporada)) cantidadPilotos = 34;
         if(temporadaCon36Pilotos(temporada)) cantidadPilotos = 36;

@@ -13,7 +13,7 @@
 
     <?php include('templates/header.php') ?>
 
-    <!-- Establezco las temporadas que tendran 22 y 24 pilotos -->
+    <!-- Establezco la cantidad de pilotos de la temporada -->
     <?php 
       $temporadaCon22Pilotos =  array(
                                   2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
@@ -28,20 +28,23 @@
       $temporadaCon28Pilotos = array(
                                   1994, 1986
                                 );
+      $temporadaCon30Pilotos = array(
+                                  1984
+                                );
       $temporadaCon32Pilotos = array(
-                                  1992, 1987
+                                  1992, 1987, 1983
                                 );
       $temporadaCon34Pilotos = array(
-                                  1985
+                                  1985, 1982, 1981, 1980, 1978
                                 );
       $temporadaCon36Pilotos = array(
-                                  1991, 1988
+                                  1991, 1988, 1979
                                 );
       $temporadaCon38Pilotos = array(
                                   1990
                                 );
       $temporadaCon40Pilotos = array(
-                                  1989
+                                  1989, 1977
                                 );
     ?>
 
@@ -175,6 +178,7 @@
                 else if(in_array($temporada, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
                 else if(in_array($temporada, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
                 else if(in_array($temporada, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
+                else if(in_array($temporada, $temporadaCon30Pilotos)) $cantidadPilotos = 30;
                 else if(in_array($temporada, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
                 else if(in_array($temporada, $temporadaCon34Pilotos)) $cantidadPilotos = 34;
                 else if(in_array($temporada, $temporadaCon36Pilotos)) $cantidadPilotos = 36;

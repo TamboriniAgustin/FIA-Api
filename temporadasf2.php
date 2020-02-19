@@ -166,7 +166,7 @@
                 if(($contador % 6 == 0)) echo "<div class='row'>";
             ?>
                 <div class="col-2 card text-center" style="width: 18rem;">
-                  <img style="border:solid .1rem grey; width:10rem;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                  <img style="border:solid .1rem grey; width:10rem; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
                   <div class="card-body">
                     <h5 class="card-title">Gran Premio de <?php echo $carrera[1]['nombre']; ?></h5>
                     <a id="mostrarCarrera" class="btn btn-primary active" data-id="<?php echo valorCarrera($carrera[1]['nombre']); ?>">Ver</a>
@@ -178,6 +178,7 @@
               }
             ?>
           </div>
+          <br>
 
           <!-- Carreras -->
           <?php 
