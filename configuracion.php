@@ -17,34 +17,34 @@
     <?php 
       $temporadaCon22Pilotos =  array(
                                   2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
-                                  1999, 1998, 1996
+                                  1999, 1998, 1997, 1996
                                 ); 
       $temporadaCon24Pilotos = array(
-                                  2012, 2011, 2010, 1997
+                                  2012, 2011, 2010
                                 );
       $temporadaCon26Pilotos = array(
-                                  1995, 1993
+                                  1995, 1993, 1986
                                 );
       $temporadaCon28Pilotos = array(
-                                  1994, 1986
+                                  1994, 1987, 1985, 1984, 1980
                                 );
       $temporadaCon30Pilotos = array(
-                                  1984
+                                  1983, 1979
                                 );
       $temporadaCon32Pilotos = array(
-                                  1992, 1987, 1983
+                                  1992, 1988, 1982, 1981
                                 );
       $temporadaCon34Pilotos = array(
-                                  1985, 1982, 1981, 1980, 1978
+                                  1991, 1978
                                 );
       $temporadaCon36Pilotos = array(
-                                  1991, 1988, 1979
+                                  1990, 1977
                                 );
       $temporadaCon38Pilotos = array(
-                                  1990
+                                  
                                 );
       $temporadaCon40Pilotos = array(
-                                  1989, 1977
+                                  1989
                                 );
     ?>
 
