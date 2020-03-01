@@ -18,6 +18,7 @@ function mostrarCarrera(Carrera) {
         $('.Budapest').hide(); $('.LeCastellet').hide(); $('.Baku').hide();
         $('.LasVegas').hide(); $('.Jarama').hide(); $('.NuevaYork').hide();
         $('.Anderstorp').hide(); $('.Bowmanville').hide();
+        $('.Barcelona').hide(); $('.Nievelles').hide();
 
         $(carrera).show();
     }

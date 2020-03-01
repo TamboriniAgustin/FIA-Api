@@ -24,13 +24,13 @@
                                   1994, 1987, 1985, 1984, 1980
                                );
       $temporadaCon30Pilotos = array(
-                                  1983, 1979
+                                  1983, 1979, 1976, 1975
                                );
       $temporadaCon32Pilotos = array(
                                   1992, 1988, 1982, 1981
                                );
       $temporadaCon34Pilotos = array(
-                                  1991, 1978
+                                  1991, 1978, 1974
                                );
       $temporadaCon36Pilotos = array(
                                   1990, 1977
@@ -188,6 +188,7 @@
           <?php if($temporadaActual == "2007") echo "* McLaren ha sido descalificado del torneo por espionaje hacia ferrari." ?>
           <?php if($temporadaActual == "1988") echo "* Para la cuenta final del campeonato sólo se contaron los 11 mejores resultados de 16 posibles." ?>
           <?php if($temporadaActual == "1984") echo "* En Mónaco los puntos se han dividido por dos ya que la carrera fue suspendida por mal clima. Tyrrell fue desclasificado del Campeonato Mundial de Pilotos y Campeonato Mundial de Constructores debido a una infracción técnica." ?>
+          <?php if($temporadaActual == "1974") echo "* Para la cuenta final del campeonato sólo se contaron los siete mejores resultados de las ocho primeras carreras y los mejores seis de las siete restantes. Para el campeonato de constructores sólo puntuaba un coche por carrera, el mejor clasificado." ?>
           <!-- Seleccionar Carrera -->
           <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
             <?php

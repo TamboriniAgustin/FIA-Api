@@ -29,13 +29,13 @@
                                   1994, 1987, 1985, 1984, 1980
                                 );
       $temporadaCon30Pilotos = array(
-                                  1983, 1979
+                                  1983, 1979, 1976, 1975
                                 );
       $temporadaCon32Pilotos = array(
                                   1992, 1988, 1982, 1981
                                 );
       $temporadaCon34Pilotos = array(
-                                  1991, 1978
+                                  1991, 1978, 1974
                                 );
       $temporadaCon36Pilotos = array(
                                   1990, 1977
