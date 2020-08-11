@@ -1,36 +1,121 @@
+<!-- Errores -->
+<?php 
+  // ini_set('display_errors', 1);
+  // ini_set('display_startup_errors', 1);
+  // error_reporting(E_ALL);
+?>
+<!-- Cargo la funcionalidad de la página -->
+<?php include('funcionesf2.php'); ?>
+<!-- Establezco variables de interés -->
+<?php 
+  $temporadaActual = $_GET['temporada'];   
+  $campeonPilotos = "";
+  $campeonEscuderias = "";
+?>
+<!-- Establezco la cantidad de pilotos de la temporada -->
+<?php 
+  $temporadaCon22Pilotos =  array(
+                              
+                            ); 
+  $temporadaCon24Pilotos = array(
+                              
+                           );
+  $temporadaCon26Pilotos = array(
+                              
+                           );
+  $temporadaCon28Pilotos = array(
+                              
+                           );
+  $temporadaCon30Pilotos = array(
+                              
+                           );
+  $temporadaCon32Pilotos = array(
+                              
+                           );
+  $temporadaCon34Pilotos = array(
+                              
+                           );
+  $temporadaCon36Pilotos = array(
+                              
+                           );
+  $temporadaCon38Pilotos = array(
+                                  
+                          );
+  $temporadaCon40Pilotos = array(
+                              
+                           );
+  
+  $cantidadPilotos = 20;
+  if(in_array($temporadaActual, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
+  else if(in_array($temporadaActual, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
+  else if(in_array($temporadaActual, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
+  else if(in_array($temporadaActual, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
+  else if(in_array($temporadaActual, $temporadaCon30Pilotos)) $cantidadPilotos = 30;
+  else if(in_array($temporadaActual, $temporadaCon32Pilotos)) $cantidadPilotos = 32;
+  else if(in_array($temporadaActual, $temporadaCon34Pilotos)) $cantidadPilotos = 34;
+  else if(in_array($temporadaActual, $temporadaCon36Pilotos)) $cantidadPilotos = 36;
+  else if(in_array($temporadaActual, $temporadaCon38Pilotos)) $cantidadPilotos = 38;
+  else if(in_array($temporadaActual, $temporadaCon40Pilotos)) $cantidadPilotos = 40;
+?>
+<!-- Conexiones a la base de datos -->
+<?php
+  try {
+    require('db/conexion.php');
+    //TEMPORADAS
+    $cargarTemporadas = ' SELECT * FROM temporadas WHERE año >= 2017 ORDER BY año DESC';
+    $resultadoTemporadas = $con->query($cargarTemporadas);
+    
+    if($temporadaActual){
+      //CAMPEONES
+      $cargarCampeones = " SELECT campeon_pilotos_f2, campeon_escuderias_f2 FROM temporadas WHERE año = $temporadaActual ";
+      $campeonesTemporada = $con->query($cargarCampeones);
+      $resultadoCampeones = $campeonesTemporada->fetch_assoc();
+
+      $campeonPilotos = $resultadoCampeones['campeon_pilotos_f2'];
+      $campeonEscuderias = $resultadoCampeones['campeon_escuderias_f2'];
+      //PILOTOS (TEMPORADA ACTUAL)
+      $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE (SELECT pilotosF2 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, '%') ";
+      $pilotosTemporada = $con->query($cargarPilotosTemporada);
+      //ESCUDERIAS (TEMPORADA ACTUAL)
+      $cargarEscuderiasTemporada = " SELECT * FROM escuderias WHERE (SELECT escuderiasF2 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, '%') ";
+      $escuderiasTemporada = $con->query($cargarEscuderiasTemporada);
+      //CARRERAS
+      $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' AND temporada = $temporadaActual ";
+      $resultadoCarreras = $con->query($cargarCarreras);
+      
+      $carrerasF2 = array();
+      while($carreras = $resultadoCarreras->fetch_assoc()){
+        array_push($carrerasF2, $carreras);
+      }
+      //PISTAS
+      $cargarPistas = " SELECT * FROM pistas WHERE CONCAT(pais, ' - ', ciudad) IN (SELECT nombre FROM carreras WHERE temporada = $temporadaActual) ";
+      $resultadoPistas = $con->query($cargarPistas);
+      
+      $pistasF2 = array();
+      while($pistas = $resultadoPistas->fetch_assoc()){
+        array_push($pistasF2, $pistas);
+      }
+    }
+  } catch (\Exception $e) {
+    $error = $e->getMessage();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Contenido no visible -->
   <?php include('templates/head.php') ?>
+  <!-- Contenido visible -->
   <body>
+    <!-- Botón volver -->
     <a href="index.php"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
-
-    <?php include('templates/header.php') ?>
-
-    <?php include('funcionesf2.php'); ?>
-
-    <!-- Conecto a la base de datos y cargo las temporadas -->
-    <?php 
-      try {
-        require('db/conexion.php');
-
-        $cargarTemporadas = ' SELECT * FROM temporadas WHERE año >= "2017" ORDER BY año DESC';
-        $resultadoTemporadas = $con->query($cargarTemporadas);
-      } catch (\Exception $e) {
-        $error = $e->getMessage();
-      }
-    ?>
-
+    <!-- Header -->
+    <?php include('templates/header.php') ?>   
+    <!-- Elegir Temporada -->
     <div id="elegirTemporada" class="text-center">
       <?php
         $contador = 1;
-        $temporadaActual = $_GET['temporada'];
-        $campeonPilotos = "";
-        $campeonEscuderias = "";
         while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
-          if($temporadas['año'] == $temporadaActual){
-            $campeonPilotos = $temporadas['campeon_pilotos_f2'];
-            $campeonEscuderias = $temporadas['campeon_escuderias_f2'];
-          }
       ?>
           <a href="temporadasf2.php?categoria=f2&temporada=<?php echo $temporadas['año']; ?>"><span class="badge badge-pill badge-primary"><?php echo $temporadas['año']; ?></span></a>
       <?php
@@ -39,279 +124,203 @@
         }
       ?>
     </div>
-
-    <a id="configurarTemporada" href="#seleccionar_temporada"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
-    
-    <!-- Obtengo los pilotos que participaron en la temporada -->
-    <?php 
-      if($temporadaActual){
-        try {
-          require('db/conexion.php');
-
-          $cargarPilotosTemporada = " SELECT pilotosF2 FROM temporadas WHERE año = $temporadaActual ";
-          $resultadoTemporada = $con->query($cargarPilotosTemporada);
-
-          $pilotosTemporada = $resultadoTemporada->fetch_assoc()['pilotosF2'];
-          $pilotosTemporada = str_replace('{', '', $pilotosTemporada);
-          $pilotosTemporada = str_replace('}', '', $pilotosTemporada);
-          $pilotosTemporada = explode(',', $pilotosTemporada);
-
-          $cargarEscuderiasTemporada = " SELECT escuderiasF2 FROM temporadas WHERE año = $temporadaActual ";
-          $resultadoTemporada = $con->query($cargarEscuderiasTemporada);
-
-          $escuderiasTemporada = $resultadoTemporada->fetch_assoc()['escuderiasF2'];
-          $escuderiasTemporada = str_replace('{', '', $escuderiasTemporada);
-          $escuderiasTemporada = str_replace('}', '', $escuderiasTemporada);
-          $escuderiasTemporada = explode(',', $escuderiasTemporada);
-        } catch (\Exception $e) {
-          $error = $e->getMessage();
+    <!-- Configuración de Temporada -->
+    <div id="configurarTemporada">
+      <?php 
+        if($temporadaActual){
+      ?>
+          <a id="configurarTemporada" href="configuracion.php?categoria=f2&temporada=<?php echo $temporadaActual; ?>"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
+      <?php 
         }
-    ?>
-    <!-- Conecto a la base de datos y cargo las carreras - Generando un array por cada una -->
-    <?php 
-      try {
-        require('db/conexion.php');
-
-        $cargarCarreras = "SELECT * FROM carreras WHERE categoria = 'f2' AND temporada = $temporadaActual";
-        $resultadoCarreras = $con->query($cargarCarreras);
-
-        $cargarPistas = "SELECT * FROM pistas";
-        $resultadoPistas = $con->query($cargarPistas);
-      } catch (\Exception $e) {
-        $error = $e->getMessage();
-      }
-
-      $carrerasF2 = array();
-
-      while($carreras = $resultadoCarreras->fetch_assoc()){
-        if($carrerasTemporada[$carreras['nombre']]){
-          $carrerasTemporada[$carreras['nombre']][2] = $carreras;
-          array_push($carrerasF2, $carreras);
-        }
-        else{
-          $carrerasTemporada[$carreras['nombre']][1] = $carreras;
-          array_push($carrerasF2, $carreras);
-        }
-      }
-    ?>
-
-        <div class="container contenido">
-          <!-- Tabla de Posiciones del Mundial -->
-          <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Pilotos</h3>
-          <table class="table table-posiciones">
-            <thead class="text-center" style="color:white; background-color:#007bff;">
-              <tr>
-                <th scope="col" data-tablesorter="false">Piloto</th>
-                <th scope="col">Puntos</th>
-                <th scope="col">Victorias</th>
-                <th scope="col">Vueltas Rápidas</th>
-                <th scope="col">Poles</th>
-                <th scope="col">Abandonos</th>
-              </tr>
-            </thead>
-            <tbody class="text-center">
-              <?php 
-                foreach ($pilotosTemporada as $piloto) {
-              ?>
-                  <tr <?php if(($piloto == $campeonPilotos) || (strpos($piloto, $campeonPilotos) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
-                    <td><?php echo $piloto ?></td>
-                    <td><?php echo calcularPuntosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
-                    <td><?php echo cantidadVictoriasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
-                    <td><?php echo cantidadVueltasRapidasTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
-                    <td><?php echo cantidadPolesTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
-                    <td><?php echo cantidadAbandonosTemporada($piloto, $temporadaActual, 'piloto', $carrerasF2); ?></td>
-                  </tr>
-              <?php 
-                }
-              ?>
-            </tbody>
-          </table>
-
-          <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Escuderias</h3>
-          <table class="table table-posicionesE">
-            <thead class="text-center" style="color:white; background-color:#007bff;">
-              <tr>
-                <th scope="col" data-tablesorter="false">Escudería</th>
-                <th scope="col">Puntos</th>
-                <th scope="col">Victorias</th>
-                <th scope="col">Vueltas Rápidas</th>
-                <th scope="col">Poles</th>
-                <th scope="col">Abandonos</th>
-              </tr>
-            </thead>
-            <tbody class="text-center">
-            <?php 
-              foreach ($escuderiasTemporada as $escuderia){
-            ?>
-                <tr <?php if(($escuderia == $campeonEscuderias) || (strpos($escuderia, $campeonEscuderias) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
-                  <td><?php echo $escuderia; ?></td>
-                  <td><?php echo calcularPuntosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
-                  <td><?php echo cantidadVictoriasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2) ?></td>
-                  <td><?php echo cantidadVueltasRapidasTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
-                  <td><?php echo cantidadPolesTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
-                  <td><?php echo cantidadAbandonosTemporada($escuderia, $temporadaActual, 'escuderia', $carrerasF2); ?></td>
-                </tr>
-            <?php 
-              }
-            ?>
-            </tbody>
-          </table>
-
-          <!-- Seleccionar Carrera -->
-          <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
-            <?php
-              $contador = 0; 
-              foreach ($carrerasTemporada as $carrera){
-                $paisCarrera = substr($carrera[1]['nombre'], 0, strpos($carrera[1]['nombre'], ' -'));
-                if(($contador % 6 == 0)) echo "<div class='row'>";
-            ?>
-                <div class="col-2 card text-center" style="width: 18rem;">
-                  <img style="border:solid .1rem grey; width:10rem; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
-                  <div class="card-body">
-                    <h5 class="card-title">Gran Premio de <?php echo $carrera[1]['nombre']; ?></h5>
-                    <a id="mostrarCarrera" class="btn btn-primary active" data-id="<?php echo valorCarrera($carrera[1]['nombre']); ?>">Ver</a>
-                  </div>
-                </div>
-            <?php
-                $contador++;
-                if(($contador % 6 == 0)) echo "</div>"; 
-              }
-            ?>
-          </div>
-          <br>
-
-          <!-- Carreras -->
-          <?php 
-            while($pista = $resultadoPistas->fetch_assoc()){
-              $nombrePista = $pista['pais'] . ' - ' . $pista['ciudad'];
-          ?>
-              <div class="d-flex justify-content-around">
-                <div style="flex: 1;">
-                  <table class="<?php echo str_replace(' ', '', $pista['ciudad']); ?> table" style="display: none; border-right: 3px solid <?php echo $pista['texto_principal']; ?>;">
-                    <thead class="text-center" style="background-color:<?php echo $pista['color_principal']; ?>;">
-                      <tr style="height:150px;">
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal']; ?>;"><?php echo $pista['ciudad']; ?></h3></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal']; ?>;">---</h3></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal']; ?>;"><?php echo $pista['pais']; ?></h3></th>
-                        <th scope="col" width="25%" class="text-right"></th>
-                      </tr>
-                      <tr>
-                        <th scope="col" width="25%"></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal']; ?>;">Feature</h3></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_secundario']; ?>;">Race</h3></th>
-                        <th scope="col" width="25%" class="text-right"></th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-center">
-                      <tr style="font-weight: bold; background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_secundario']; ?>;">
-                        <th scope="row">#</th>
-                        <td>Piloto</td>
-                        <td>Escuderia</td>
-                        <td>Puntos</td>
-                      </tr>
-                      <?php 
-                        $posicionesPilotos = json_decode($carrerasTemporada[$nombrePista][1]['posiciones_pilotos'], true);
-                        $posicionesEscuderias = json_decode($carrerasTemporada[$nombrePista][1]['posiciones_escuderias'], true);
-                        for($i = 1; $i <= 20; $i++){
+      ?>
+    </div>
+    <!-- Contenido de Temporada -->
+    <div id="contenido-temporada">
+        <?php 
+          if($temporadaActual){
+        ?>
+            <div class="container contenido">
+              <!-- Tabla de Posiciones del Mundial de Pilotos -->
+              <div class="mundial-pilotos">
+                <!-- Titulo -->
+                <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Pilotos</h3>
+                <!-- Tabla -->
+                <table class="table table-posiciones">
+                  <!-- Header -->
+                  <thead class="text-center" style="color:white; background-color:#007bff;">
+                    <tr>
+                      <th scope="col" data-tablesorter="false">Piloto</th>
+                      <th scope="col">Puntos</th>
+                      <th scope="col">Victorias</th>
+                      <th scope="col">Podios</th>
+                      <th scope="col">Vueltas Rápidas</th>
+                      <th scope="col">Poles</th>
+                      <th scope="col">Abandonos</th>
+                    </tr>
+                  </thead>
+                  <!-- Body -->
+                  <tbody class="text-center">
+                    <?php
+                      while($piloto = $pilotosTemporada->fetch_assoc()) {
+                        $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
+                        calcularInformacionTemporada($nombrePiloto, $temporadaActual, 'piloto', $carrerasF2, $informacionPiloto);
+                    ?>
+                        <tr <?php if(($nombrePiloto == $campeonPilotos) || (strpos($nombrePiloto, $campeonPilotos) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
+                          <!-- Nombre -->
+                          <td><?php echo $nombrePiloto; ?></td>
+                          <td><?php echo $informacionPiloto['puntos']; ?></td>
+                          <td><?php echo $informacionPiloto['victorias']; ?></td>
+                          <td><?php echo $informacionPiloto['podios']; ?></td>
+                          <td><?php echo $informacionPiloto['vueltasRapidas']; ?></td>
+                          <td><?php echo $informacionPiloto['poles']; ?></td>
+                          <td><?php echo $informacionPiloto['abandonos']; ?></td>
+                        </tr>
+                    <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+              
+              <!-- Tabla de Posiciones del Mundial de Escuderias -->
+              <div class="mundial-escuderias">
+                <!-- Titulo -->
+                <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Escuderias</h3>
+                <!-- Tabla -->
+                <table class="table table-posicionesE">
+                  <!-- Header -->
+                  <thead class="text-center" style="color:white; background-color:#007bff;">
+                    <tr>
+                      <th scope="col" data-tablesorter="false">Escuderia</th>
+                      <th scope="col">Puntos</th>
+                      <th scope="col">Victorias</th>
+                      <th scope="col">Podios</th>
+                      <th scope="col">Vueltas Rápidas</th>
+                      <th scope="col">Poles</th>
+                      <th scope="col">Abandonos</th>
+                    </tr>
+                  </thead>
+                  <!-- Body -->
+                  <tbody class="text-center">
+                    <?php
+                        while($escuderia = $escuderiasTemporada->fetch_assoc()) {
+                          $nombreEscuderia = $escuderia['nombre'];
+                          calcularInformacionTemporada($nombreEscuderia, $temporadaActual, 'escuderia', $carrerasF2, $informacionEscuderia);
                       ?>
-                          <tr height="130px">
-                            <th scope="row"><?php if(strpos('{' . $carrerasTemporada[$nombrePista][1]['abandonos'] . '}', $posicionesPilotos[$i]) == false) echo $i; else echo "DNF"; ?></th>
-                            <td><?php echo $posicionesPilotos[$i]; ?></td>
-                            <td><?php echo $posicionesEscuderias[$i]; ?></td>
-                            <td><?php echo calcularPuntos($i, $_GET['temporada'], $carrerasTemporada[$nombrePista][1]['tipo']); ?></td>
+                          <tr <?php if(($nombreEscuderia == $campeonEscuderias) || (strpos($nombreEscuderia, $campeonEscuderias) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
+                            <td><?php echo $nombreEscuderia ?></td>
+                            <td><?php echo $informacionEscuderia['puntos']; ?></td>
+                            <td><?php echo $informacionEscuderia['victorias']; ?></td>
+                            <td><?php echo $informacionEscuderia['podios']; ?></td>
+                            <td><?php echo $informacionEscuderia['vueltasRapidas']; ?></td>
+                            <td><?php echo $informacionEscuderia['poles']; ?></td>
+                            <td><?php echo $informacionEscuderia['abandonos']; ?></td>
                           </tr>
-                      <?php 
+                      <?php
                         }
                       ?>
-                    </tbody>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_principal']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Vuelta Rápida</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][1]['vuelta_rapida'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_principal']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Pole</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][1]['pole'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_secundario']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Piloto del Día</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][1]['piloto_del_dia'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                  </table>
-                </div>
-                <div style="flex: 1;">
-                  <table class="<?php echo str_replace(' ', '', $pista['ciudad']); ?> table" style="display: none;">
-                    <thead class="text-center" style="background-color:<?php echo $pista['color_principal']; ?>;">
-                      <tr style="height:150px;">
-                        <th scope="col" width="25%"></th>
-                        <th scope="col" width="25%"></th>
-                        <th scope="col" width="25%"></th>
-                        <th scope="col" width="25%" class="text-right"><img src="images/Paises/<?php echo $pista['pais']; ?>.svg" alt="Bandera" width="100px" height="75px"></th>
-                      </tr>
-                      <tr>
-                        <th scope="col" width="25%"></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal']; ?>;">Sprint</h3></th>
-                        <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_secundario']; ?>;">Race</h3></th>
-                        <th scope="col" width="25%" class="text-right"></th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-center">
-                      <tr style="font-weight: bold; background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_secundario']; ?>;">
-                        <th scope="row">#</th>
-                        <td>Piloto</td>
-                        <td>Escuderia</td>
-                        <td>Puntos</td>
-                      </tr>
-                      <?php 
-                        $posicionesPilotos = json_decode($carrerasTemporada[$nombrePista][2]['posiciones_pilotos'], true);
-                        $posicionesEscuderias = json_decode($carrerasTemporada[$nombrePista][2]['posiciones_escuderias'], true);
-                        for($i = 1; $i <= 20; $i++){
-                      ?>
-                          <tr height="130px">
-                            <th scope="row"><?php if(strpos('{' . $carrerasTemporada[$nombrePista][2]['abandonos'] . '}', $posicionesPilotos[$i]) == false) echo $i; else echo "DNF"; ?></th>
-                            <td><?php echo $posicionesPilotos[$i]; ?></td>
-                            <td><?php echo $posicionesEscuderias[$i]; ?></td>
-                            <td><?php echo calcularPuntos($i, $_GET['temporada'], $carrerasTemporada[$nombrePista][2]['tipo']); ?></td>
-                          </tr>
-                      <?php 
-                        }
-                      ?>
-                    </tbody>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_principal']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Vuelta Rápida</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][2]['vuelta_rapida'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_principal']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Pole</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][2]['pole'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                    <tfoot class="text-center" height="100px" style="background-color:<?php echo $pista['color_principal']; ?>; color:<?php echo $pista['texto_secundario']; ?>;">
-                      <th width="25%" scope="row"></th>
-                      <th width="25%" scope="row">Piloto del Día</th>
-                      <th width="25%" scope="row"><?php echo $carrerasTemporada[$nombrePista][2]['piloto_del_dia'] ?></th>
-                      <th width="25%" scope="row"></th>
-                    </tfoot>
-                  </table>
+                  </tbody>
+                </table>
+              </div>
+              
+              <br>
+              
+              <!-- Carreras -->
+              <div class="carreras">
+                <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
+                  <?php
+                    $contador = 0; 
+                    foreach ($carrerasF2 as $carrera){
+                      $paisCarrera = substr($carrera['nombre'], 0, strpos($carrera['nombre'], ' -'));
+                  ?>
+                      <!-- Seleccionar Carrera -->
+                      <?php if(($contador % 4 == 0)) echo "<div class='row'>"; ?>
+                        <div class="col-3 card text-center" style="width: 18rem;">
+                          <h5><?php echo $carrera['tipo']; ?></h5>
+                          <img style="width:10rem; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                          <div class="card-body">
+                            <h5 class="card-title">Gran Premio de <?php echo $carrera['nombre']; ?></h5>
+                            <a id="mostrarCarrera" class="btn btn-danger active" data-id="<?php echo $carrera['id']; ?>">Ver</a>
+                          </div>
+                        </div>
+                      <?php if(($contador + 1) % 4 == 0) echo "</div>"; ?>
+                      <!-- Carrera -->
+                      <div class="carrera pista<?php echo $carrera['id']; ?>" style="width:100%; display: none;">
+                        <?php 
+                          foreach($pistasF2 as $pista) {
+                            $nombrePista = $pista['pais'] . ' - ' . $pista['ciudad'];
+                            if($nombrePista == $carrera['nombre']){
+                        ?>
+                              <table class="table" style="margin-top:2rem;">
+                                <!-- Head -->
+                                <thead class="text-center" style="background-color:<?php echo $pista['color_principal'] ?>;">
+                                  <tr>
+                                    <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal'] ?>;"><?php echo $pista['ciudad']; ?></h3></th>
+                                    <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal'] ?>;">---</h3></th>
+                                    <th scope="col" width="25%"><h3 style="font-weight: bold; color:<?php echo $pista['texto_principal'] ?>;"><?php echo $pista['pais']; ?></h3></th>
+                                    <th scope="col" width="25%" class="text-right"><img src="images/Paises/<?php echo $pista['pais']; ?>.svg" alt="Bandera" width="50%"></img></th>
+                                  </tr>
+                                </thead>
+                                <!-- Body -->
+                                <tbody class="text-center">
+                                  <tr style="font-weight: bold; background-color:<?php echo $pista['color_principal'] ?>; color:<?php echo $pista['texto_secundario'] ?>;">
+                                    <th scope="row">#</th>
+                                    <td>Piloto</td>
+                                    <td>Escuderia</td>
+                                    <td>Puntos</td>
+                                  </tr>
+                                  <?php 
+                                      $posicionesPilotos = json_decode($carrera['posiciones_pilotos'], true);
+                                      $posicionesEscuderias = json_decode($carrera['posiciones_escuderias'], true);
+                                      for($i = 1; $i <= $cantidadPilotos; $i++){
+                                    ?>
+                                      <tr>
+                                        <th scope="row"><?php if(strpos('{' . $carrera['abandonos'] . '}', $posicionesPilotos[$i]) == false) echo $i; else echo "DNF"; ?></th>
+                                        <td><?php echo $posicionesPilotos[$i]; ?></td>
+                                        <td><?php echo $posicionesEscuderias[$i]; ?></td>
+                                        <td><?php echo calcularPuntos($_GET['temporada'], $i, $carrera['tipo']); ?></td>
+                                      </tr>
+                                    <?php 
+                                      }
+                                    ?>
+                                </tbody>
+                                <!-- Foots -->
+                                <tfoot class="text-center" style="background-color:<?php echo $pista['color_principal'] ?>; color:<?php echo $pista['texto_principal'] ?>;">
+                                  <th width="25%" scope="row"></th>
+                                  <th width="25%" scope="row">Vuelta Rápida</th>
+                                  <th width="25%" scope="row"><?php echo $carrera['vuelta_rapida']; ?></th>
+                                  <th width="25%" scope="row"></th>
+                                </tfoot>
+                                <tfoot class="text-center" style="background-color:<?php echo $pista['color_principal'] ?>; color:<?php echo $pista['texto_principal'] ?>;">
+                                  <th width="25%" scope="row"></th>
+                                  <th width="25%" scope="row">Pole</th>
+                                  <th width="25%" scope="row"><?php echo $carrera['pole']; ?></th>
+                                  <th width="25%" scope="row"></th>
+                                </tfoot>
+                                <tfoot class="text-center" style="background-color:<?php echo $pista['color_principal'] ?>; color:<?php echo $pista['texto_secundario'] ?>;">
+                                  <th width="25%" scope="row"></th>
+                                  <th width="25%" scope="row">Piloto del Día</th>
+                                  <th width="25%" scope="row"><?php echo $carrera['piloto_del_dia']; ?></th>
+                                  <th width="25%" scope="row"></th>
+                                </tfoot>
+                              </table>
+                        <?php
+                            } 
+                          }
+                        ?>
+                      </div>
+                  <?php
+                      $contador++; 
+                    }
+                  ?>
                 </div>
               </div>
-          <?php 
-            }
-          ?>
-        </div>
-
-    <?php 
-      }
-    ?>
-
+            </div>
+        <?php 
+          }
+        ?>
+    </div>
+    <!-- Scripts -->
     <?php include('templates/scripts.php') ?>
   </body>
 </html>

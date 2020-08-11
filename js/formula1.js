@@ -1,50 +1,49 @@
 function mostrarCarrera(Carrera) {
-    if(Carrera != "Selecciona una carrera"){
-        let carrera = '.' + Carrera;
-        $('.Melbourne').hide(); $('.Sahkir').hide(); $('.Shangai').hide(); 
-        $('.Catalunya').hide(); $('.Montecarlo').hide(); $('.Montreal').hide(); 
-        $('.Spielberg').hide(); $('.Silverstone').hide(); $('.Hockenheim').hide(); 
-        $('.Spa').hide(); $('.Monza').hide(); $('.MarinaBay').hide(); 
-        $('.Suzuka').hide(); $('.MexicoDF').hide(); $('.Texas').hide(); 
-        $('.AbuDhabi').hide(); $('.KualaLampur').hide(); $('.Jerez').hide(); 
-        $('.Yeongam').hide(); $('.Buddh').hide(); $('.Valencia').hide(); 
-        $('.Nevers').hide(); $('.Fuji').hide(); $('.Indianapolis').hide(); 
-        $('.BuenosAires').hide(); $('.Dijon').hide(); $('.California').hide();
-        $('.Estoril').hide(); $('.Okayama').hide(); $('.Adelaida').hide();
-        $('.Kyalami').hide(); $('.Phoenix').hide(); $('.RioDeJaneiro').hide();
-        $('.Michigan').hide(); $('.Kent').hide(); $('.Zandvoort').hide();
-        $('.Zolder').hide(); $('.Imola').hide(); $('.Estambul').hide();
-        $('.Nurburg').hide(); $('.SaoPablo').hide(); $('.Sochi').hide();
-        $('.Budapest').hide(); $('.LeCastellet').hide(); $('.Baku').hide();
-        $('.LasVegas').hide(); $('.Jarama').hide(); $('.NuevaYork').hide();
-        $('.Anderstorp').hide(); $('.Bowmanville').hide();
-        $('.Barcelona').hide(); $('.Nievelles').hide();
+    const pista = $(`.carreras .pista${Carrera}`).hide();
+    $(pista).show();
+}
 
-        $(carrera).show();
-    }
+function ocultarCarrera(Carrera) {
+    const pista = $(`.carreras .pista${Carrera}`).hide();
+    $(pista).hide();
 }
 
 $(document).ready(function () {
-    if(window.location.search == ""){
-        $('.contenido').hide();
-    }
-
     let mundialPilotos = $('.table-posiciones');
-    mundialPilotos.tablesorter();
+    $(mundialPilotos).tablesorter({
+        headers: { 
+            0: { sorter: false}
+        },
+        sortList: [[1,1]]
+    });
 
     let mundialEscuderias = $('.table-posicionesE');
-    mundialEscuderias.tablesorter();
+    $(mundialEscuderias).tablesorter({
+        headers: { 
+            0: { sorter: false}
+        },
+        sortList: [[1,1]]
+    });
 
     let seleccionCarrera = $('.card #mostrarCarrera');
     $(seleccionCarrera).on('click', function () {
-        carreraSeleccionada = $(this).attr('data-id');
-        mostrarCarrera(carreraSeleccionada);
-    });
+        $('#seleccionarCarrera .card').removeClass('col-12');
+        $('#seleccionarCarrera .card').addClass('col-3');
 
-    let modificarTemporada = $('#configurarTemporada');
-    $(modificarTemporada).on('click', function () {
-        if(window.location.search != ""){
-            window.location = "configuracion.php" + window.location.search;
-        } 
+        carreraSeleccionada = $(this).attr('data-id');
+
+        if($(this).html() == "Ver"){
+            $(this).html('Ocultar');
+            $(this).closest('.card').removeClass('col-3');
+            $(this).closest('.card').addClass('col-12');
+            mostrarCarrera(carreraSeleccionada);
+        }
+        else{
+            $(this).html('Ver');
+            $(this).closest('.card').removeClass('col-12');
+            $(this).closest('.card').addClass('col-3');
+            ocultarCarrera(carreraSeleccionada);
+        }
+        
     });
 });

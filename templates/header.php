@@ -20,31 +20,36 @@
         $encabezado = 'Modificar Pista';
     }
     if(strpos($nombrePagina, 'historiaf1') != false){
-        $imagen = 'images/pilotos.jpg';
+        $imagen = 'images/campeones/f1/campeones.jpg';
         $encabezado = 'Historia de la Fórmula 1';
     }
     if(strpos($nombrePagina, 'historiaf2') != false){
-        $imagen = 'images/pilotosf2.jpg';
+        $imagen = 'images/campeones/f2/campeones.jpg';
         $encabezado = 'Historia de la Fórmula 2';
     }
     if(strpos($nombrePagina, 'temporadasf1') != false){
-        $imagen = 'images/f1.jpg';
+        if($campeonPilotos == "" || $campeonEscuderias == "") $imagen = 'images/Campeones/f1/campeones.jpg';
+        else $imagen = 'images/Campeones/f1/campeones' . $temporadaActual . '.jpg';
         $encabezado = 'Fórmula 1 - Temporadas';
     }
     if(strpos($nombrePagina, 'temporadasf2') != false){
-        $imagen = 'images/f2.jpg';
+        if($campeonPilotos == "" || $campeonEscuderias == "") $imagen = 'images/Campeones/f2/campeones.jpg';
+        else $imagen = 'images/Campeones/f2/campeones' . $temporadaActual . '.jpg';
         $encabezado = 'Fórmula 2 - Temporadas';
     }
     if(strpos($nombrePagina, 'configuracion') != false){
-        $imagen = 'images/f1.jpg';
+        if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
+        if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         $encabezado = 'Configuracion';
     }
     if(strpos($nombrePagina, 'comparar-pilotos') != false){
-        $imagen = 'images/pilotos.jpg';
+        if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
+        if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         $encabezado = 'Comparacion de Pilotos';
     }
     if(strpos($nombrePagina, 'comparar-escuderias') != false){
-        $imagen = 'images/pilotos.jpg';
+        if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
+        if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         $encabezado = 'Comparacion de Escuderias';
     }
 ?>

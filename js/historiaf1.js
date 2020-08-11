@@ -1,19 +1,30 @@
 $(document).ready(function () {
     // Pilotos
-    $("#tabla-pilotos").fancyTable({
-      pagination: true,
-      paginationClass: "btn btn-danger active",
-	  paginationClassActive: "active",
-      perPage:10
+    $('#tabla-pilotos').tablesorter({
+      headers: { 
+          0: { sorter: false }
+      },
+      sortList: [[7,1]]
     });
-    $("#tabla-pilotos").tablesorter();
-
     // Escuderias
-    $("#tabla-escuderias").fancyTable({
-        pagination: true,
-        paginationClass: "btn btn-danger active",
-	    paginationClassActive: "active",
-		perPage:10
+    $('#tabla-escuderias').tablesorter({
+      headers: { 
+          0: { sorter: false }
+      },
+      sortList: [[7,1]]
     });
-    $("#tabla-escuderias").tablesorter();
+    // Paises
+    $('#tabla-paises').tablesorter({
+      headers: { 
+          0: { sorter: false }
+      },
+      sortList: [[1,1]]
+    });
+    // Pistas
+    $('#tabla-pistas').tablesorter({
+      headers: { 
+          0: { sorter: false }
+      },
+      sortList: [[1,1]]
+    });
 });

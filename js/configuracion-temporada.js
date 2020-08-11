@@ -65,6 +65,7 @@ function temporadaCon22Pilotos(temporada){
     if(temporada == 1998) return true;
     if(temporada == 1997) return true;
     if(temporada == 1996) return true;
+    if(temporada == 1957) return true;
     return false;
 }
 
@@ -72,6 +73,10 @@ function temporadaCon24Pilotos(temporada){
     if(temporada == 2012) return true;
     if(temporada == 2011) return true;
     if(temporada == 2010) return true;
+    if(temporada == 1968) return true;
+    if(temporada == 1966) return true;
+    if(temporada == 1960) return true;
+    if(temporada == 1955) return true;
     return false;
 }
 
@@ -79,6 +84,10 @@ function temporadaCon26Pilotos(temporada){
     if(temporada == 1995) return true;
     if(temporada == 1993) return true;
     if(temporada == 1986) return true;
+    if(temporada == 1967) return true;
+    if(temporada == 1964) return true;
+    if(temporada == 1963) return true;
+    if(temporada == 1951) return true;
     return false;
 }
 
@@ -88,6 +97,11 @@ function temporadaCon28Pilotos(temporada){
     if(temporada == 1985) return true;
     if(temporada == 1984) return true;
     if(temporada == 1980) return true;
+    if(temporada == 1971) return true;
+    if(temporada == 1970) return true;
+    if(temporada == 1965) return true;
+    if(temporada == 1956) return true;
+    if(temporada == 1950) return true;
     return false;
 }
 
@@ -96,6 +110,9 @@ function temporadaCon30Pilotos(temporada){
     if(temporada == 1979) return true;
     if(temporada == 1976) return true;
     if(temporada == 1975) return true;
+    if(temporada == 1973) return true;
+    if(temporada == 1962) return true;
+    if(temporada == 1959) return true;
     return false;
 }
 
@@ -104,6 +121,10 @@ function temporadaCon32Pilotos(temporada){
     if(temporada == 1988) return true;
     if(temporada == 1982) return true;
     if(temporada == 1981) return true;
+    if(temporada == 1972) return true;
+    if(temporada == 1958) return true;
+    if(temporada == 1954) return true;
+    if(temporada == 1953) return true;
     return false;
 }
 
@@ -111,12 +132,14 @@ function temporadaCon34Pilotos(temporada){
     if(temporada == 1991) return true;
     if(temporada == 1978) return true;
     if(temporada == 1974) return true;
+    if(temporada == 1961) return true;
     return false;
 }
 
 function temporadaCon36Pilotos(temporada){
     if(temporada == 1990) return true;
     if(temporada == 1977) return true;
+    if(temporada == 1952) return true;
     return false;
 }
 

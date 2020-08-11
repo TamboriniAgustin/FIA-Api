@@ -1,169 +1,322 @@
+<!-- Cargo el tipo de historia que quiero cargar -->
+<?php 
+  $tipo = $_GET['tipo']; 
+  $categoria = 'f1';
+?>
+<!-- Cargo la funcionalidad PHP -->
+<?php include('funcionesf1.php'); ?> 
+<!-- Realizo la consulta en la base de datos -->
+<?php
+  if($tipo){
+    try {
+      require('db/conexion.php');
+
+      if($tipo == "pilotos"){
+        //ESTADÍSTICAS
+        $cargarEstadistica =  " SELECT " .
+                              "   p1.id AS id, " . 
+                              "   CONCAT(p1.nombre, ' ', p1.apellido) AS nombre , " . 
+                              "   p1.nacionalidad AS nacionalidad, " .
+                              "   p1.edad AS edad, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.posiciones_pilotos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria') " .
+                              "   ) AS grandes_premios, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.posiciones_pilotos LIKE CONCAT('%', '\"1\":\"', p1.nombre, ' ', p1.apellido, '\"%')) AND (c2.categoria = '$categoria') " .
+                              "  ) AS victorias, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM carreras c2 " .
+                              "    WHERE ((c2.posiciones_pilotos LIKE CONCAT('%', '\"1\":\"', p1.nombre, ' ', p1.apellido, '\"%')) OR (c2.posiciones_pilotos LIKE CONCAT('%', '\"2\":\"', p1.nombre, ' ', p1.apellido, '\"%')) OR (c2.posiciones_pilotos LIKE CONCAT('%', '\"3\":\"', p1.nombre, ' ', p1.apellido, '\"%'))) AND (c2.categoria = '$categoria') " .
+                              "  ) AS podios, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM carreras c2 " .
+                              "    WHERE (c2.pole = CONCAT(p1.nombre, ' ', p1.apellido)) AND (c2.categoria = '$categoria') " .
+                              "  ) AS poles, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM carreras c2 " .
+                              "    WHERE (c2.vuelta_rapida = CONCAT(p1.nombre, ' ', p1.apellido)) AND (c2.categoria = '$categoria') " .
+                              "  ) AS vueltas_rapidas, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM carreras c2 " .
+                              "    WHERE (c2.abandonos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria') " .
+                              "  ) AS abandonos, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM temporadas t2 " .
+                              "    WHERE t2.campeon_pilotos_$categoria = CONCAT(p1.nombre, ' ', p1.apellido) " .
+                              "  ) AS campeonatos, " .
+                              "  ( " .
+                              "    SELECT MAX(temporada) FROM carreras c2 " .
+                              "    WHERE (c2.posiciones_pilotos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria') " .
+                              "  ) AS ultima_participacion " .
+                              " FROM pilotos p1 " .
+                              " WHERE (SELECT COUNT(*) FROM carreras c2 WHERE (c2.posiciones_pilotos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria')) > 0 " .
+                              " ORDER BY p1.apellido, p1.nombre " 
+                            ;
+      }
+      else if($tipo == "escuderias"){
+        //ESTADÍSTICAS
+        $cargarEstadistica =  " SELECT " .
+                              "   e1.id AS id, " . 
+                              "   e1.nombre AS nombre , " . 
+                              "   e1.nacionalidad AS nacionalidad, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.posiciones_escuderias LIKE CONCAT('%', e1.nombre, '%')) AND (c2.categoria = '$categoria') " .
+                              "   ) AS grandes_premios, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.posiciones_escuderias LIKE CONCAT('%', '\"1\":\"', e1.nombre, '\"%')) AND (c2.categoria = '$categoria') " .
+                              "   ) AS victorias, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE ((c2.posiciones_escuderias LIKE CONCAT('%', '\"1\":\"', e1.nombre, '\"%')) OR (c2.posiciones_escuderias LIKE CONCAT('%', '\"2\":\"', e1.nombre, '\"%')) OR (c2.posiciones_escuderias LIKE CONCAT('%', '\"3\":\"', e1.nombre, '\"%'))) AND (c2.categoria = '$categoria') " .
+                              "   ) AS podios, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.pole_escuderia = e1.nombre) AND (c2.categoria = '$categoria') " .
+                              "   ) AS poles, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.vuelta_rapida_escuderia = e1.nombre) AND (c2.categoria = '$categoria') " .
+                              "   ) AS vueltas_rapidas, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM carreras c2 " .
+                              "    WHERE (c2.abandonos_escuderias LIKE CONCAT('%', e1.nombre, '%')) AND (c2.categoria = '$categoria') " .
+                              "  ) AS abandonos, " .
+                              "  ( " .
+                              "    SELECT COUNT(*) FROM temporadas t2 " .
+                              "    WHERE t2.campeon_escuderias_$categoria = e1.nombre " .
+                              "  ) AS campeonatos, " .
+                              "  ( " .
+                              "    SELECT MAX(temporada) FROM carreras c2 " .
+                              "    WHERE (c2.posiciones_escuderias LIKE CONCAT('%', e1.nombre, '%')) AND (c2.categoria = '$categoria') " .
+                              "  ) AS ultima_participacion " .
+                              " FROM escuderias e1 " .
+                              " WHERE (SELECT COUNT(*) FROM carreras c2 WHERE (c2.posiciones_escuderias LIKE CONCAT('%', e1.nombre, '%')) AND (c2.categoria = '$categoria')) > 0 " .
+                              " ORDER BY e1.nombre " 
+                            ;
+      }
+      else if($tipo == "paises"){
+        //ESTADÍSTICAS
+        $cargarEstadistica =  " SELECT " .
+                              "   p1.nacionalidad AS pais, " . 
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM temporadas t2 " .
+                              "     JOIN pilotos p2 ON t2.campeon_pilotos_$categoria = CONCAT(p2.nombre, ' ', p2.apellido) " .
+                              "     WHERE p2.nacionalidad = p1.nacionalidad " .
+                              "   ) AS campeonatos_piloto, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM temporadas t2 " .
+                              "     JOIN escuderias e2 ON t2.campeon_escuderias_$categoria = e2.nombre " .
+                              "     WHERE e2.nacionalidad = p1.nacionalidad " .
+                              "   ) AS campeonatos_escuderia, " .
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.nombre LIKE CONCAT('%', p1.nacionalidad, '%')) AND (c2.categoria = '$categoria') " .
+                              "   ) AS sede, " .
+                              "   ( " .
+                              "     SELECT MAX(c2.temporada) FROM carreras c2 " .
+                              "     WHERE (c2.nombre LIKE CONCAT('%', p1.nacionalidad, '%')) AND (c2.categoria = '$categoria') " .
+                              "   ) AS ultima_sede " .
+                              " FROM pilotos p1 " .
+                              " GROUP BY p1.nacionalidad " .
+                              " ORDER BY campeonatos_escuderia DESC, campeonatos_piloto DESC, sede DESC, p1.nacionalidad " 
+                            ;
+      }
+      else if($tipo == "pistas"){
+        //ESTADÍSTICAS
+        $cargarEstadistica =  " SELECT " .
+                              "   CONCAT(p1.ciudad, ', ', p1.pais) AS pista, " . 
+                              "   ( " .
+                              "     SELECT COUNT(*) FROM carreras c2 " .
+                              "     WHERE (c2.nombre = CONCAT(p1.pais, ' - ', p1.ciudad)) AND (c2.categoria = '$categoria') " .
+                              "   ) AS sede, " .
+                              "   ( " .
+                              "     SELECT CONCAT(p2.nombre, ' ', p2.apellido) FROM pilotos p2 " .
+                              "     JOIN carreras c2 ON (c2.posiciones_pilotos LIKE CONCAT('%', '\"1\":\"', p2.nombre, ' ', p2.apellido, '\"%')) " .
+                              "     WHERE (c2.nombre = CONCAT(p1.pais, ' - ', p1.ciudad)) AND (c2.categoria = '$categoria') " .
+                              "     GROUP BY p2.id, p2.nombre, p2.apellido " .
+                              "     ORDER BY COUNT(c2.id) DESC " .
+                              "     LIMIT 1 " .
+                              "   ) AS mejor_piloto, " .
+                              "   ( " .
+                              "     SELECT e2.nombre FROM escuderias e2 " .
+                              "     JOIN carreras c2 ON (c2.posiciones_escuderias LIKE CONCAT('%', '\"1\":\"', e2.nombre, '\"%')) " .
+                              "     WHERE (c2.nombre = CONCAT(p1.pais, ' - ', p1.ciudad)) AND (c2.categoria = '$categoria') " .
+                              "     GROUP BY e2.nombre " .
+                              "     ORDER BY COUNT(c2.id) DESC " .
+                              "     LIMIT 1 " .
+                              "   ) AS mejor_escuderia " .
+                              " FROM pistas p1 " .
+                              " ORDER BY p1.pais, p1.ciudad " 
+                            ;
+      }
+      $resultadoEstadistica = $con->query($cargarEstadistica);
+    } catch (\Exception $e) {
+      $error = $e->getMessage();
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Contenido no visible -->
   <?php include('templates/head.php') ?>
+  <!-- Contenido visible -->
   <body>
+    <!-- Botón volver -->
     <a href="index.php"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
-
+    <!-- Header -->
     <?php include('templates/header.php') ?>
-
-    <?php include('funcionesf1.php'); ?> 
-
-    <!-- Cargo las temporadas que hayan formado parte de la historia de la F1 -->
-    <?php 
-         try {
-            require('db/conexion.php');
-  
-            $cargarTemporadas = " SELECT * FROM temporadas ";
-            $resultadoTemporada = $con->query($cargarTemporadas);
-  
-          } catch (\Exception $e) {
-            $error = $e->getMessage();
-          }
-
-          $temporadasF1 = array();
-          while ($temporadas = $resultadoTemporada->fetch_assoc()) {
-            array_push($temporadasF1, $temporadas);
-          }
-    ?>
-    <!-- Cargo las carreras que hayan formado parte de la historia de la F1 -->
-    <?php 
-         try {
-            require('db/conexion.php');
-  
-            $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f1' ORDER BY temporada DESC ";
-            $resultadoCarrera = $con->query($cargarCarreras);
-  
-          } catch (\Exception $e) {
-            $error = $e->getMessage();
-          }
-
-          $carrerasF1 = array();
-          while ($carreras = $resultadoCarrera->fetch_assoc()) {
-            array_push($carrerasF1, $carreras);
-          }
-    ?>
-    <!-- Cargo los pilotos que participaron en alguna temporada de F1 -->
-    <?php 
-         try {
-            require('db/conexion.php');
-  
-            $cargarPilotosTemporada = " SELECT * FROM pilotos ORDER BY apellido";
-            $resultadoTemporada = $con->query($cargarPilotosTemporada);
-  
-          } catch (\Exception $e) {
-            $error = $e->getMessage();
-          }
-
-          $pilotosF1 = array();
-          while ($pilotos = $resultadoTemporada->fetch_assoc()) {
-            $esPilotoDeF1 = corrioEnF1($pilotos['nombre'] . ' ' . $pilotos['apellido'], 'piloto', $carrerasF1);
-            if($esPilotoDeF1){
-                array_push($pilotosF1, $pilotos);
-            }
-          }
-    ?>
-    <!-- Cargo las escuderias que participaron en alguna temporada de F1 -->
-    <?php 
-         try {
-            require('db/conexion.php');
-  
-            $cargarEscuderiasTemporada = " SELECT * FROM escuderias ORDER BY nombre";
-            $resultadoTemporada = $con->query($cargarEscuderiasTemporada);
-  
-          } catch (\Exception $e) {
-            $error = $e->getMessage();
-          }
-
-          $escuderiasF1 = array();
-          while ($escuderias = $resultadoTemporada->fetch_assoc()) {
-            $esEscuderiaDeF1 = corrioEnF1($escuderias['nombre'], 'escuderia', $carrerasF1);
-            if($esEscuderiaDeF1){
-                array_push($escuderiasF1, $escuderias);
-            }
-          }
-    ?>
-
-    <div style="margin-top: 50px;">
-        <!-- Pilotos -->
-        <h3 class="text-center">Pilotos</h3>
-            <div class="tabla-pilotos">
-                <table id="tabla-pilotos" class="table">
-                    <thead class="text-center" style="color:white; background-color:#dc3545;">
-                        <tr>
-                        <th scope="col" width="75%">Piloto</th>
-                        <th scope="col">Carreras Corridas</th>
-                        <th scope="col">Poles</th>
-                        <th scope="col">Podios</th>
-                        <th scope="col">Vueltas Rápidas</th>
-                        <th scope="col">Abandonos</th>
-                        <th scope="col">Victorias</th>
-                        <th scope="col">Campeonatos del Mundo</th>
-                        <th scope="col">Última Participación</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                            foreach ($pilotosF1 as $piloto) {
-                                $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
-                        ?>
-                                <tr>
-                                    <th scope="row"><?php echo $nombrePiloto; ?></th>
-                                    <th scope="row"><?php echo carrerasEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo polesEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo podiosEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo vueltasRapidasEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo abandonosEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo victoriasEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                    <th scope="row"><?php echo mundialesDeF1($nombrePiloto, 'piloto', $temporadasF1); ?></th>
-                                    <th scope="row"><?php echo ultimaParticipacionEnF1($nombrePiloto, 'piloto', $carrerasF1); ?></th>
-                                </tr>
-                        <?php 
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-
-        <!-- Escuderias -->
-        <h3 class="text-center">Escuderias</h3>
-            <div class="tabla-escuderias">
-                <table id="tabla-escuderias" class="table">
-                    <thead class="text-center" style="color:white; background-color:#dc3545;">
-                        <tr>
-                        <th scope="col" width="75%">Escuderia</th>
-                        <th scope="col">Carreras Corridas</th>
-                        <th scope="col">Poles</th>
-                        <th scope="col">Podios</th>
-                        <th scope="col">Vueltas Rápidas</th>
-                        <th scope="col">Abandonos</th>
-                        <th scope="col">Victorias</th>
-                        <th scope="col">Campeonatos del Mundo</th>
-                        <th scope="col">Última Participación</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                    <?php
-                        foreach ($escuderiasF1 as $escuderia) {
-                    ?>
-                            <tr>
-                                <th scope="row"><?php echo $escuderia['nombre']; ?></th>
-                                <th scope="row"><?php echo carrerasEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo polesEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo podiosEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo vueltasRapidasEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo abandonosEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo victoriasEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                                <th scope="row"><?php echo mundialesDeF1($escuderia['nombre'], 'escuderia', $temporadasF1); ?></th>
-                                <th scope="row"><?php echo ultimaParticipacionEnF1($escuderia['nombre'], 'escuderia', $carrerasF1); ?></th>
-                            </tr>
-                    <?php 
-                        }
-                    ?>
-                    </tbody>
-                </table>
-            </div>    
+    <!-- Selección de historia -->
+    <div class="seleccionar-tipo text-center" style="margin:20px auto;">
+      <a href="historiaf1.php?tipo=pilotos" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pilotos") echo 'btn-danger'; else echo 'btn-outline-danger'; ?>">Pilotos</a>
+      <a href="historiaf1.php?tipo=escuderias" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "escuderias") echo 'btn-danger'; else echo 'btn-outline-danger'; ?>">Escuderias</a>
+      <a href="historiaf1.php?tipo=paises" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "paises") echo 'btn-danger'; else echo 'btn-outline-danger'; ?>">Países</a>
+      <a href="historiaf1.php?tipo=pistas" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pistas") echo 'btn-danger'; else echo 'btn-outline-danger'; ?>">Pistas</a>
     </div>
-
+    <!-- Tablas de Historia -->
+    <div class="tabla-historia">
+      <?php 
+        if($tipo == "pilotos"){
+      ?>
+          <table id="tabla-pilotos" class="table">
+            <thead class="text-center" style="color:white; background-color:#dc3545;">
+                <tr>
+                  <th scope="col" width="75%">Piloto</th>
+                  <th scope="col">Grandes Premios</th>
+                  <th scope="col">Victorias</th>
+                  <th scope="col">Podios</th>
+                  <th scope="col">Poles</th>
+                  <th scope="col">Vueltas Rápidas</th>
+                  <th scope="col">Abandonos</th>
+                  <th scope="col">Campeonatos del Mundo</th>
+                  <th scope="col">Última Participación</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                    while($piloto = $resultadoEstadistica->fetch_assoc()) {
+                ?>
+                      <tr>
+                          <th scope="row"><?php echo $piloto['nombre']; ?></th>
+                          <th scope="row"><?php echo $piloto['grandes_premios']; ?></th>
+                          <th scope="row"><?php echo $piloto['victorias']; ?></th>
+                          <th scope="row"><?php echo $piloto['podios']; ?></th>
+                          <th scope="row"><?php echo $piloto['poles']; ?></th>
+                          <th scope="row"><?php echo $piloto['vueltas_rapidas']; ?></th>
+                          <th scope="row"><?php echo $piloto['abandonos']; ?></th>
+                          <th scope="row"><?php echo $piloto['campeonatos']; ?></th>
+                          <th scope="row"><?php echo $piloto['ultima_participacion']; ?></th>
+                      </tr>
+                <?php 
+                    }
+                ?>
+            </tbody>
+          </table>
+      <?php 
+        }
+        else if($tipo == "escuderias"){
+      ?>
+          <table id="tabla-escuderias" class="table">
+            <thead class="text-center" style="color:white; background-color:#dc3545;">
+                <tr>
+                  <th scope="col" width="75%">Escuderia</th>
+                  <th scope="col">Grandes Premios</th>
+                  <th scope="col">Victorias</th>
+                  <th scope="col">Podios</th>
+                  <th scope="col">Poles</th>
+                  <th scope="col">Vueltas Rápidas</th>
+                  <th scope="col">Abandonos</th>
+                  <th scope="col">Campeonatos del Mundo</th>
+                  <th scope="col">Última Participación</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                    while($escuderia = $resultadoEstadistica->fetch_assoc()) {
+                ?>
+                      <tr>
+                          <th scope="row"><?php echo $escuderia['nombre']; ?></th>
+                          <th scope="row"><?php echo $escuderia['grandes_premios']; ?></th>
+                          <th scope="row"><?php echo $escuderia['victorias']; ?></th>
+                          <th scope="row"><?php echo $escuderia['podios']; ?></th>
+                          <th scope="row"><?php echo $escuderia['poles']; ?></th>
+                          <th scope="row"><?php echo $escuderia['vueltas_rapidas']; ?></th>
+                          <th scope="row"><?php echo $escuderia['abandonos']; ?></th>
+                          <th scope="row"><?php echo $escuderia['campeonatos']; ?></th>
+                          <th scope="row"><?php echo $escuderia['ultima_participacion']; ?></th>
+                      </tr>
+                <?php 
+                    }
+                ?>
+            </tbody>
+          </table>
+      <?php 
+        }
+        else if($tipo == "paises"){
+      ?>
+          <table id="tabla-paises" class="table">
+            <thead class="text-center" style="color:white; background-color:#dc3545;">
+                <tr>
+                  <th scope="col" width="20%">País</th>
+                  <th scope="col">Campeonatos de Pilotos</th>
+                  <th scope="col">Campeonatos de Escuderias</th>
+                  <th scope="col">Sede</th>
+                  <th scope="col">Último año de Sede</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                    while($pais = $resultadoEstadistica->fetch_assoc()) {
+                ?>
+                      <tr>
+                          <th scope="row"><?php echo $pais['pais']; ?></th>
+                          <th scope="row"><?php echo $pais['campeonatos_piloto']; ?></th>
+                          <th scope="row"><?php echo $pais['campeonatos_escuderia']; ?></th>
+                          <th scope="row"><?php echo $pais['sede']; ?></th>
+                          <th scope="row"><?php echo $pais['ultima_sede']; ?></th>
+                      </tr>
+                <?php 
+                    }
+                ?>
+            </tbody>
+          </table>
+      <?php 
+        }
+        else if($tipo == "pistas"){
+      ?>
+          <table id="tabla-pistas" class="table">
+            <thead class="text-center" style="color:white; background-color:#dc3545;">
+                <tr>
+                  <th scope="col" width="20%">Pista</th>
+                  <th scope="col">Sede</th>
+                  <th scope="col">Piloto más ganador</th>
+                  <th scope="col">Escuderia más ganadora</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                    while($pista = $resultadoEstadistica->fetch_assoc()) {
+                ?>
+                      <tr>
+                          <th scope="row"><?php echo $pista['pista']; ?></th>
+                          <th scope="row"><?php echo $pista['sede']; ?></th>
+                          <th scope="row"><?php echo $pista['mejor_piloto']; ?></th>
+                          <th scope="row"><?php echo $pista['mejor_escuderia']; ?></th>
+                      </tr>
+                <?php 
+                    }
+                ?>
+            </tbody>
+          </table>
+      <?php 
+        }
+      ?>
+    </div>
+    <!-- Contenido no visible -->
     <?php include('templates/scripts.php') ?>
   </body>
 </html>
