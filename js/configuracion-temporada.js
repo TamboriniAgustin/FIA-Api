@@ -203,17 +203,25 @@ function leerFormulario(formulario, nombreFormulario){
         const posPilotos = new Array();
         const posEscuderias = new Array();
 
-        var cantidadPilotos = 20;
-        if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
-        if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
-        if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
-        if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
-        if(temporadaCon30Pilotos(temporada)) cantidadPilotos = 30;
-        if(temporadaCon32Pilotos(temporada)) cantidadPilotos = 32;
-        if(temporadaCon34Pilotos(temporada)) cantidadPilotos = 34;
-        if(temporadaCon36Pilotos(temporada)) cantidadPilotos = 36;
-        if(temporadaCon38Pilotos(temporada)) cantidadPilotos = 38;
-        if(temporadaCon40Pilotos(temporada)) cantidadPilotos = 40;
+        if(categoria == 'f1'){
+            var cantidadPilotos = 20;
+            if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
+            if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
+            if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
+            if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
+            if(temporadaCon30Pilotos(temporada)) cantidadPilotos = 30;
+            if(temporadaCon32Pilotos(temporada)) cantidadPilotos = 32;
+            if(temporadaCon34Pilotos(temporada)) cantidadPilotos = 34;
+            if(temporadaCon36Pilotos(temporada)) cantidadPilotos = 36;
+            if(temporadaCon38Pilotos(temporada)) cantidadPilotos = 38;
+            if(temporadaCon40Pilotos(temporada)) cantidadPilotos = 40;
+        }
+        else if(categoria == 'f2'){
+            var cantidadPilotos = 20;
+        }
+        else if(categoria == 'f3'){
+            var cantidadPilotos = 30;
+        }
 
         for (let i = 1; i <= cantidadPilotos; i++) {
             let idPilotos = "#posicion" + i + "-Piloto";

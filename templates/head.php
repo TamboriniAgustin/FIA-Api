@@ -1,4 +1,6 @@
-<?php $nombrePagina = $_SERVER['PHP_SELF']; ?>
+<?php 
+    $nombrePagina = $_SERVER['PHP_SELF'];
+?>
 <head>
     <?php 
         if(strpos($nombrePagina, 'index') != false) echo '<title>Campeonatos de la FIA</title>';

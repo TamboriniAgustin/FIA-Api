@@ -5,7 +5,7 @@
   // error_reporting(E_ALL);
 ?>
 <!-- Cargo la funcionalidad de la página -->
-<?php include('funcionesf2.php'); ?>
+<?php include('funcionesf3.php'); ?>
 <!-- Establezco variables de interés -->
 <?php 
   $temporadaActual = $_GET['temporada'];   
@@ -27,7 +27,7 @@
                               
                            );
   $temporadaCon30Pilotos = array(
-                              
+                              2019, 2020, 2021, 2022 
                            );
   $temporadaCon32Pilotos = array(
                               
@@ -62,38 +62,38 @@
   try {
     require('db/conexion.php');
     //TEMPORADAS
-    $cargarTemporadas = ' SELECT * FROM temporadas WHERE año >= 2017 ORDER BY año DESC';
+    $cargarTemporadas = ' SELECT * FROM temporadas WHERE año >= 2019 ORDER BY año DESC';
     $resultadoTemporadas = $con->query($cargarTemporadas);
     
     if($temporadaActual){
       //CAMPEONES
-      $cargarCampeones = " SELECT campeon_pilotos_f2, campeon_escuderias_f2 FROM temporadas WHERE año = $temporadaActual ";
+      $cargarCampeones = " SELECT campeon_pilotos_f3, campeon_escuderias_f3 FROM temporadas WHERE año = $temporadaActual ";
       $campeonesTemporada = $con->query($cargarCampeones);
       $resultadoCampeones = $campeonesTemporada->fetch_assoc();
 
-      $campeonPilotos = $resultadoCampeones['campeon_pilotos_f2'];
-      $campeonEscuderias = $resultadoCampeones['campeon_escuderias_f2'];
+      $campeonPilotos = $resultadoCampeones['campeon_pilotos_f3'];
+      $campeonEscuderias = $resultadoCampeones['campeon_escuderias_f3'];
       //PILOTOS (TEMPORADA ACTUAL)
-      $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE (SELECT pilotosF2 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, '%') ";
+      $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE (SELECT pilotosf3 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, '%') ";
       $pilotosTemporada = $con->query($cargarPilotosTemporada);
       //ESCUDERIAS (TEMPORADA ACTUAL)
-      $cargarEscuderiasTemporada = " SELECT * FROM escuderias WHERE (SELECT escuderiasF2 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, '%') ";
+      $cargarEscuderiasTemporada = " SELECT * FROM escuderias WHERE (SELECT escuderiasf3 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, '%') ";
       $escuderiasTemporada = $con->query($cargarEscuderiasTemporada);
       //CARRERAS
-      $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f2' AND temporada = $temporadaActual ";
+      $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f3' AND temporada = $temporadaActual ";
       $resultadoCarreras = $con->query($cargarCarreras);
       
-      $carrerasF2 = array();
+      $carrerasF3 = array();
       while($carreras = $resultadoCarreras->fetch_assoc()){
-        array_push($carrerasF2, $carreras);
+        array_push($carrerasF3, $carreras);
       }
       //PISTAS
       $cargarPistas = " SELECT * FROM pistas WHERE CONCAT(pais, ' - ', ciudad) IN (SELECT nombre FROM carreras WHERE temporada = $temporadaActual) ";
       $resultadoPistas = $con->query($cargarPistas);
       
-      $pistasF2 = array();
+      $pistasF3 = array();
       while($pistas = $resultadoPistas->fetch_assoc()){
-        array_push($pistasF2, $pistas);
+        array_push($pistasF3, $pistas);
       }
     }
   } catch (\Exception $e) {
@@ -117,7 +117,7 @@
         $contador = 1;
         while ($temporadas = $resultadoTemporadas->fetch_assoc()) {
       ?>
-          <a href="temporadasf2.php?categoria=f2&temporada=<?php echo $temporadas['año']; ?>"><span class="badge badge-pill badge-primary"><?php echo $temporadas['año']; ?></span></a>
+          <a href="temporadasf3.php?categoria=f3&temporada=<?php echo $temporadas['año']; ?>"><span class="badge badge-pill badge-secondary"><?php echo $temporadas['año']; ?></span></a>
       <?php
           if($contador % 20 == 0) echo "<br>";
           $contador++; 
@@ -129,7 +129,7 @@
       <?php 
         if($temporadaActual){
       ?>
-          <a id="configurarTemporada" href="configuracion.php?categoria=f2&temporada=<?php echo $temporadaActual; ?>"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
+          <a id="configurarTemporada" href="configuracion.php?categoria=f3&temporada=<?php echo $temporadaActual; ?>"><h5 class="mb-2 bread text-right" style="padding: 20px;">Configurar Temporada</h5></a>    
       <?php 
         }
       ?>
@@ -143,11 +143,11 @@
               <!-- Tabla de Posiciones del Mundial de Pilotos -->
               <div class="mundial-pilotos">
                 <!-- Titulo -->
-                <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Pilotos</h3>
+                <h3 class="mb-2 bread text-center" style="color:#6c757d; padding: 20px;">Mundial de Pilotos</h3>
                 <!-- Tabla -->
                 <table class="table table-posiciones">
                   <!-- Header -->
-                  <thead class="text-center" style="color:white; background-color:#007bff;">
+                  <thead class="text-center" style="color:white; background-color:#6c757d;">
                     <tr>
                       <th scope="col" data-tablesorter="false">Piloto</th>
                       <th scope="col">Puntos</th>
@@ -163,7 +163,7 @@
                     <?php
                       while($piloto = $pilotosTemporada->fetch_assoc()) {
                         $nombrePiloto = $piloto['nombre'] . ' ' . $piloto['apellido'];
-                        calcularInformacionTemporada($nombrePiloto, $temporadaActual, 'piloto', $carrerasF2, $informacionPiloto);
+                        calcularInformacionTemporada($nombrePiloto, $temporadaActual, 'piloto', $carrerasF3, $informacionPiloto);
                     ?>
                         <tr <?php if(($nombrePiloto == $campeonPilotos) || (strpos($nombrePiloto, $campeonPilotos) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                           <!-- Nombre -->
@@ -185,11 +185,11 @@
               <!-- Tabla de Posiciones del Mundial de Escuderias -->
               <div class="mundial-escuderias">
                 <!-- Titulo -->
-                <h3 class="mb-2 bread text-center" style="color:#007bff; padding: 20px;">Mundial de Escuderias</h3>
+                <h3 class="mb-2 bread text-center" style="color:#6c757d; padding: 20px;">Mundial de Escuderias</h3>
                 <!-- Tabla -->
                 <table class="table table-posicionesE">
                   <!-- Header -->
-                  <thead class="text-center" style="color:white; background-color:#007bff;">
+                  <thead class="text-center" style="color:white; background-color:#6c757d;">
                     <tr>
                       <th scope="col" data-tablesorter="false">Escuderia</th>
                       <th scope="col">Puntos</th>
@@ -205,7 +205,7 @@
                     <?php
                         while($escuderia = $escuderiasTemporada->fetch_assoc()) {
                           $nombreEscuderia = $escuderia['nombre'];
-                          calcularInformacionTemporada($nombreEscuderia, $temporadaActual, 'escuderia', $carrerasF2, $informacionEscuderia);
+                          calcularInformacionTemporada($nombreEscuderia, $temporadaActual, 'escuderia', $carrerasF3, $informacionEscuderia);
                       ?>
                           <tr <?php if(($nombreEscuderia == $campeonEscuderias) || (strpos($nombreEscuderia, $campeonEscuderias) != false)) echo 'style="color:white; background-color:#bf930d;"' ?>>
                             <td><?php echo $nombreEscuderia ?></td>
@@ -224,13 +224,20 @@
               </div>
               
               <br>
+
+              <!-- Aclaraciones de temporadas no habituales -->
+              <div class="aclaraciones">
+                <?php if($temporadaActual == "2021") echo "* Fraga se consagra campeón por desempate en podios ante Caldwell, tras haber igualado en puntos, victorias, poles y vueltas rápidas." ?>
+              </div>
+
+              <br>
               
               <!-- Carreras -->
               <div class="carreras">
                 <div id="seleccionarCarrera" class="text-center" style="margin-top:2rem;">
                   <?php
                     $contador = 0; 
-                    foreach ($carrerasF2 as $carrera){
+                    foreach ($carrerasF3 as $carrera){
                       $paisCarrera = substr($carrera['nombre'], 0, strpos($carrera['nombre'], ' -'));
                   ?>
                       <!-- Seleccionar Carrera -->
@@ -244,14 +251,14 @@
                           <img style="width:<?php echo $width; ?>; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
                           <div class="card-body">
                             <h5 class="card-title">Gran Premio de <?php echo $carrera['nombre']; ?></h5>
-                            <a id="mostrarCarrera" class="btn btn-danger active" data-id="<?php echo $carrera['id']; ?>">Ver</a>
+                            <a id="mostrarCarrera" class="btn btn-secondary active" data-id="<?php echo $carrera['id']; ?>">Ver</a>
                           </div>
                         </div>
                       <?php if(($contador + 1) % 4 == 0) echo "</div>"; ?>
                       <!-- Carrera -->
                       <div class="carrera pista<?php echo $carrera['id']; ?>" style="width:100%; display: none;">
                         <?php 
-                          foreach($pistasF2 as $pista) {
+                          foreach($pistasF3 as $pista) {
                             $nombrePista = $pista['pais'] . ' - ' . $pista['ciudad'];
                             if($nombrePista == $carrera['nombre']){
                         ?>

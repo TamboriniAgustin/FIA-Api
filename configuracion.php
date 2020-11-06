@@ -5,8 +5,9 @@
     <?php 
       $categoria = $_GET['categoria'];
       $temporada = $_GET['temporada'];
-      if($categoria == "f1") $paginaAnterior = "temporadasf1.php?categoria=f1&temporada=" . $temporada;
-      if($categoria == "f2") $paginaAnterior = "temporadasf2.php?categoria=f2&temporada=" . $temporada;
+      if($categoria == "f1") { $paginaAnterior = "temporadasf1.php?categoria=f1&temporada=" . $temporada; $colorPagina = 'danger'; }
+      if($categoria == "f2") { $paginaAnterior = "temporadasf2.php?categoria=f2&temporada=" . $temporada; $colorPagina = 'primary'; }
+      if($categoria == "f3") { $paginaAnterior = "temporadasf3.php?categoria=f3&temporada=" . $temporada; $colorPagina = 'secondary'; }
     ?>
 
     <a href="<?php echo $paginaAnterior; ?>"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
@@ -14,39 +15,105 @@
     <?php include('templates/header.php') ?>
 
     <!-- Establezco la cantidad de pilotos de la temporada -->
-    <?php 
-      $temporadaCon22Pilotos =  array(
-                                  2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
-                                  1999, 1998, 1997, 1996, 1957
-                                ); 
-      $temporadaCon24Pilotos = array(
-                                  2012, 2011, 2010, 1968, 1966, 1960, 1955
-                                );
-      $temporadaCon26Pilotos = array(
-                                  1995, 1993, 1986, 1967, 1964, 1963, 1951
-                                );
-      $temporadaCon28Pilotos = array(
-                                  1994, 1987, 1985, 1984, 1980, 1971, 1970, 1965,
-                                  1956, 1950
-                                );
-      $temporadaCon30Pilotos = array(
-                                  1983, 1979, 1976, 1975, 1973, 1962, 1959
-                                );
-      $temporadaCon32Pilotos = array(
-                                  1992, 1988, 1982, 1981, 1972, 1958, 1954, 1953
-                                );
-      $temporadaCon34Pilotos = array(
-                                  1991, 1978, 1974, 1961
-                                );
-      $temporadaCon36Pilotos = array(
-                                  1990, 1977, 1952
-                                );
-      $temporadaCon38Pilotos = array(
-                                  
-                                );
-      $temporadaCon40Pilotos = array(
-                                  1989
-                                );
+    <?php
+      if($categoria == 'f1'){ 
+        $temporadaCon22Pilotos =  array(
+                                    2016, 2014, 2013, 2008, 2007, 2006, 2002, 2001, 2000,
+                                    1999, 1998, 1997, 1996, 1957
+                                  ); 
+        $temporadaCon24Pilotos = array(
+                                    2012, 2011, 2010, 1968, 1966, 1960, 1955
+                                  );
+        $temporadaCon26Pilotos = array(
+                                    1995, 1993, 1986, 1967, 1964, 1963, 1951
+                                  );
+        $temporadaCon28Pilotos = array(
+                                    1994, 1987, 1985, 1984, 1980, 1971, 1970, 1965,
+                                    1956, 1950
+                                  );
+        $temporadaCon30Pilotos = array(
+                                    1983, 1979, 1976, 1975, 1973, 1962, 1959
+                                  );
+        $temporadaCon32Pilotos = array(
+                                    1992, 1988, 1982, 1981, 1972, 1958, 1954, 1953
+                                  );
+        $temporadaCon34Pilotos = array(
+                                    1991, 1978, 1974, 1961
+                                  );
+        $temporadaCon36Pilotos = array(
+                                    1990, 1977, 1952
+                                  );
+        $temporadaCon38Pilotos = array(
+                                    
+                                  );
+        $temporadaCon40Pilotos = array(
+                                    1989
+                                  );
+      }
+      else if($categoria == 'f2'){
+        $temporadaCon22Pilotos =  array(
+                                    
+                                  ); 
+        $temporadaCon24Pilotos = array(
+                                    
+                                  );
+        $temporadaCon26Pilotos = array(
+                                    
+                                  );
+        $temporadaCon28Pilotos = array(
+                                    
+                                  );
+        $temporadaCon30Pilotos = array(
+                                    
+                                  );
+        $temporadaCon32Pilotos = array(
+                                    
+                                  );
+        $temporadaCon34Pilotos = array(
+                                    
+                                  );
+        $temporadaCon36Pilotos = array(
+                                    
+                                  );
+        $temporadaCon38Pilotos = array(
+                                    
+                                  );
+        $temporadaCon40Pilotos = array(
+                                    
+                                  );
+      }
+      else if($categoria == 'f3'){
+        $temporadaCon22Pilotos =  array(
+                                    
+                                  ); 
+        $temporadaCon24Pilotos = array(
+                                    
+                                  );
+        $temporadaCon26Pilotos = array(
+                                    
+                                  );
+        $temporadaCon28Pilotos = array(
+                                    
+                                  );
+        $temporadaCon30Pilotos = array(
+                                    2019, 2020, 2021, 2022
+                                  );
+        $temporadaCon32Pilotos = array(
+                                    
+                                  );
+        $temporadaCon34Pilotos = array(
+                                    
+                                  );
+        $temporadaCon36Pilotos = array(
+                                    
+                                  );
+        $temporadaCon38Pilotos = array(
+                                    
+                                  );
+        $temporadaCon40Pilotos = array(
+                                    
+                                  );
+      }
     ?>
 
     <!-- Conecto a la base de datos y cargo los pilotos y escuderias, y ademas la temporada actual -->
@@ -70,6 +137,14 @@
           $pilotosActuales = $temporadaActual['pilotosF2'];
           $escuderiasActuales = $temporadaActual['escuderiasF2'];  
         }
+        else if($categoria == "f3"){
+          $cargarTemporada = " SELECT pilotosF3, escuderiasF3 FROM temporadas WHERE año = $temporada";
+          $resultadoTemporada = $con->query($cargarTemporada);
+            
+          $temporadaActual = $resultadoTemporada->fetch_assoc();
+          $pilotosActuales = $temporadaActual['pilotosF3'];
+          $escuderiasActuales = $temporadaActual['escuderiasF3'];  
+        }
 
         $cargarPilotos = ' SELECT * FROM pilotos ORDER BY apellido ASC';
         $resultadoPilotos = $con->query($cargarPilotos);
@@ -77,7 +152,7 @@
         $cargarEscuderias = ' SELECT * FROM escuderias ORDER BY nombre ASC';
         $resultadoEscuderias = $con->query($cargarEscuderias);
 
-        $cargarPistas = ' SELECT * FROM pistas ORDER BY pais';
+        $cargarPistas = ' SELECT * FROM pistas ORDER BY pais, ciudad';
         $resultadoPistas = $con->query($cargarPistas);
       } catch (\Exception $e) {
         $error = $e->getMessage();
@@ -110,7 +185,7 @@
                 <input type="hidden" id="escuderias_categoria" value="<?php echo $categoria ?>">
                 <input type="hidden" id="escuderias_temporada" value="<?php echo $temporada ?>">
                 <input type="hidden" id="escuderias_actuales" value="<?php echo $escuderiasActuales ?>">
-                <button name="submit" type="submit" class="btn btn-primary">Añadir</button>
+                <button name="submit" type="submit" class="btn btn-<?php echo $colorPagina; ?>">Añadir</button>
               </div>
             </div>
         </form>
@@ -140,7 +215,7 @@
                 <input type="hidden" id="pilotos_categoria" value="<?php echo $categoria ?>">
                 <input type="hidden" id="pilotos_temporada" value="<?php echo $temporada ?>">
                 <input type="hidden" id="pilotos_actuales" value="<?php echo $pilotosActuales ?>">
-                <button name="submit" type="submit" class="btn btn-primary">Añadir</button>
+                <button name="submit" type="submit" class="btn btn-<?php echo $colorPagina; ?>">Añadir</button>
               </div>
             </div>
         </form>
@@ -275,6 +350,18 @@
                           }
                         }
                     ?>
+                    <?php
+                        $resultadoEscuderias = $con->query($cargarEscuderias);
+                        while ($escuderias = $resultadoEscuderias->fetch_assoc()) {
+                          $idEscuderia = $escuderias['id'];
+                          $nombreEscuderia = $escuderias['nombre'];
+                          if(strpos($escuderiasActuales, $nombreEscuderia) != false){
+                    ?>
+                            <option value="<?php echo $nombreEscuderia ?>"><?php echo $nombreEscuderia ?></option>
+                    <?php 
+                          }
+                        }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -373,7 +460,7 @@
               <div class="text-center offset-4 col-8">
                 <input type="hidden" id="temporada-carrera" value="<?php echo $_GET['temporada'] ?>">
                 <input type="hidden" id="categoria-carrera" value="<?php echo $_GET['categoria'] ?>">
-                <button name="submit" type="submit" class="btn btn-primary">Añadir</button>
+                <button name="submit" type="submit" class="btn btn-<?php echo $colorPagina; ?>">Añadir</button>
               </div>
             </div>
         </form>
@@ -426,7 +513,7 @@
               <div class="text-center offset-4 col-8">
                 <input type="hidden" id="temporada-campeon" value="<?php echo $_GET['temporada'] ?>">
                 <input type="hidden" id="categoria-campeon" value="<?php echo $_GET['categoria'] ?>">
-                <button name="submit" type="submit" class="btn btn-primary">Añadir</button>
+                <button name="submit" type="submit" class="btn btn-<?php echo $colorPagina; ?>">Añadir</button>
               </div>
             </div>
         </form>

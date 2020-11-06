@@ -38,10 +38,12 @@
       }
       $informacion['puntos'] = $informacion['puntos'] + calcularPuntosPorPole($informacion['poles'], $temporada, $carrera['tipo']);
       $informacion['puntos'] = $informacion['puntos'] + calcularPuntosPorVueltaRapida($informacion['vueltasRapidas'], $temporada, $carrera['tipo']);
+
+      if(($carrera['tipo'] == "Sprint") && (hizoLaPole($nombre, $carrera, $tipo)) && ($temporada >= 2020)) $informacion['poles']++;
     }
     function calcularPuntos($temporada, $posicion, $tipoCarrera){
       if($tipoCarrera == "Feature"){
-        if($temporada >= 2017){
+        if($temporada >= 2019){
           if($posicion == 1) return 25;
           if($posicion == 2) return 18;
           if($posicion == 3) return 15;
@@ -55,7 +57,7 @@
         }
       }
       else{
-        if($temporada >= 2017){
+        if($temporada >= 2019){
           if($posicion == 1) return 15;
           if($posicion == 2) return 12;
           if($posicion == 3) return 10;
@@ -88,11 +90,11 @@
       else return 0;
     }
     function calcularPuntosPorPole($poles, $temporada, $tipoCarrera){
-      if(($temporada >= 2017)) return $poles * 4;
+      if(($temporada >= 2019)) return $poles * 4;
       return 0;
     }
     function calcularPuntosPorVueltaRapida($vueltasRapidas, $temporada, $tipoCarrera){
-      if($temporada >= 2017) return $vueltasRapidas * 2;
+      if($temporada >= 2019) return $vueltasRapidas * 2;
       return 0;
     }
     

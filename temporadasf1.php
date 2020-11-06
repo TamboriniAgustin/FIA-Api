@@ -254,7 +254,11 @@
                       <!-- Seleccionar Carrera -->
                       <?php if(($contador % 4 == 0)) echo "<div class='row'>"; ?>
                         <div class="col-3 card text-center" style="width: 18rem;">
-                          <img style="width:10rem; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
+                          <?php
+                            if($paisCarrera == "Hungria") $width = "8rem";
+                            else $width = "10rem";
+                          ?>
+                          <img style="width:<?php echo $width; ?>; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">
                           <div class="card-body">
                             <h5 class="card-title">Gran Premio de <?php echo $carrera['nombre']; ?></h5>
                             <a id="mostrarCarrera" class="btn btn-danger active" data-id="<?php echo $carrera['id']; ?>">Ver</a>

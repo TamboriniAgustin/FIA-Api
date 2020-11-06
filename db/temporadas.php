@@ -62,6 +62,9 @@
             else if($categoria == "f2"){
                 $stmt = $con->prepare('UPDATE temporadas SET escuderiasF2 = ? WHERE año = ?');
             }
+            else if($categoria == "f3"){
+                $stmt = $con->prepare('UPDATE temporadas SET escuderiasF3 = ? WHERE año = ?');
+            }
             $stmt->bind_param('ss', $escuderias, $temporada);
             $stmt->execute();
             $respuesta = array(
@@ -93,6 +96,9 @@
             }
             else if($categoria == "f2"){
                 $stmt = $con->prepare('UPDATE temporadas SET pilotosF2 = ? WHERE año = ?');
+            }
+            else if($categoria == "f3"){
+                $stmt = $con->prepare('UPDATE temporadas SET pilotosF3 = ? WHERE año = ?');
             }
             $stmt->bind_param('ss', $pilotos, $temporada);
             $stmt->execute();
@@ -161,7 +167,8 @@
         //Inserto en la base de datos
         try {
             if($categoria == 'f1') $stmt = $con->prepare('UPDATE temporadas SET campeon_pilotos_f1 = ?, campeon_escuderias_f1 = ? WHERE año = ?');
-            else $stmt = $con->prepare('UPDATE temporadas SET campeon_pilotos_f2 = ?, campeon_escuderias_f2 = ? WHERE año = ?');
+            else if($categoria == 'f2') $stmt = $con->prepare('UPDATE temporadas SET campeon_pilotos_f2 = ?, campeon_escuderias_f2 = ? WHERE año = ?');
+            else if($categoria == 'f3') $stmt = $con->prepare('UPDATE temporadas SET campeon_pilotos_f3 = ?, campeon_escuderias_f3 = ? WHERE año = ?');
             $stmt->bind_param('ssi', $campeonPilotos, $campeonEscuderias, $temporada);
             $stmt->execute();
             $respuesta = array(

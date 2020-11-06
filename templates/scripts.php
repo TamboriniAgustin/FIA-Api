@@ -16,6 +16,7 @@
 <?php
     if(strpos($nombrePagina, 'temporadasf1') != false) echo '<script src="js/formula1.js"></script>';
     else if(strpos($nombrePagina, 'temporadasf2') != false) echo '<script src="js/formula2.js"></script>';
+    else if(strpos($nombrePagina, 'temporadasf3') != false) echo '<script src="js/formula3.js"></script>';
     else if(strpos($nombrePagina, 'creaciones') != false) echo '<script src="js/creaciones.js"></script>';
     else if(strpos($nombrePagina, 'modificaciones') != false) echo '<script src="js/modificaciones.js"></script>';
     else if(strpos($nombrePagina, 'modificar-piloto') != false) echo '<script src="js/modificaciones.js"></script>';
@@ -24,6 +25,7 @@
     else if(strpos($nombrePagina, 'configuracion') != false) echo '<script src="js/configuracion-temporada.js"></script>';
     else if(strpos($nombrePagina, 'historiaf1') != false) echo '<script src="js/historiaf1.js"></script>';
     else if(strpos($nombrePagina, 'historiaf2') != false) echo '<script src="js/historiaf2.js"></script>';
+    else if(strpos($nombrePagina, 'historiaf3') != false) echo '<script src="js/historiaf3.js"></script>';
     else if(strpos($nombrePagina, 'comparar-pilotos') != false) echo '<script src="js/comparar-pilotos.js"></script>';
     else if(strpos($nombrePagina, 'comparar-escuderias') != false) echo '<script src="js/comparar-escuderias.js"></script>';
 ?>
