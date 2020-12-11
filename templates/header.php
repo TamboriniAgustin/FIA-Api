@@ -31,6 +31,10 @@
         $imagen = 'images/campeones/f3/campeones.jpg';
         $encabezado = 'Historia de la Fórmula 3';
     }
+    if(strpos($nombrePagina, 'historiafe') != false){
+        $imagen = 'images/campeones/fe/campeones.jpg';
+        $encabezado = 'Historia de la Fórmula E';
+    }
     if(strpos($nombrePagina, 'temporadasf1') != false){
         if($campeonPilotos == "" || $campeonEscuderias == "") $imagen = 'images/Campeones/f1/campeones.jpg';
         else $imagen = 'images/Campeones/f1/campeones' . $temporadaActual . '.jpg';
@@ -46,22 +50,30 @@
         else $imagen = 'images/Campeones/f3/campeones' . $temporadaActual . '.jpg';
         $encabezado = 'Fórmula 3 - Temporadas';
     }
+    if(strpos($nombrePagina, 'temporadasfe') != false){
+        if($campeonPilotos == "" || $campeonEscuderias == "") $imagen = 'images/Campeones/fe/campeones.jpg';
+        else $imagen = 'images/Campeones/fe/campeones' . $temporadaActual . '.jpg';
+        $encabezado = 'Fórmula E - Temporadas';
+    }
     if(strpos($nombrePagina, 'configuracion') != false){
         if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
         if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         if($_GET['categoria'] == 'f3') $imagen = 'images/Campeones/f3/campeones.jpg';
+        if($_GET['categoria'] == 'fe') $imagen = 'images/Campeones/fe/campeones.jpg';
         $encabezado = 'Configuracion';
     }
     if(strpos($nombrePagina, 'comparar-pilotos') != false){
         if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
         if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         if($_GET['categoria'] == 'f3') $imagen = 'images/Campeones/f3/campeones.jpg';
+        if($_GET['categoria'] == 'fe') $imagen = 'images/Campeones/fe/campeones.jpg';
         $encabezado = 'Comparacion de Pilotos';
     }
     if(strpos($nombrePagina, 'comparar-escuderias') != false){
         if($_GET['categoria'] == 'f1') $imagen = 'images/Campeones/f1/campeones.jpg';
         if($_GET['categoria'] == 'f2') $imagen = 'images/Campeones/f2/campeones.jpg';
         if($_GET['categoria'] == 'f3') $imagen = 'images/Campeones/f3/campeones.jpg';
+        if($_GET['categoria'] == 'fe') $imagen = 'images/Campeones/fe/campeones.jpg';
         $encabezado = 'Comparacion de Escuderias';
     }
 ?>

@@ -12,11 +12,13 @@
   $colorPagina;
   if($categoria == 'f1') $colorPagina = "#dc3545";
   else if($categoria == 'f2') $colorPagina = "#007bff";
-  else if($categoria == 'f3') $colorPagina = "#6c757d"; 
+  else if($categoria == 'f3') $colorPagina = "#6c757d";
+  else if($categoria == 'fe') $colorPagina = "#007bff"; 
   //FUNCIONALIDAD DEL SITIO
   if($categoria == 'f1') include('funcionesf1.php'); 
   else if($categoria == 'f2') include('funcionesf2.php');
   else if($categoria == 'f3') include('funcionesf3.php');
+  else if($categoria == 'fe') include('funcionesfe.php');
   //PILOTOS A COMPARAR
   $piloto1 = $_GET['piloto1'];
   $piloto2 = $_GET['piloto2'];

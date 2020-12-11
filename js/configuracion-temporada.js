@@ -51,21 +51,29 @@ function agregarPilotos(pilotosActuales, pilotosNuevos){
     return resultado.replace('"', '').replace('"', '').replace('[', '{').replace(']', '}');
 }
 
-function temporadaCon22Pilotos(temporada){
-    if(temporada == 2016) return true;
-    if(temporada == 2014) return true;
-    if(temporada == 2013) return true;
-    if(temporada == 2008) return true;
-    if(temporada == 2007) return true;
-    if(temporada == 2006) return true;
-    if(temporada == 2002) return true;
-    if(temporada == 2001) return true;
-    if(temporada == 2000) return true;
-    if(temporada == 1999) return true;
-    if(temporada == 1998) return true;
-    if(temporada == 1997) return true;
-    if(temporada == 1996) return true;
-    if(temporada == 1957) return true;
+function temporadaCon18Pilotos(temporada, categoria){
+    if(categoria == 'fe' && temporada == 2016) return true;
+    return false;
+}
+
+function temporadaCon22Pilotos(temporada, categoria){
+    if(temporada == 2019 && categoria == 'fe') return true;
+
+    if(temporada == 2016 && categoria == 'f1') return true;
+    if(temporada == 2014 && categoria == 'f1') return true;
+    if(temporada == 2013 && categoria == 'f1') return true;
+    if(temporada == 2008 && categoria == 'f1') return true;
+    if(temporada == 2007 && categoria == 'f1') return true;
+    if(temporada == 2006 && categoria == 'f1') return true;
+    if(temporada == 2002 && categoria == 'f1') return true;
+    if(temporada == 2001 && categoria == 'f1') return true;
+    if(temporada == 2000 && categoria == 'f1') return true;
+    if(temporada == 1999 && categoria == 'f1') return true;
+    if(temporada == 1998 && categoria == 'f1') return true;
+    if(temporada == 1997 && categoria == 'f1') return true;
+    if(temporada == 1996 && categoria == 'f1') return true;
+    if(temporada == 1957 && categoria == 'f1') return true;
+
     return false;
 }
 
@@ -205,7 +213,7 @@ function leerFormulario(formulario, nombreFormulario){
 
         if(categoria == 'f1'){
             var cantidadPilotos = 20;
-            if(temporadaCon22Pilotos(temporada)) cantidadPilotos = 22;
+            if(temporadaCon22Pilotos(temporada, 'f1')) cantidadPilotos = 22;
             if(temporadaCon24Pilotos(temporada)) cantidadPilotos = 24;
             if(temporadaCon26Pilotos(temporada)) cantidadPilotos = 26;
             if(temporadaCon28Pilotos(temporada)) cantidadPilotos = 28;
@@ -221,6 +229,11 @@ function leerFormulario(formulario, nombreFormulario){
         }
         else if(categoria == 'f3'){
             var cantidadPilotos = 30;
+        }
+        else if(categoria == 'fe'){
+            var cantidadPilotos = 20;
+            if(temporadaCon18Pilotos(temporada, 'fe')) cantidadPilotos = 18;
+            if(temporadaCon22Pilotos(temporada, 'fe')) cantidadPilotos = 22;
         }
 
         for (let i = 1; i <= cantidadPilotos; i++) {

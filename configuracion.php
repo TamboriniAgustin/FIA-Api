@@ -8,6 +8,7 @@
       if($categoria == "f1") { $paginaAnterior = "temporadasf1.php?categoria=f1&temporada=" . $temporada; $colorPagina = 'danger'; }
       if($categoria == "f2") { $paginaAnterior = "temporadasf2.php?categoria=f2&temporada=" . $temporada; $colorPagina = 'primary'; }
       if($categoria == "f3") { $paginaAnterior = "temporadasf3.php?categoria=f3&temporada=" . $temporada; $colorPagina = 'secondary'; }
+      if($categoria == "fe") { $paginaAnterior = "temporadasfe.php?categoria=fe&temporada=" . $temporada; $colorPagina = 'primary'; }
     ?>
 
     <a href="<?php echo $paginaAnterior; ?>"><h3 class="mb-2 bread" style="padding: 20px;">Volver</h3></a>
@@ -96,7 +97,42 @@
                                     
                                   );
         $temporadaCon30Pilotos = array(
-                                    2019, 2020, 2021, 2022
+                                    2019, 2020, 2021, 2022, 2023
+                                  );
+        $temporadaCon32Pilotos = array(
+                                    
+                                  );
+        $temporadaCon34Pilotos = array(
+                                    
+                                  );
+        $temporadaCon36Pilotos = array(
+                                    
+                                  );
+        $temporadaCon38Pilotos = array(
+                                    
+                                  );
+        $temporadaCon40Pilotos = array(
+                                    
+                                  );
+      }
+      else if($categoria == 'fe'){
+        $temporadaCon18Pilotos =  array(
+                                    2016
+        )                         ;
+        $temporadaCon22Pilotos =  array(
+                                    2019
+                                  ); 
+        $temporadaCon24Pilotos = array(
+                                    
+                                  );
+        $temporadaCon26Pilotos = array(
+                                    
+                                  );
+        $temporadaCon28Pilotos = array(
+                                    
+                                  );
+        $temporadaCon30Pilotos = array(
+
                                   );
         $temporadaCon32Pilotos = array(
                                     
@@ -144,6 +180,14 @@
           $temporadaActual = $resultadoTemporada->fetch_assoc();
           $pilotosActuales = $temporadaActual['pilotosF3'];
           $escuderiasActuales = $temporadaActual['escuderiasF3'];  
+        }
+        else if($categoria == "fe"){
+          $cargarTemporada = " SELECT pilotosFE, escuderiasFE FROM temporadas WHERE año = $temporada";
+          $resultadoTemporada = $con->query($cargarTemporada);
+            
+          $temporadaActual = $resultadoTemporada->fetch_assoc();
+          $pilotosActuales = $temporadaActual['pilotosFE'];
+          $escuderiasActuales = $temporadaActual['escuderiasFE'];  
         }
 
         $cargarPilotos = ' SELECT * FROM pilotos ORDER BY apellido ASC';
@@ -239,18 +283,19 @@
                 </select>
                 <div class="text-center">
                     <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="tipo-carrera" type="radio" value="Feature" <?php if($categoria == 'f1'){ ?>checked<?php } ?>>
+                  <input class="form-check-input" name="tipo-carrera" type="radio" value="Feature" <?php if($categoria == 'f1' || $categoria == 'fe'){ ?>checked<?php } ?>>
                       <label class="form-check-label">Feature Race</label>
                     </div>
                     <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="tipo-carrera" type="radio" value="Sprint" <?php if($categoria == 'f1'){ ?>disabled<?php } ?>>
+                  <input class="form-check-input" name="tipo-carrera" type="radio" value="Sprint" <?php if($categoria == 'f1' || $categoria == 'fe'){ ?>disabled<?php } ?>>
                       <label class="form-check-label">Sprint Race</label>
                     </div>
                 </div>
               </div>
 
               <?php
-                if(in_array($temporada, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
+                if(in_array($temporada, $temporadaCon18Pilotos)) $cantidadPilotos = 18;
+                else if(in_array($temporada, $temporadaCon22Pilotos)) $cantidadPilotos = 22;
                 else if(in_array($temporada, $temporadaCon24Pilotos)) $cantidadPilotos = 24;
                 else if(in_array($temporada, $temporadaCon26Pilotos)) $cantidadPilotos = 26;
                 else if(in_array($temporada, $temporadaCon28Pilotos)) $cantidadPilotos = 28;
@@ -273,7 +318,7 @@
                       while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                         $idPiloto = $pilotos['id'];
                         $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                        if(strpos($pilotosActuales, $nombrePiloto) != false){
+                        if(strpos($pilotosActuales, $nombrePiloto . ',') != false || strpos($pilotosActuales, $nombrePiloto . '}') != false){
                     ?>
                           <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
                     <?php 
@@ -315,7 +360,7 @@
                         while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                           $idPiloto = $pilotos['id'];
                           $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                          if(strpos($pilotosActuales, $nombrePiloto) != false){
+                          if(strpos($pilotosActuales, $nombrePiloto . ',') != false || strpos($pilotosActuales, $nombrePiloto . '}') != false){
                     ?>
                             <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
                     <?php 
@@ -375,7 +420,7 @@
                         while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                           $idPiloto = $pilotos['id'];
                           $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                          if(strpos($pilotosActuales, $nombrePiloto) != false){
+                          if(strpos($pilotosActuales, $nombrePiloto . ',') != false || strpos($pilotosActuales, $nombrePiloto . '}') != false){
                     ?>
                             <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
                     <?php 
@@ -410,7 +455,7 @@
                         while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                           $idPiloto = $pilotos['id'];
                           $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                          if(strpos($pilotosActuales, $nombrePiloto) != false){
+                          if(strpos($pilotosActuales, $nombrePiloto . ',') != false || strpos($pilotosActuales, $nombrePiloto . '}') != false){
                     ?>
                             <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
                     <?php 
@@ -445,7 +490,7 @@
                         while ($pilotos = $resultadoPilotos->fetch_assoc()) {
                           $idPiloto = $pilotos['id'];
                           $nombrePiloto = $pilotos['nombre'] . ' ' . $pilotos['apellido'];
-                          if(strpos($pilotosActuales, $nombrePiloto) != false){
+                          if(strpos($pilotosActuales, $nombrePiloto . ',') != false || strpos($pilotosActuales, $nombrePiloto . '}') != false){
                     ?>
                             <option value="<?php echo $nombrePiloto ?>"><?php echo $nombrePiloto ?></option>
                     <?php 

@@ -76,10 +76,10 @@
       $campeonPilotos = $resultadoCampeones['campeon_pilotos_f1'];
       $campeonEscuderias = $resultadoCampeones['campeon_escuderias_f1'];
       //PILOTOS (TEMPORADA ACTUAL)
-      $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE (SELECT pilotosF1 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, '%') ";
+      $cargarPilotosTemporada = " SELECT * FROM pilotos WHERE (SELECT pilotosF1 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, ',%') OR (SELECT pilotosF1 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, ' ', apellido, '}%') ORDER BY `pilotos`.`apellido` ASC ";
       $pilotosTemporada = $con->query($cargarPilotosTemporada);
       //ESCUDERIAS (TEMPORADA ACTUAL)
-      $cargarEscuderiasTemporada = " SELECT * FROM escuderias WHERE (SELECT escuderiasF1 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, '%') ";
+      $cargarEscuderiasTemporada = " SELECT * FROM escuderias WHERE (SELECT escuderiasF1 FROM temporadas WHERE año = $temporadaActual) LIKE CONCAT('%', nombre, '%') ORDER BY nombre ";
       $escuderiasTemporada = $con->query($cargarEscuderiasTemporada);
       //CARRERAS
       $cargarCarreras = " SELECT * FROM carreras WHERE categoria = 'f1' AND temporada = $temporadaActual ";
@@ -256,6 +256,7 @@
                         <div class="col-3 card text-center" style="width: 18rem;">
                           <?php
                             if($paisCarrera == "Hungria") $width = "8rem";
+                            if($paisCarrera == "Hong Kong") $width = "8rem";
                             else $width = "10rem";
                           ?>
                           <img style="width:<?php echo $width; ?>; height:8rem; margin:1rem auto;" src="images/Paises/<?php echo $paisCarrera; ?>.svg" class="card-img-top" alt="foto pais">

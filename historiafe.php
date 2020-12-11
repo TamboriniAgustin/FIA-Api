@@ -1,10 +1,10 @@
 <!-- Cargo el tipo de historia que quiero cargar -->
 <?php 
   $tipo = $_GET['tipo']; 
-  $categoria = 'f2';
+  $categoria = 'fe';
 ?>
 <!-- Cargo la funcionalidad PHP -->
-<?php include('funcionesf2.php'); ?> 
+<?php include('funcionesfe.php'); ?> 
 <!-- Realizo la consulta en la base de datos -->
 <?php
   if($tipo){
@@ -172,10 +172,10 @@
     <?php include('templates/header.php') ?>
     <!-- Selección de historia -->
     <div class="seleccionar-tipo text-center" style="margin:20px auto;">
-      <a href="historiaf2.php?tipo=pilotos" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pilotos") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Pilotos</a>
-      <a href="historiaf2.php?tipo=escuderias" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "escuderias") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Escuderias</a>
-      <a href="historiaf2.php?tipo=paises" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "paises") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Países</a>
-      <a href="historiaf2.php?tipo=pistas" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pistas") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Pistas</a>
+      <a href="historiafe.php?tipo=pilotos" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pilotos") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Pilotos</a>
+      <a href="historiafe.php?tipo=escuderias" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "escuderias") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Escuderias</a>
+      <a href="historiafe.php?tipo=paises" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "paises") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Países</a>
+      <a href="historiafe.php?tipo=pistas" class="btn p-3 px-xl-4 py-xl-3 <?php if($tipo == "pistas") echo 'btn-primary'; else echo 'btn-outline-primary'; ?>">Pistas</a>
     </div>
     <!-- Tablas de Historia -->
     <div class="tabla-historia">

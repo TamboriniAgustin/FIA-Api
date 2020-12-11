@@ -51,7 +51,7 @@
                               "    WHERE (c2.posiciones_pilotos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria') " .
                               "  ) AS ultima_participacion " .
                               " FROM pilotos p1 " .
-                              " WHERE (SELECT COUNT(*) FROM carreras c2 WHERE (c2.posiciones_pilotos LIKE CONCAT('%', p1.nombre, ' ', p1.apellido, '%')) AND (c2.categoria = '$categoria')) > 0 " .
+                              " WHERE (SELECT COUNT(*) FROM carreras c2 WHERE (c2.posiciones_pilotos LIKE CONCAT('%\"', p1.nombre, ' ', p1.apellido, '\"%')) AND (c2.categoria = '$categoria')) > 0 " .
                               " ORDER BY p1.apellido, p1.nombre " 
                             ;
       }
