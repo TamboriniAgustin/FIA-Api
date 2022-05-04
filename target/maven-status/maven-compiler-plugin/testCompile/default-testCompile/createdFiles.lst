@@ -1,0 +1,5 @@
+betprix\generator\services\GeneratorServiceTest.class
+betprix\generator\controllers\ViewsTesterControllerTest.class
+betprix\generator\validators\EmailValidatorTest.class
+betprix\generator\controllers\VersionsApiControllerTest.class
+betprix\generator\controllers\GeneratorApiControllerTest.class
