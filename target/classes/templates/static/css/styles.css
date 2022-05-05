@@ -1,0 +1,71 @@
+/* Countries Select */
+#countries-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 360px;
+}
+
+#countries-menu .country-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.country-selection .back-arrow {
+    font-size: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: white;
+    opacity: 80%;
+}
+.country-selection .next-arrow {
+    font-size: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: white;
+    opacity: 80%;
+}
+.country-selection .back-arrow:hover, .country-selection .next-arrow:hover {
+    opacity: 100%;
+    transition: all .2s ease-in;
+}
+.country-selection img {
+    width: 64px;
+    height: 64px;
+    cursor: grab;
+    opacity: 80%;
+}
+.country-selection img:hover {
+    opacity: 100%;
+    transition: all .2s ease-in;
+}
+
+.filters .letter-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.letter-filter .letter {
+    margin: 0 1.5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.letter-filter .letter[active=true]{
+    color: crimson;
+    cursor: default;
+}
+.filters .continent-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.continent-filter .continent {
+    margin: 0px 3px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 10px;
+}
+.continent-filter .continent[active=true]{
+    color: crimson;
+    cursor: default;
+}
