@@ -1,7 +1,38 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* General */
+body {
+	font-family: 'Roboto Slab', serif;
+}
+h1, h2, h3, h4, h5 {
+	font-family: 'Orbitron', sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+i {
+	margin-right: 10px;
+}
+
 /* Countries Select */
+#countries-select {
+	width: 100px;
+    height: 65px;
+    cursor: pointer;
+    background-image: url(../img/countries/UNK.png);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Countries Menu */
 #countries-menu {
     background-color: rgba(0, 0, 0, 0.8);
     width: 360px;
+    margin-left: 3px;
 }
 
 #countries-menu .country-selection {
@@ -12,16 +43,21 @@
 .country-selection .back-arrow {
     font-size: 25px;
     margin-right: 10px;
+    margin-left: 10px;
     cursor: pointer;
     color: white;
     opacity: 80%;
 }
 .country-selection .next-arrow {
     font-size: 25px;
+    margin-right: 10px;
     margin-left: 10px;
     cursor: pointer;
     color: white;
     opacity: 80%;
+}
+.country-selection .back-arrow.disabled, .country-selection .next-arrow.disabled {
+	cursor: not-allowed;
 }
 .country-selection .back-arrow:hover, .country-selection .next-arrow:hover {
     opacity: 100%;
@@ -36,6 +72,12 @@
 .country-selection img:hover {
     opacity: 100%;
     transition: all .2s ease-in;
+}
+.country-selection .countries {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .filters .letter-filter {

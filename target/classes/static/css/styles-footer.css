@@ -1,0 +1,22 @@
+#footer {
+	background-color: #011640;
+	color: #BFAC88;
+	text-align: center;
+	padding: 20px;
+}
+
+#footer p, #footer a {
+	margin: 0;
+}
+
+#footer a {
+	font-size: 15px;
+}
+
+#footer i {
+	margin: 0;
+}
+
+#footer a {
+	color: #8C713F;
+}
