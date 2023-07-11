@@ -1,6 +1,6 @@
 #footer {
-	background-color: #011640;
-	color: #BFAC88;
+	background-color: var(--cPrincipal);
+	color: var(--cSecundario);
 	text-align: center;
 	padding: 20px;
 }
@@ -18,5 +18,5 @@
 }
 
 #footer a {
-	color: #8C713F;
+	color: var(--cSecundarioOscuro);
 }

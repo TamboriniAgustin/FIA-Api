@@ -1,12 +1,51 @@
 /* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap");
+
+@font-face {
+    font-family: "f1";
+    src: url(../fonts/Formula1-Regular_web_0.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: "f1";
+    src: url(../fonts/Formula1-Bold_web_0.ttf) format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: block;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cPrincipal: #011640;
+  --cPrincipalClaro: #011640C7;
+  
+  --cSecundario: #BFAC88;
+  --cSecundarioOscuro: #8C713F;
+  
+  --category-colour: #0090D0;
+  --formula-2-colour: #FFFFFF;
+  --formula-2-bgcolour: #0090D0;
+  --formula-2-bgcolour-hover: #004267;
+  
+  --site-font: "f1", "Staatliches", "Roboto Condensed", sans-serif;
+  --font-bold-narrow: "Staatliches", sans-serif;
+  --font-normal-narrow: "Roboto Condensed", sans-serif;
+}
 
 /* General */
 body {
-	font-family: 'Roboto Slab', serif;
-}
-h1, h2, h3, h4, h5 {
-	font-family: 'Orbitron', sans-serif;
+	font-family: var(--site-font);
 }
 
 * {
@@ -16,6 +55,68 @@ h1, h2, h3, h4, h5 {
 
 i {
 	margin-right: 10px;
+}
+
+input {
+	padding-left: 10px;
+}
+
+/** Backgrounds **/
+.bg-black {
+    background: #000;
+}
+.bg-principal {
+	background: var(--cPrincipal);
+}
+.bg-principal-light {
+	background: var(--cPrincipalClaro);
+}
+
+/** Titles **/
+h1.title {
+	font-weight: bold;
+	display: block;
+    margin-bottom: 15px;
+    padding-right: 20px;
+    position: relative;
+    overflow: hidden;
+}
+h1.title::after {
+    background-image: url(../img/titles-image.webp);
+    background-size: 30px;
+    content: '';
+    position: absolute;
+    height: 95%;
+    width: 100%;
+    background-position: 0 90%;
+}
+h1.title span:last-of-type {
+	padding-right: 20px;
+}
+@media (max-width:637px) {
+	h1.title {
+		text-align: center;
+		padding-bottom: 20px;
+    	padding-right: 0;
+	}
+	h1.title::after {
+		top: 110%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+	}
+	h1.title span:last-of-type {
+		padding-right: 0;
+	}
+}
+
+/** Modals **/
+.modal-title, 
+.modal-content button {
+	font-weight: bold;
+}
+
+.modal-body {
+	overflow-x: auto;
 }
 
 /* Countries Select */
@@ -110,4 +211,326 @@ i {
 .continent-filter .continent[active=true]{
     color: crimson;
     cursor: default;
+}
+
+/** Team cards **/
+.team-card-container {
+    background-color: transparent;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+.team-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    user-select: none;
+}
+.team-card {
+    background: black;
+    position: relative;
+    filter: drop-shadow(0 0 0.5rem var(--team-color));
+}
+.team-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1em;
+    overflow: hidden;
+}
+.team-card-background:after {
+    content: "";
+    position: absolute;
+    width: 400%;
+    height: 100%;
+    transform: skew(-22.5deg) translateX(-25%);
+    transform-origin: top left;
+    background-color: var(--team-color);
+    background-image: linear-gradient( 90deg, rgba(255, 255, 255, 0.05) 50%, transparent 50% ), linear-gradient(90deg, rgba(0, 0, 0, 0.08) 50%, transparent 50%), linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.11) 50%), linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.14) 50%);
+    background-size: 15%, 28%, 35%, 50%;
+    margin: 0;
+    transition: transform 0.25s ease;
+}
+.team-card .background-image-layer {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    opacity: 0.2;
+}
+.team-card .background-image-layer img {
+    filter: grayscale(1);
+}
+.team-card .team-image-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.team-card .team-image-layer:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+.team-card .team-image-layer img {
+    height: 40%;
+    right: -5rem;
+    filter: drop-shadow(-0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5));
+    transition: transform 0.25s ease;
+    position: relative;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.team-card .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    color: white;
+    z-index: 1;
+}
+.team-card .overlay .flag {
+    margin-top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    object-fit: contain;
+    background-color: white;
+    padding: 0.05rem;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
+}
+.team-card .overlay-name {
+    position: absolute;
+    flex-direction: column;
+    padding: 1rem;
+    color: white;
+    font-family: var(--font-bold-narrow);
+    z-index: 1;
+    text-shadow: 0 0 0.2rem black, 0 0 0.2rem black, 0 0 0.2rem var(--team-color), 0 0 0.2rem var(--team-color);
+    bottom: 0;
+}
+.team-card .overlay-name .name {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+/** Driver cards **/
+.flip-card {
+  background-color: transparent;
+  width: 15rem;
+  height: 20rem;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  margin: 0 auto;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  user-select: none;
+}
+.flip-card.active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.driver-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 1em;
+  overflow: hidden;
+}
+.driver-card {
+  background: black;
+  position: relative;
+  filter: drop-shadow(0 0 0.5rem var(--team-color));
+}
+.driver-card .helmet-image-layer {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+.driver-card .helmet-image-layer img {
+  filter: grayscale(1);
+}
+.driver-card .driver-image-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.driver-card .driver-image-layer img {
+  height: 100%;
+  right: -5rem;
+  filter: drop-shadow(-0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s ease;
+  transform-origin: bottom right;
+  transform: scale(0.95);
+}
+.flip-card:hover .driver-image-layer img {
+  height: 100%;
+  transform-origin: bottom right;
+  transform: scale(1);
+}
+.driver-card .driver-image-layer:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+.driver-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  color: white;
+  z-index: 1;
+}
+.driver-card .overlay .number {
+  font-size: 2rem;
+  line-height: 2rem;
+  text-shadow: 0 0 0.2rem black;
+}
+.driver-card .overlay .abbr {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 0.2rem black;
+}
+.driver-card .overlay .flag,
+.driver-card .overlay .team {
+  margin-top: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: white;
+  padding: 0.05rem;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
+}
+.driver-card .overlay-name {
+  position: absolute;
+  /* display: flex; */
+  flex-direction: column;
+  padding: 1rem;
+  color: white;
+  font-family: var(--font-bold-narrow);
+  z-index: 1;
+  text-shadow: 0 0 0.2rem black, 0 0 0.2rem black, 0 0 0.2rem var(--team-color),
+    0 0 0.2rem var(--team-color);
+  bottom: 0;
+}
+.driver-card .overlay-name img.helmet {
+  height: 3rem;
+  margin-left: -1rem;
+}
+.driver-card .overlay-name .first-name {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+.driver-card .overlay-name .last-name {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.card-background:after {
+  content: "";
+  position: absolute;
+  width: 400%;
+  height: 100%;
+  transform: skew(-22.5deg) translateX(-25%);
+  transform-origin: top left;
+  background-color: var(--team-color);
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 50%
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08) 50%, transparent 50%),
+    linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.11) 50%),
+    linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.14) 50%);
+  background-size: 15%, 28%, 35%, 50%;
+  margin: 0;
+  transition: transform 0.25s ease;
+}
+.driver-card.card-background:hover:after {
+  transform: skew(-22.5deg) translateX(-15%);
+}
+.details-inner > * {
+  position: absolute;
+}
+.detail-name {
+  top: 1rem;
+  left: 1rem;
+}
+.detail-helmet {
+  bottom: 1.1rem;
+  right: 0.8rem;
+  height: 2.4rem;
+  width: 2.8rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.detail-number {
+  top: 1rem;
+  right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+.detail-car {
+  bottom: 1rem;
+  left: -100%;
+  height: 3rem;
+  transition: left 0.8s ease;
+}
+.active .detail-car {
+  left: 1rem;
 }

@@ -2,12 +2,456 @@
 <html lang="en">
 	<head>
 	    <script th:replace="/shared/head"></script>
-	    <!-- View styles -->
-		<!-- View scripts -->
 	</head>
 	<body>
 		<!-- Header -->
 		<section th:insert="/shared/header :: header"></section>
+		
+		<br> <br> <br> <br>
+		
+		<section id="season-details">
+			<div class="splide" role="group" aria-label="Splide Basic HTML Example">
+				<div class="splide__track">
+					<ul class="splide__list">
+						<li class="splide__slide">
+							<div class="splide-content">
+								<h1 class="title">TEAMS & DRIVERS <span class="category">FORMULA 2</span> <span class="season">2023</span></h1>
+								
+								<div class="teams-and-drivers">
+									<div class="team" th:style="|--team-bgcolor: #443ff3; --team-color: #ffffff|">
+										<div class="brand text-center">
+											<h4>Red Bull Racing</h4>
+											<img th:src="@{'/img/teams/Red Bull Racing.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #dc0000; --team-color: #000000|">
+										<div class="brand text-center">
+											<h4>Scuderia Ferrari</h4>
+											<img th:src="@{'/img/teams/Scuderia Ferrari.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #443ff3; --team-color: #ffffff|">
+										<div class="brand text-center">
+											<h4>Red Bull Racing</h4>
+											<img th:src="@{'/img/teams/Red Bull Racing.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #dc0000; --team-color: #000000|">
+										<div class="brand text-center">
+											<h4>Scuderia Ferrari</h4>
+											<img th:src="@{'/img/teams/Scuderia Ferrari.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #443ff3; --team-color: #ffffff|">
+										<div class="brand text-center">
+											<h4>Red Bull Racing</h4>
+											<img th:src="@{'/img/teams/Red Bull Racing.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #dc0000; --team-color: #000000|">
+										<div class="brand text-center">
+											<h4>Scuderia Ferrari</h4>
+											<img th:src="@{'/img/teams/Scuderia Ferrari.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #443ff3; --team-color: #ffffff|">
+										<div class="brand text-center">
+											<h4>Red Bull Racing</h4>
+											<img th:src="@{'/img/teams/Red Bull Racing.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #dc0000; --team-color: #000000|">
+										<div class="brand text-center">
+											<h4>Scuderia Ferrari</h4>
+											<img th:src="@{'/img/teams/Scuderia Ferrari.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #443ff3; --team-color: #ffffff|">
+										<div class="brand text-center">
+											<h4>Red Bull Racing</h4>
+											<img th:src="@{'/img/teams/Red Bull Racing.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Red Bull Racing')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="team" th:style="|--team-bgcolor: #dc0000; --team-color: #000000|">
+										<div class="brand text-center">
+											<h4>Scuderia Ferrari</h4>
+											<img th:src="@{'/img/teams/Scuderia Ferrari.png'}" class="logo">
+											<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car admin-features">
+											<div class="admin-features">
+												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
+											</div>
+										</div>
+										<div class="drivers">
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='verstappen', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')"></div>
+											<div class="admin-features">
+												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
+												<i class="fa fa-info-circle driver-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the driver card to add an image"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="admin-features text-center">
+										<i class="fa fa-plus-circle add-team" aria-hidden="true" data-toggle="tooltip" title="Add team"></i>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="splide__slide">
+							<div class="splide-content">
+								<h1 class="title">CALENDAR & RESULTS <span class="category">FORMULA 2</span> <span class="season">2023</span></h1>
+							</div>
+						</li>
+						<li class="splide__slide">
+							<div class="splide-content">
+								<h1 class="title">STANDINGS <span class="category">FORMULA 2</span> <span class="season">2023</span></h1>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Modal team image -->
+			<div id="modalTeamImage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalTeamImage" aria-hidden="true">
+	  			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    			<div class="modal-content">
+	      				<div class="modal-header">
+	        				<h5 class="modal-title">Update car image</h5>
+	      				</div>
+	      				<div class="modal-body">
+	      					<form id="updateCarImage">
+		        				<img class="car">
+		        				<i class="fa fa-arrow-right" aria-hidden="true"></i>
+		        				<label for="car-image-upload">
+		        					<img th:src="@{'/img/teams/cars/f1.default.png'}" class="car new">
+								</label>
+		        				<input id="car-image-upload" type="file" style="display: none;">
+	      					</form>
+	      				</div>
+	      				<div class="modal-footer">
+	        				<button type="button" class="btn btn-success">Save changes</button>
+	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+	      				</div>
+	    			</div>
+	  			</div>
+			</div>
+			
+			<!-- Modal driver image -->
+			<div id="modalDriverImage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalDriverImage" aria-hidden="true">
+	  			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    			<div class="modal-content">
+	      				<div class="modal-header">
+	        				<h5 class="modal-title">Update car image</h5>
+	      				</div>
+	      				<div class="modal-body">
+	      					<form id="updateDriverImage">
+		        				<img class="driver">
+		        				<i class="fa fa-arrow-right" aria-hidden="true"></i>
+		        				<label for="driver-image-upload">
+		        					<img th:src="@{'/img/drivers/default.png'}" class="driver new">
+								</label>
+		        				<input id="driver-image-upload" type="file" style="display: none;">
+	      					</form>
+	      				</div>
+	      				<div class="modal-footer">
+	        				<button type="button" class="btn btn-success">Save changes</button>
+	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+	      				</div>
+	    			</div>
+	  			</div>
+			</div>
+			
+			<!-- Modal add driver -->
+			<div id="modalAddDriver" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAddDriver" aria-hidden="true">
+	  			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    			<div class="modal-content">
+	      				<div class="modal-header">
+	        				<h5 class="modal-title">Add driver to <span class="team-name"></span></h5>
+	      				</div>
+	      				<div class="modal-body">
+	      					<div class="filters">
+								<form id="addDriverFilters">
+									<div class="filter-types">
+										<input name="lastname" type="text" placeholder="Insert lastname">
+										<div th:insert="/shared/countries-selection-menu :: countries-selection-menu"></div>
+									</div>
+									<div class="actions">
+										<button class="cancel-button btn btn-secondary">X</button>
+										<button class="search-button btn btn-warning">Search</button>								
+									</div>
+								</form>
+	      					</div>
+	      					<div class="drivers-list">
+	      						<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+	      					</div>
+	      					<div class="pagination justify-content-center"></div>
+	      				</div>
+	      				<div class="modal-footer">
+	        				<button type="button" class="btn btn-success">Add</button>
+	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      				</div>
+	    			</div>
+	  			</div>
+			</div>
+		</section>
+		
+		<script>
+			new Splide('.splide', {
+		    	arrows: false,
+		    	pagination: true,
+		    	perPage: 1,
+		    	drag: false
+		  	}).mount();
+			
+			$($(".splide__pagination__page")[0]).text("Teams & Drivers");
+			$($(".splide__pagination__page")[1]).text("Race & Results");
+			$($(".splide__pagination__page")[2]).text("Standings");
+			
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+			
+			//Modal update car image
+			$(".team .brand img.car").on("click", function() {
+				$("#updateCarImage img.car").attr("src", $(this).attr("src"));
+				$('#modalTeamImage').modal('toggle');
+			});
+			
+			$("#car-image-upload").on("change", function(e) {
+				const file = e.target.files[0];
+				showImagePreview("#updateCarImage img.new", file);
+			});
+			
+			//Modal update driver image
+			$(".team .drivers .driver-card").on("click", function() {
+				$("#updateDriverImage img.driver").attr("src", $(this).find(".driver-image-layer img").attr("src"));
+				$('#modalDriverImage').modal('toggle');
+			});
+			
+			$("#driver-image-upload").on("change", function(e) {
+				const file = e.target.files[0];
+				showImagePreview("#updateDriverImage img.new", file);
+			});
+			
+			//Modal add driver
+			$(".team .drivers .admin-features i.add-driver").on("click", function() {
+				$("#modalAddDriver .modal-header span.team-name").text($(this).parent().parent().parent().find(".brand h4").text());
+				$("#modalAddDriver").modal('toggle');
+			});
+			
+			paginate(2, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+			
+			function paginate(pageSize, paginationDiv, elementsDiv) {
+				var elements = $(elementsDiv).find("[data-filter='ok']");
+				var pages = Math.ceil(elements.length / pageSize);
+
+				//Add pages
+				var previousPage = newFunctionPage("&laquo;");
+				$(previousPage).bind('click', {newPage: i}, function(event) {
+					var activePage = $(this).parent().find(".active");
+					if(activePage.text() > 1) {
+						$(activePage).prev().children().click();
+					}
+	            });
+				$(paginationDiv).append(previousPage);
+				
+				for(var i=1; i<=pages; i++) {
+					var page = newPage(i);
+					$(page).bind('click', {newPage: i}, function(event) {
+		                //Classes updates
+		                $(this).parent().find(".active").removeClass("active");
+		                $(this).addClass("active");
+						
+						//Hide elements
+						$(elements).hide();
+		                var currentPage = event.data['newPage'];
+		                var startIndex = (currentPage - 1) * pageSize;
+		                var endIndex = startIndex + pageSize;
+		                $(elements).slice(startIndex, endIndex).show();
+		                
+		                //Update prev and next buttons
+	                	$(this).parent().find("li:first-of-type").removeClass("disabled");
+	                	$(this).parent().find("li:last-of-type").removeClass("disabled");
+		                if(currentPage == 1) {
+		                	$(this).prev().addClass("disabled");
+		                } else if(currentPage == pages) {
+		                	$(this).next().addClass("disabled");
+		                }
+		            });
+					$(paginationDiv).append(page);
+				}
+				
+				var nextPage = newFunctionPage("&raquo;");
+				$(nextPage).bind('click', {newPage: i}, function(event) {
+					var activePage = $(this).parent().find(".active");
+					if(activePage.text() != pages) {
+						$(activePage).next().children().click();
+					}
+	            });
+				$(paginationDiv).append(nextPage);
+				
+				$(paginationDiv).find("li:nth-child(2) button").click();
+			}
+			
+			function newFunctionPage(html) {
+				const page = $("<button>");
+				$(page).addClass("page-link");
+				$(page).html("<span aria-hidden='true'>"+html+"</span>");
+				
+				const pageContainer = $("<li>");
+				$(pageContainer).addClass("page-item");
+				$(pageContainer).append(page);
+				
+				return pageContainer;
+			}
+			
+			function newPage(pageNumber) {
+				const page = $("<button>");
+				$(page).addClass("page-link");
+				$(page).text(pageNumber);
+				
+				const pageContainer = $("<li>");
+				$(pageContainer).addClass("page-item");
+				$(pageContainer).append(page);
+				
+				return pageContainer;
+			}
+			
+			/** Functions **/
+			function showImagePreview(previewElement, file) {
+				const fileReader = new FileReader();
+				
+				fileReader.onload = function(event) {
+			      $(previewElement).attr("src", event.target.result);
+			    };
+			    
+			    fileReader.readAsDataURL(file);
+			}
+		</script>
 		
 		<br> <br> <br> <br>
 		

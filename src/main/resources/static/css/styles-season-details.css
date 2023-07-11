@@ -1,0 +1,284 @@
+#season-details {
+	max-width: 80%;
+	margin: 0 auto;
+}
+#season-details h1.title span.category {
+	color: var(--category-colour);
+}
+#season-details .modal-title {
+	font-weight: bold;
+}
+
+/** Pagination **/
+.page-link, .page-link:hover {
+	color: var(--formula-2-bgcolour);
+}
+.page-item.active .page-link {
+	background-color: var(--formula-2-bgcolour);
+	border-color: var(--formula-2-bgcolour);
+}
+
+/** Splide Pagination **/
+.splide__pagination {
+    position: absolute;
+    padding: 0;
+    top: -15px;
+    bottom: auto;
+    left: auto;
+    right: auto;
+}
+.splide__pagination__page {
+	position: relative;
+    width: 170px;
+    height: auto;
+    border-radius: 0;
+    padding: 8px;
+    margin: 0;
+    background: var(--formula-2-bgcolour);
+	color: var(--formula-2-colour);
+    transition: transform .2s linear;
+}
+.splide__pagination__page.is-active {
+	background: var(--formula-2-bgcolour-hover);
+	font-weight: bold;
+	transform: none;
+}
+@media (max-width:637px) {
+	.splide-content {
+		margin-top: 65px;
+	}
+}
+@media (max-width:424px) {
+	.splide-content {
+		margin-top: 100px;
+	}
+}
+
+/** Teams **/
+.teams-and-drivers .team {
+	display:flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 25px;
+	height: 230px;
+    padding: 15px;
+    margin-bottom: 5px;
+	color: var(--team-color);
+	background: var(--team-bgcolor);
+    border-radius: 10px;
+    border-style: outset;
+    border-color: var(--team-bgcolor);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.teams-and-drivers .team::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+.teams-and-drivers .team::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.teams-and-drivers .team::-webkit-scrollbar-thumb {
+  background-color: var(--team-color);
+  outline: 1px solid var(--team-color);
+}
+.team .brand {
+	width: 225px;
+	min-width: 225px;
+}
+.team .brand img.logo {
+	max-width: 200px;
+	max-height: 80px;
+	display: block;
+	margin: 0 auto;
+}
+.team .brand img.car {
+	width: 130px;
+	height: 33px;
+	margin-top: 15px;
+	transition: all .2s linear;
+}
+.team .brand img.car.admin-features:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+.admin-features i {
+	cursor: pointer;
+    font-size: 25px;
+    opacity: 0.8;
+    transition: all .2s linear;
+}
+.admin-features i:hover {
+	opacity: 1;
+}
+.team .drivers {
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+.drivers .flip-card {
+	width: 150px;
+    height: 200px;
+}
+.drivers .flip-card .driver-card .overlay {
+	padding-left: 0.5rem;
+	align-items: flex-start;	
+}
+.drivers .flip-card .team {
+	display: none;
+}
+.drivers .admin-features {
+	margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.drivers .admin-features i {
+	cursor: pointer;
+    font-size: 30px;
+    opacity: 0.8;
+    transition: all .2s linear;
+}
+.drivers .admin-features i:hover {
+	opacity: 1;
+}
+
+/** Update car image **/
+#updateCarImage {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#updateCarImage i {
+	margin: 0;
+}
+#updateCarImage img {
+	width: 130px;
+	height: 33px;
+}
+#updateCarImage img.new:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
+/** Update driver image **/
+#updateDriverImage {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#updateDriverImage i {
+	margin: 0;
+}
+#updateDriverImage img {
+	width: 275px
+}
+#updateDriverImage img.new:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
+/** Add driver **/
+#addDriverFilters {
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+#addDriverFilters .filter-types {
+	display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+}
+#addDriverFilters .filter-types #countries-select {
+	width: 85px;
+	height: 50px;
+}
+#addDriverFilters .filter-types #countries-menu {
+	width: 440px;
+	margin-left: -175px;
+}
+#addDriverFilters .filter-types input {
+	height: 50px;
+}
+#addDriverFilters .filter-types input::after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 40px;
+    bottom: -1px;
+    left: 0;
+    z-index: 0;
+    border-right: 1px solid #D0D0D2;
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+    -webkit-transform: skew(-31deg, 0deg);
+    transform: skew(-31deg, 0deg);
+}
+#addDriverFilters .actions {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#addDriverFilters .actions button {
+	height: 50px;
+	font-weight: bold;
+}
+#addDriverFilters .actions button.cancel-button {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+#addDriverFilters .actions button.search-button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+#modalAddDriver .drivers-list {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#modalAddDriver .drivers-list button {
+	outline: none;
+	border: none;
+}
+#modalAddDriver .drivers-list .flip-card {
+	width: 175px;
+    height: 225px;
+}
+#modalAddDriver .drivers-list .flip-card .driver-card .driver-image-layer:after {
+	box-shadow: none;
+}
+#modalAddDriver .drivers-list button:focus .flip-card .driver-card .driver-image-layer:after {
+	box-shadow: inset 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+#modalAddDriver .pagination {
+	margin-top: 20px;
+}
+@media (max-width:991px) {
+	#addDriverFilters {
+		justify-content: center;
+		gap: 5px;
+	}
+}
+@media (max-width:400px) {
+	#addDriverFilters .filter-types {
+		width: 90%;
+		display: block;
+	}
+	#addDriverFilters .filter-types input {
+		width: 100%;
+		margin-bottom: 5px;
+	}
+	#addDriverFilters .filter-types #countries-menu {
+		margin-left: 3px;
+	}
+}

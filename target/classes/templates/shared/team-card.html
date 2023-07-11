@@ -1,0 +1,33 @@
+<div class="team-card-container" th:style="|--team-color: ${colour}|" th:fragment="team-card">
+	<div class="team-card-inner">
+		<div class="team-card team-card-background">
+			<div class="background-image-layer">
+				<img th:src="@{'/img/teams/backgrounds/'+${name}+'.png'}" data-toggle="tooltip">
+			</div>
+			<div class="team-image-layer">
+				<img th:src="@{'/img/teams/'+${name}+'.png'}" data-toggle="tooltip">
+			</div>
+			<div class="overlay">
+				<img th:src="@{'/img/countries/'+${country}+'.png'}" class="flag" data-toggle="tooltip">
+			</div>
+			<div class="overlay-name">
+				<div class="name" th:text="${name}"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Team Cards -->
+		<section class="text-center">
+			<div th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Red Bull Racing', country='NL')"></div>
+			<div th:insert="/shared/team-card :: team-card(colour='#dc0000', name='Scuderia Ferrari', country='IT')"></div>
+		</section>
+		
+		<br> <br> <br> <br>
+		
+		<!-- Driver Cards -->
+		<section class="text-center">
+			<div th:insert="/shared/driver-card :: driver-card(colour='#ffffff', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti')"></div>
+			<div th:insert="/shared/driver-card :: driver-card(colour='#443ff3', driverImage='default', number='12', abbr='RAN', country='AR', team='Red Bull Racing', firstName='Leandro', lastName='Paredes')"></div>
+		</section>
