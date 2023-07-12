@@ -2,16 +2,16 @@
 	<div class="flip-card-inner">
 		<div class="driver-card card-background">
 			<div class="helmet-image-layer">
-				<img th:if="${team != null}" th:src="@{'/img/teams/backgrounds/'+${team}+'.png'}" data-toggle="tooltip">
+				<img th:if="${team != null}" th:src="@{'/img/teams/backgrounds/'+${team}+'.png'}">
 			</div>
 			<div class="driver-image-layer">
-				<img th:src="@{'/img/drivers/'+${driverImage}+'.png'}" data-toggle="tooltip">
+				<img th:src="@{'/img/drivers/'+${driverImage}+'.png'}">
 			</div>
 			<div class="overlay">
 				<div class="number" th:text="${number}"></div>
 				<div class="abbr" th:text="${abbr}"></div>
-				<img th:src="@{'/img/countries/'+${country}+'.png'}" class="flag" data-toggle="tooltip">
-				<img th:if="${team != null}" th:src="@{'/img/teams/'+${team}+'.png'}" class="team" data-toggle="tooltip">
+				<img th:src="@{'/img/countries/'+${country}+'.png'}" class="flag" th:data-value="${country}">
+				<img th:if="${team != null}" th:src="@{'/img/teams/'+${team}+'.png'}" class="team">
 			</div>
 			<div class="overlay-name">
 				<div class="first-name" th:text="${firstName}"></div>

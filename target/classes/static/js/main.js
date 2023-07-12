@@ -13,12 +13,12 @@ $(document).ready(function () {
     $("#countries-menu .country-data img").tooltip({placement: "bottom"});
     
     /****************************** Countries Select ******************************/
-    $("#countries-select").on("click", function() {
+    $(".countries-select").on("click", function() {
         if(menuShowed) {
-            $("#countries-menu").hide();
+            $(this).parent().find("#countries-menu").hide();
             menuShowed = false;
         } else {
-            $("#countries-menu").show();
+            $(this).parent().find("#countries-menu").show();
             menuShowed = true;
         }
     });
@@ -27,11 +27,11 @@ $(document).ready(function () {
         const selectedCountry = $(this).attr("value");
         
         //Set the selected country value
-        $("#countries-select").attr("value", selectedCountry);
-        $("#countries-select").css("background-image", `url(../img/countries/${selectedCountry}.png`);
+        $(this).parent().parent().parent().parent().parent().find("#countries-select").attr("value", selectedCountry);
+        $(this).parent().parent().parent().parent().parent().find("#countries-select").css("background-image", `url(../img/countries/${selectedCountry}.png`);
 
         //Hide the menu
-        $("#countries-menu").hide();
+        $(this).parent().parent().parent().parent().hide();
         menuShowed = false;
     });
 

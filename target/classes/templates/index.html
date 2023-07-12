@@ -299,14 +299,56 @@
 								</form>
 	      					</div>
 	      					<div class="drivers-list">
-	      						<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+	      						<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='IT', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Agustin', lastName='Tamborini', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Francisco', lastName='Molina', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='BR', firstName='Roberto', lastName='Carlos', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Santiago', lastName='Lopez', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Santino', lastName='Tamborini', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='BR', firstName='Rubens', lastName='Barrichello', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='GB', firstName='Lewis', lastName='Hamilton', team='Scuderia Ferrari')" data-filter="ok"></button>
+	      					</div>
+	      					<div class="pagination justify-content-center"></div>
+	      				</div>
+	      				<div class="modal-footer">
+	        				<button type="button" class="btn btn-success">Add</button>
+	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      				</div>
+	    			</div>
+	  			</div>
+			</div>
+		
+			<!-- Modal add team -->
+			<div id="modalAddTeam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAddTeam" aria-hidden="true">
+	  			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    			<div class="modal-content">
+	      				<div class="modal-header">
+	        				<h5 class="modal-title">Add team to 2023 season</h5>
+	      				</div>
+	      				<div class="modal-body">
+	      					<div class="filters">
+								<form id="addTeamFilters">
+									<div class="filter-types">
+										<input name="name" type="text" placeholder="Insert name">
+										<div th:insert="/shared/countries-selection-menu :: countries-selection-menu"></div>
+									</div>
+									<div class="actions">
+										<button class="cancel-button btn btn-secondary">X</button>
+										<button class="search-button btn btn-warning">Search</button>								
+									</div>
+								</form>
+	      					</div>
+	      					<div class="teams-list">
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Red Bull Racing', country='NL')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Scuderia Ferrari', country='IT')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Alfa Romeo', country='IT')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Audi Sports', country='GE')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Alpha Tauri', country='IT')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Porsche Racing', country='GE')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Mclaren', country='GB')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Williams Racing', country='GB')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Trident', country='IT')" data-filter="ok"></button>
+	      						<button th:insert="/shared/team-card :: team-card(colour='#443ff3', name='Mercedes Benz', country='GB')" data-filter="ok"></button>
 	      					</div>
 	      					<div class="pagination justify-content-center"></div>
 	      				</div>
@@ -363,16 +405,94 @@
 				$("#modalAddDriver").modal('toggle');
 			});
 			
-			paginate(2, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+			$("#modalAddDriver .search-button").on("click", function(e) {
+				e.preventDefault();
+				
+				const lastname = $("#addDriverFilters input[name='lastname']").val();
+				const country = $("#addDriverFilters #countries-select").attr("value");
+				
+				$("#modalAddDriver .pagination li").remove();
+				$("#modalAddDriver .drivers-list button").filter(function() {
+					if(passAddDriverFilter($(this), lastname, country)) {
+						$(this).toggle(true);
+						$(this).attr("data-filter", "ok");
+					} else {
+						$(this).toggle(false);
+						$(this).attr("data-filter", null);
+					}
+				});
+				paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+			});
 			
+			function passAddDriverFilter(element, lastname, country) {
+				const lastnameCheck = $(element).find(".flip-card .last-name").text().toLowerCase().includes(lastname.toLowerCase());
+				const countryCheck = $(element).find(".flip-card .flag").attr("data-value").toLowerCase().includes(country.toLowerCase());
+				
+				return lastnameCheck && countryCheck;
+			}
+			
+			$("#modalAddDriver .cancel-button").on("click", function(e) { 
+				e.preventDefault();
+				
+				$("#modalAddDriver .pagination li").remove();
+				$("#modalAddDriver .drivers-list button").toggle(true);
+				$("#modalAddDriver .drivers-list button").attr("data-filter", "ok");
+				paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+			});
+			
+			paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+			
+			//Modal add team
+			$(".teams-and-drivers .admin-features i.add-team").on("click", function() {
+				$("#modalAddTeam").modal('toggle');
+			});
+			
+			$("#modalAddTeam .search-button").on("click", function(e) {
+				e.preventDefault();
+				
+				const name = $("#addTeamFilters input[name='name']").val();
+				const country = $("#addTeamFilters #countries-select").attr("value");
+				
+				$("#modalAddTeam .pagination li").remove();
+				$("#modalAddTeam .teams-list button").filter(function() {
+					if(passAddTeamFilter($(this), name, country)) {
+						$(this).toggle(true);
+						$(this).attr("data-filter", "ok");
+					} else {
+						$(this).toggle(false);
+						$(this).attr("data-filter", null);
+					}
+				});
+				paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
+			});
+			
+			$("#modalAddTeam .cancel-button").on("click", function(e) { 
+				e.preventDefault();
+				
+				$("#modalAddTeam .pagination li").remove();
+				$("#modalAddTeam .teams-list button").toggle(true);
+				$("#modalAddTeam .teams-list button").attr("data-filter", "ok");
+				paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
+			});
+			
+			function passAddTeamFilter(element, name, country) {
+				const nameCheck = $(element).find(".team-card-container .name").text().toLowerCase().includes(name.toLowerCase());
+				const countryCheck = $(element).find(".team-card-container .flag").attr("data-value").toLowerCase().includes(country.toLowerCase());
+				
+				return nameCheck && countryCheck;
+			}
+			
+			paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
+			
+			//Pagination
 			function paginate(pageSize, paginationDiv, elementsDiv) {
-				var elements = $(elementsDiv).find("[data-filter='ok']");
-				var pages = Math.ceil(elements.length / pageSize);
+				const elements = $(elementsDiv).find("[data-filter='ok']");
+				const pages = Math.ceil(elements.length / pageSize);
 
 				//Add pages
-				var previousPage = newFunctionPage("&laquo;");
+				const previousPage = newFunctionPage("&laquo;");
 				$(previousPage).bind('click', {newPage: i}, function(event) {
-					var activePage = $(this).parent().find(".active");
+					const activePage = $(this).parent().find(".active");
 					if(activePage.text() > 1) {
 						$(activePage).prev().children().click();
 					}
@@ -380,7 +500,7 @@
 				$(paginationDiv).append(previousPage);
 				
 				for(var i=1; i<=pages; i++) {
-					var page = newPage(i);
+					const page = newPage(i);
 					$(page).bind('click', {newPage: i}, function(event) {
 		                //Classes updates
 		                $(this).parent().find(".active").removeClass("active");
@@ -388,9 +508,9 @@
 						
 						//Hide elements
 						$(elements).hide();
-		                var currentPage = event.data['newPage'];
-		                var startIndex = (currentPage - 1) * pageSize;
-		                var endIndex = startIndex + pageSize;
+						const currentPage = event.data['newPage'];
+						const startIndex = (currentPage - 1) * pageSize;
+						const endIndex = startIndex + pageSize;
 		                $(elements).slice(startIndex, endIndex).show();
 		                
 		                //Update prev and next buttons
@@ -405,9 +525,9 @@
 					$(paginationDiv).append(page);
 				}
 				
-				var nextPage = newFunctionPage("&raquo;");
+				const nextPage = newFunctionPage("&raquo;");
 				$(nextPage).bind('click', {newPage: i}, function(event) {
-					var activePage = $(this).parent().find(".active");
+					const activePage = $(this).parent().find(".active");
 					if(activePage.text() != pages) {
 						$(activePage).next().children().click();
 					}

@@ -282,3 +282,104 @@
 		margin-left: 3px;
 	}
 }
+
+/** Add team **/
+#addTeamFilters {
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+#addTeamFilters .filter-types {
+	display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+}
+#addTeamFilters .filter-types #countries-select {
+	width: 85px;
+	height: 50px;
+}
+#addTeamFilters .filter-types #countries-menu {
+	width: 440px;
+	margin-left: -175px;
+}
+#addTeamFilters .filter-types input {
+	height: 50px;
+}
+#addTeamFilters .filter-types input::after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 40px;
+    bottom: -1px;
+    left: 0;
+    z-index: 0;
+    border-right: 1px solid #D0D0D2;
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+    -webkit-transform: skew(-31deg, 0deg);
+    transform: skew(-31deg, 0deg);
+}
+#addTeamFilters .actions {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#addTeamFilters .actions button {
+	height: 50px;
+	font-weight: bold;
+}
+#addTeamFilters .actions button.cancel-button {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+#addTeamFilters .actions button.search-button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+#modalAddTeam .teams-list {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#modalAddTeam .teams-list button {
+	outline: none;
+	border: none;
+}
+#modalAddTeam .teams-list .team-card-container {
+	width: 245px;
+    height: 170px;
+}
+#modalAddTeam .teams-list .team-card-container .team-card .team-image-layer:after {
+	box-shadow: none;
+}
+#modalAddTeam .teams-list button:focus .team-card-container .team-card .team-image-layer:after {
+	box-shadow: inset 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+#modalAddTeam .pagination {
+	margin-top: 20px;
+}
+@media (max-width:991px) {
+	#addTeamFilters {
+		justify-content: center;
+		gap: 5px;
+	}
+}
+@media (max-width:400px) {
+	#addTeamFilters .filter-types {
+		width: 90%;
+		display: block;
+	}
+	#addTeamFilters .filter-types input {
+		width: 100%;
+		margin-bottom: 5px;
+	}
+	#addTeamFilters .filter-types #countries-menu {
+		margin-left: 3px;
+	}
+}
