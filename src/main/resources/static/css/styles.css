@@ -336,6 +336,7 @@ h1.title span:last-of-type {
 .team-card .overlay-name .name {
     font-size: 1.5rem;
     line-height: 2rem;
+    white-space: nowrap;
 }
 
 /** Driver cards **/
@@ -476,6 +477,7 @@ h1.title span:last-of-type {
 .driver-card .overlay-name .last-name {
   font-size: 2rem;
   line-height: 2rem;
+  white-space: nowrap;
 }
 .card-background:after {
   content: "";

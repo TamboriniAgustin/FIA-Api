@@ -2,10 +2,10 @@
 	<div class="team-card-inner">
 		<div class="team-card team-card-background">
 			<div class="background-image-layer">
-				<img th:src="@{'/img/teams/backgrounds/'+${name}+'.png'}">
+				<img th:src="@{'/img/teams/backgrounds/'+${id}+'.png'}">
 			</div>
 			<div class="team-image-layer">
-				<img th:src="@{'/img/teams/'+${name}+'.png'}">
+				<img th:src="@{'/img/teams/'+${id}+'.png'}">
 			</div>
 			<div class="overlay">
 				<img th:src="@{'/img/countries/'+${country}+'.png'}" class="flag" th:data-value="${country}">

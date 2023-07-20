@@ -5,7 +5,7 @@
 				<img th:if="${team != null}" th:src="@{'/img/teams/backgrounds/'+${team}+'.png'}">
 			</div>
 			<div class="driver-image-layer">
-				<img th:src="@{'/img/drivers/'+${driverImage}+'.png'}">
+				<img th:src="@{'/img/drivers/'+${season}+'/'+${id}+'.png'}" onerror="loadDefaultDriverImage(this)">
 			</div>
 			<div class="overlay">
 				<div class="number" th:text="${number}"></div>

@@ -1,9 +1,9 @@
 #season-details {
 	max-width: 80%;
-	margin: 0 auto;
+	margin: 40px auto 20px auto;
 }
 #season-details h1.title span.category {
-	color: var(--category-colour);
+	color: var(--background-color);
 }
 #season-details .modal-title {
 	font-weight: bold;
@@ -11,11 +11,11 @@
 
 /** Pagination **/
 .page-link, .page-link:hover {
-	color: var(--formula-2-bgcolour);
+	color: var(--background-color);
 }
 .page-item.active .page-link {
-	background-color: var(--formula-2-bgcolour);
-	border-color: var(--formula-2-bgcolour);
+	background-color: var(--background-color);
+	border-color: var(--background-color);
 }
 
 /** Splide Pagination **/
@@ -34,12 +34,12 @@
     border-radius: 0;
     padding: 8px;
     margin: 0;
-    background: var(--formula-2-bgcolour);
-	color: var(--formula-2-colour);
+    background: var(--background-color);
+	color: var(--text-color);
     transition: transform .2s linear;
 }
 .splide__pagination__page.is-active {
-	background: var(--formula-2-bgcolour-hover);
+	background: var(--background-color-hover);
 	font-weight: bold;
 	transform: none;
 }
@@ -363,6 +363,17 @@
 }
 #modalAddTeam .pagination {
 	margin-top: 20px;
+}
+#modalAddTeam .team-colors {
+	display: none;
+}
+#modalAddTeam .team-colors input {
+	width: 50%;
+	height: 65px;
+	margin: 0 auto;
+}
+#modalAddTeam .goback-button {
+	display: none;
 }
 @media (max-width:991px) {
 	#addTeamFilters {
