@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import api.fia.models.Category;
 import api.fia.models.Constructor;
 import api.fia.models.Country;
+import api.fia.models.Driver;
 import api.fia.models.Season;
 import api.fia.repositories.ConstructorsRepository;
+import api.fia.repositories.DriversRepository;
 import api.fia.services.CategoriesService;
 import api.fia.services.CountriesService;
 import api.fia.services.SeasonsService;
@@ -30,11 +32,19 @@ public class MainController {
 	@Autowired
 	private CountriesService countriesService;
 	@Autowired
+	private DriversRepository driversRepository;
+	@Autowired
 	private SeasonsService seasonsService;
 	
 	@GetMapping("/")
 	public String loadIndex(Model model, HttpSession session) {
 		List<Country> countries = countriesService.getListOfCountries();
+		
+		//Get all the drivers
+		Map<Integer, Driver> driversMap = new LinkedHashMap<>();
+		driversRepository.getDrivers().forEach(driver -> {
+			driversMap.put(driver.getId(), driver);
+		});
 		
 		//Get all the constructors
 		Map<Integer, Constructor> constructorsMap = new LinkedHashMap<>();
@@ -54,6 +64,7 @@ public class MainController {
 		session.setAttribute("countries", countries);
 		session.setAttribute("categories", categories.stream().collect(Collectors.toMap(Category::getAbbr, category -> category)));
 		session.setAttribute("constructors", constructorsMap);
+		session.setAttribute("drivers", driversMap);
 		
 		return "index";
 	}

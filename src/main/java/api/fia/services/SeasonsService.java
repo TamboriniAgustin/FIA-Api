@@ -19,11 +19,15 @@ public class SeasonsService {
 	@Autowired
 	private SeasonsRepository repository;
 	
+	/**
+	 * Load season data
+	 * **/
 	public List<Season> getSeasons(int categoryId) {
 		return repository.getSeasons(categoryId);
 	}
 	
-	public Map<Integer, Constructor> getSeasonConstructors(int season, int categoryId, Map<Integer, Constructor> otherConstructors) {
+	public Map<Integer, Constructor> getSeasonConstructors(int season, int categoryId, Map<Integer, Constructor> otherConstructors, 
+			Map<Integer, Driver> otherDrivers) {
 		Map<Integer, Constructor> constructorsMap = new LinkedHashMap<>();
 		
 		List<Constructor> constructors = repository.getSeasonConstructors(season, categoryId);
@@ -32,6 +36,8 @@ public class SeasonsService {
 			List<Driver> drivers = repository.getConstructorDriversPerSeason(season, constructor.getId());
 			drivers.forEach(driver -> {
 				driversMap.put(driver.getId(), driver);
+				otherDrivers.get(driver.getId()).setTeam(constructor);
+				otherDrivers.get(driver.getId()).setNumber(driver.getNumber());
 			});
 			constructor.setDrivers(driversMap);
 			constructorsMap.put(constructor.getId(), constructor);
@@ -41,7 +47,11 @@ public class SeasonsService {
 		return constructorsMap;
 	}
 	
-	public Constructor addTeamStep1(int season, int categoryId, int team, String principalColor, String secondaryColor, Constructor constructorObject) {
+	/**
+	 * Add teams
+	 * **/
+	public Constructor addTeamStep1(int season, int categoryId, int team, String principalColor, String secondaryColor, 
+			Constructor constructorObject) {
 		repository.addTeam(season, categoryId, team, principalColor, secondaryColor);
 		
 		Constructor constructor = new Constructor();
@@ -58,5 +68,33 @@ public class SeasonsService {
 		return constructorsMap.values().stream()
                 .sorted(Comparator.comparing(Constructor::getName))
                 .collect(LinkedHashMap::new, (map, constructor) -> map.put(constructor.getId(), constructor), Map::putAll);
+	}
+	
+	/**
+	 * Add drivers to team
+	 * **/
+	public Driver addDriverStep1(int season, int categoryId, int driverId, int driverReplaced, int number,
+			int seat, Driver driverObject, Constructor newTeam) {
+		repository.addDriver(season, driverId, number, driverReplaced, newTeam.getId(), seat);
+		
+		Driver driver = new Driver();
+		driver.setId(driverId);
+		driver.setFirstName(driverObject.getFirstName());
+		driver.setLastName(driverObject.getLastName());
+		driver.setCountry(driverObject.getCountry());
+		driver.setBirthday(driverObject.getBirthday());
+		driver.setNumber(number);
+		driver.setTeamSeat(seat);
+		driver.setLastSeason(driverObject.getLastSeason());
+		driver.setTeam(newTeam);
+		
+		return driver;
+	}
+	
+	public Map<Integer, Driver> addDriverStep2(Map<Integer, Driver> driversMap) {
+		return driversMap.values().stream()
+	            .sorted(Comparator.comparingInt(Driver::getTeamSeat)
+	                    .thenComparing(Comparator.comparingInt(Driver::getDriverReplaced).reversed()))
+	            .collect(LinkedHashMap::new, (map, driver) -> map.put(driver.getId(), driver), Map::putAll);
 	}
 }

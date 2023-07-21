@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import api.fia.models.Driver;
 
-public class SeasonDriversMapper implements RowMapper<Driver> {
+public class DriverMapper implements RowMapper<Driver> {
 	@Override
 	public Driver mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Driver driver = new Driver();
@@ -17,9 +17,7 @@ public class SeasonDriversMapper implements RowMapper<Driver> {
 		driver.setLastName(rs.getString("driver_lastname"));
 		driver.setCountry(rs.getString("driver_country"));
 		driver.setBirthday(rs.getDate("driver_birthday"));
-		driver.setTeamSeat(rs.getInt("constructor_seat"));
-		driver.setNumber(rs.getInt("driver_number"));
-		driver.setDriverReplaced(rs.getInt("driver_replace"));
+		driver.setLastSeason(rs.getInt("driver_last_season"));
 		
 		return driver;
 	}

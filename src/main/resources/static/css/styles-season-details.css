@@ -118,6 +118,10 @@
     align-items: center;
     gap: 5px;
 }
+.drivers .replaced {
+    margin-right: -95px;
+    opacity: 0.8;
+}
 .drivers .flip-card {
 	width: 150px;
     height: 200px;
@@ -262,6 +266,20 @@
 }
 #modalAddDriver .pagination {
 	margin-top: 20px;
+}
+#modalAddDriver .selected-driver {
+	display: none;
+	gap: 10px;
+}
+#modalAddDriver .selected-driver button {
+	border: none;
+}
+#modalAddDriver .selected-driver .flip-card {
+	width: 185px;
+    height: 255px;
+}
+#modalAddDriver .goback-button {
+	display: none;
 }
 @media (max-width:991px) {
 	#addDriverFilters {

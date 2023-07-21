@@ -1,4 +1,4 @@
-<div class="flip-card" th:style="|--team-color: ${colour}|" th:fragment="driver-card">
+<div class="flip-card" th:style="|--team-color: ${team != null ? team.principalColor : '#ffffff'}|" th:fragment="driver-card">
 	<div class="flip-card-inner">
 		<div class="driver-card card-background">
 			<div class="helmet-image-layer">
@@ -8,10 +8,10 @@
 				<img th:src="@{'/img/drivers/'+${season}+'/'+${id}+'.png'}" onerror="loadDefaultDriverImage(this)">
 			</div>
 			<div class="overlay">
-				<div class="number" th:text="${number}"></div>
+				<div th:if="${number > 0}" class="number" th:text="${number}"></div>
 				<div class="abbr" th:text="${abbr}"></div>
 				<img th:src="@{'/img/countries/'+${country}+'.png'}" class="flag" th:data-value="${country}">
-				<img th:if="${team != null}" th:src="@{'/img/teams/'+${team}+'.png'}" class="team">
+				<img th:if="${team != null}" th:src="@{'/img/teams/'+${team.id}+'.png'}" class="team">
 			</div>
 			<div class="overlay-name">
 				<div class="first-name" th:text="${firstName}"></div>

@@ -36,12 +36,41 @@ $( document ).ready(function() {
 	});
 	
 	//Modal add driver
-	paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
-	
 	$(".team .drivers .admin-features i.add-driver").on("click", function() {
+		const teamSelected = $(this).parent().parent().parent();
+		
+		//Get team drivers
+		const actualTeamDrivers = $(teamSelected).find(".drivers .driver").filter(function() {
+    		return !$(this).hasClass('replaced');
+		});
+		actualTeamDrivers.each(function() {
+			const driverId = $(this).attr("data-id");
+			
+			//Hide the current drivers from the selection list
+			$(`#modalAddDriver .drivers-list button[data-id='${driverId}']`).parent().toggle(false);
+			$(`#modalAddDriver .drivers-list button[data-id='${driverId}']`).attr("data-filter", null);
+			
+		    //Add them to the replaces options
+		    const formOption = $("<option>");
+		    $(formOption).attr("value", driverId);
+		    $(formOption).text($(this).find(".flip-card .overlay-name .first-name").text() + " " + $(this).find(".flip-card .overlay-name .last-name").text());
+		    $("#modalAddDriver .selected-driver select[name='driverReplaced']").append(formOption);
+		});
+		$("#modalAddDriver .pagination li").remove();
+		paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+		
+		//Custom the modal texts and variables
 		$("#modalAddDriver .modal-header span.team-name").text($(this).parent().parent().parent().find(".brand h4").text());
 		csRestoreDefaultValues();
+		
+		//Open modal
+		$("#modalAddDriver .add-button").attr("data-teamId", $(teamSelected).attr("data-id"));
 		$("#modalAddDriver").modal('toggle');
+	});
+	$("#modalAddDriver").on('hidden.bs.modal', function() {
+		$("#modalAddDriver .selected-driver select[name='driverReplaced'] option:not(:first-child)").remove();
+		$(`#modalAddDriver .drivers-list button`).parent().toggle(true);
+		$(`#modalAddDriver .drivers-list button`).attr("data-filter", "ok");
 	});
 			
 	$("#modalAddDriver .search-button").on("click", function(e) {
@@ -53,10 +82,10 @@ $( document ).ready(function() {
 		$("#modalAddDriver .pagination li").remove();
 		$("#modalAddDriver .drivers-list button").filter(function() {
 			if(passAddDriverFilter($(this), lastname, country)) {
-				$(this).toggle(true);
+				$(this).parent().toggle(true);
 				$(this).attr("data-filter", "ok");
 			} else {
-				$(this).toggle(false);
+				$(this).parent().toggle(false);
 				$(this).attr("data-filter", null);
 			}
 		});
@@ -67,9 +96,63 @@ $( document ).ready(function() {
 		e.preventDefault();
 		
 		$("#modalAddDriver .pagination li").remove();
-		$("#modalAddDriver .drivers-list button").toggle(true);
+		$("#modalAddDriver .drivers-list button").parent().toggle(true);
 		$("#modalAddDriver .drivers-list button").attr("data-filter", "ok");
 		paginate(8, $("#modalAddDriver .pagination"), $("#modalAddDriver .drivers-list"));
+	});
+	
+	$("#modalAddDriver .drivers-list button").on("click", function() {
+		const driverId = $(this).attr("data-id");
+		const driverName = $(this).attr("data-name");
+		$("#modalAddDriver .add-button").attr("data-driverId", driverId);
+		$("#modalAddDriver .add-button").attr("data-driverName", driverName);
+	});
+	$("#modalAddDriver .add-button").on("click", function() {
+		const step = $(this).attr("data-step");
+		const driverId = $(this).attr('data-driverId');
+		const teamId = $(this).attr('data-teamId');
+		
+		if(step == 1) {
+			if(driverId) {
+				$("#modalAddDriver .filters").hide();
+				$("#modalAddDriver .drivers-list").hide();
+				$("#modalAddDriver .pagination").hide();
+				$("#modalAddDriver .close-button").hide();
+				
+				$(this).attr("data-step", 2);
+				
+				$("#modalAddDriver .modal-title span.driver-name").text($(this).attr('data-driverName'));
+				$("#modalAddDriver .goback-button").show();
+				
+				const driverCard = $(`#modalAddDriver .drivers-list button[data-id='${driverId}']`).clone();
+				$("#modalAddDriver .selected-driver .selected-driver-card").append(driverCard);
+				$("#modalAddDriver .selected-driver").css("display", "flex");
+			} else {
+				showResponseAlert('error', 'No driver selected', false, 1500, "center");
+			}
+			
+			return;
+		}
+		
+		if(step == 2) {
+			const number = $("#modalAddDriver .selected-driver input[name='number']").val();
+			const seat = $("#modalAddDriver .selected-driver input[name='seat']").val();
+			const driverReplaced = $("#modalAddDriver .selected-driver select[name='driverReplaced']").val();
+			executeAjax(`season/${currentSeason}/${currentCategory}/add/driver/${driverId}/${teamId}?number=${number}&seat=${seat}&driverReplaced=${driverReplaced}`, "POST", $(this), "ajaxDriverAdded", "ajaxDriverNotAdded");
+		}
+	});
+	$("#modalAddDriver .goback-button").on("click", function() {
+		$(this).hide();
+		$("#modalAddDriver .selected-driver").hide();
+		$("#modalAddDriver .selected-driver .selected-driver-card button").remove();
+		
+		$("#modalAddDriver .add-button").attr("data-step", 1);
+		
+		$("#modalAddDriver .modal-title span.driver-name").text("driver");
+		$("#modalAddDriver .filters").show();
+		$("#modalAddDriver .drivers-list").show();
+		$("#modalAddDriver .pagination").show();
+		$("#modalAddDriver .close-button").show();
 	});
 			
 	//Modal add team
@@ -198,6 +281,17 @@ function passAddTeamFilter(element, name, country) {
 	const countryCheck = $(element).find(".team-card-container .flag").attr("data-value").toLowerCase().includes(country.toLowerCase());
 	
 	return nameCheck && countryCheck;
+}
+
+function ajaxDriverAdded() {
+	showResponseAlert("success", "Driver added", false, null, 'top-end');
+	setTimeout(function() {
+		location.reload();
+    }, 3000);
+}
+
+function ajaxDriverNotAdded() {
+	showResponseAlert("error", "Something goes wrong...", false, 1500, "center");
 }
 
 function ajaxTeamAdded() {

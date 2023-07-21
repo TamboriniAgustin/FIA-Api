@@ -26,7 +26,7 @@
 								<h1 class="title">TEAMS & DRIVERS <span class="category" th:text="${#strings.toUpperCase(category.name)}" th:data-abbr="${category.abbr}"></span> <span class="season" th:text="${season.year}"></span></h1>
 								
 								<div class="teams-and-drivers">
-									<div class="team" th:style="|--team-bgcolor: ${constructor.value.principalColor}; --team-color: ${constructor.value.secondaryColor}|" th:each="constructor, status: ${season.constructors.entrySet()}">
+									<div class="team" th:style="|--team-bgcolor: ${constructor.value.principalColor}; --team-color: ${constructor.value.secondaryColor}|" th:each="constructor, status: ${season.constructors.entrySet()}" th:data-id="${constructor.value.id}">
 										<div class="brand text-center">
 											<h4 th:text="${constructor.value.name}"></h4>
 											<img th:src="@{'../../img/teams/'+${constructor.value.id}+'.png'}" class="logo">
@@ -36,8 +36,8 @@
 											</div>
 										</div>
 										<div class="drivers">
-											<div class="driver" th:each="driver, status: ${constructor.value.drivers.entrySet()}">
-												<div th:insert="/shared/driver-card :: driver-card(colour=${constructor.value.principalColor}, season=${season.year}, id=${driver.value.id}, number=${driver.value.number}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName}, team=${constructor.value.id})"></div>
+											<div class="driver" th:each="driver, status: ${constructor.value.drivers.entrySet()}" th:data-id="${driver.value.id}" th:classappend="${driver.value.driverReplaced == 1} ? 'replaced' : ''">
+												<div th:insert="/shared/driver-card :: driver-card(colour=${constructor.value.principalColor}, season=${season.year}, id=${driver.value.id}, number=${driver.value.number}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName}, team=${constructor.value})"></div>
 											</div>
 											<div class="admin-features">
 												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
@@ -122,7 +122,7 @@
 	  			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	    			<div class="modal-content">
 	      				<div class="modal-header">
-	        				<h5 class="modal-title">Add driver to <span class="team-name"></span></h5>
+	        				<h5 class="modal-title">Add <span class="driver-name">driver</span> to <span class="team-name"></span></h5>
 	      				</div>
 	      				<div class="modal-body">
 	      					<div class="filters">
@@ -138,20 +138,31 @@
 								</form>
 	      					</div>
 	      					<div class="drivers-list">
-	      						<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='IT', firstName='Carlo', lastName='Ancelotti', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Agustin', lastName='Tamborini', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Francisco', lastName='Molina', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='BR', firstName='Roberto', lastName='Carlos', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Santiago', lastName='Lopez', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='AR', firstName='Santino', lastName='Tamborini', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='BR', firstName='Rubens', lastName='Barrichello', team='Scuderia Ferrari')" data-filter="ok"></button>
-								<button th:insert="/shared/driver-card :: driver-card(colour='#dc0000', driverImage='default', number='12', abbr='RAN', country='GB', firstName='Lewis', lastName='Hamilton', team='Scuderia Ferrari')" data-filter="ok"></button>
+								<div th:each="driver, status: ${drivers.entrySet()}">
+		      						<button th:insert="/shared/driver-card :: driver-card(team=${driver.value.team}, number=${driver.value.number}, season=${driver.value.lastSeason}, id=${driver.value.id}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName})" data-filter="ok" th:data-id="${driver.value.id}" th:data-name="${driver.value.firstName + ' ' + driver.value.lastName}"></button>
+								</div>
 	      					</div>
-	      					<div class="pagination justify-content-center"></div>
+	      					<div class="selected-driver justify-content-around align-items-center">
+								<div class="selected-driver-card"></div>
+								<div class="form text-center">
+									<label for="number">Car number</label>
+									<input type="number" name="number" class="form-control">
+									
+									<label for="seat">Team seat</label>
+									<input type="number" name="seat" class="form-control">
+									
+									<label for="driverReplaced">Driver replaced</label>
+									<select name="driverReplaced" class="form-control">
+										<option selected value="0">No one</option>
+									</select>
+								</div>	  
+							</div>
+	      					<div class="pagination"></div>
 	      				</div>
 	      				<div class="modal-footer">
-	        				<button type="button" class="btn btn-success">Add</button>
-	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-success add-button" data-step="1">Select</button>
+	        				<button type="button" class="btn btn-danger goback-button">Go back</button>
+	        				<button type="button" class="btn btn-danger close-button" data-bs-dismiss="modal">Close</button>
 	      				</div>
 	    			</div>
 	  			</div>

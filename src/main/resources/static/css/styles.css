@@ -119,6 +119,22 @@ h1.title span:last-of-type {
 	overflow-x: auto;
 }
 
+/** Pagination **/
+.pagination {
+	overflow-x: auto;
+}
+.pagination::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento en navegadores WebKit (Chrome, Safari) */
+}
+.pagination::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px; /* Redondear las esquinas del pulgar */
+}
+.pagination::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* Color del track de la barra de desplazamiento */
+  border-radius: 5px 5px 0 0; /* Redondear las esquinas del track */
+}
+
 /* Countries Select */
 #countries-select {
 	width: 100px;
