@@ -26,8 +26,7 @@ public class SeasonsService {
 		return repository.getSeasons(categoryId);
 	}
 	
-	public Map<Integer, Constructor> getSeasonConstructors(int season, int categoryId, Map<Integer, Constructor> otherConstructors, 
-			Map<Integer, Driver> otherDrivers) {
+	public Map<Integer, Constructor> getSeasonConstructors(int season, int categoryId, Map<Integer, Driver> otherDrivers) {
 		Map<Integer, Constructor> constructorsMap = new LinkedHashMap<>();
 		
 		List<Constructor> constructors = repository.getSeasonConstructors(season, categoryId);
@@ -41,7 +40,6 @@ public class SeasonsService {
 			});
 			constructor.setDrivers(driversMap);
 			constructorsMap.put(constructor.getId(), constructor);
-			otherConstructors.remove(constructor.getId());
 		});
 		
 		return constructorsMap;
@@ -85,7 +83,8 @@ public class SeasonsService {
 		driver.setBirthday(driverObject.getBirthday());
 		driver.setNumber(number);
 		driver.setTeamSeat(seat);
-		driver.setLastSeason(driverObject.getLastSeason());
+		driver.setLastSeason(season);
+		driver.setLastTeam(newTeam.getId());
 		driver.setTeam(newTeam);
 		
 		return driver;

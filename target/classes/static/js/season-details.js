@@ -14,8 +14,9 @@ $( document ).ready(function() {
 	$($(".splide__pagination__page")[2]).text("Standings");
 	
 	//Modal update car image
-	$(".team .brand img.car").on("click", function() {
+	$(".team .brand img.car.admin-features").on("click", function() {
 		$("#updateCarImage img.car").attr("src", $(this).attr("src"));
+		$("#modalTeamImage").attr("data-currentTeam", $(this).attr("data-teamId"));
 		$('#modalTeamImage').modal('toggle');
 	});
 	
@@ -24,15 +25,46 @@ $( document ).ready(function() {
 		showImagePreview("#updateCarImage img.new", file);
 	});
 	
+	$("#modalTeamImage .save-changes").on("click", function() {
+		const teamId = $("#modalTeamImage").attr("data-currentTeam");
+		const file = document.getElementById("car-image-upload").files[0];
+		
+		if(file != undefined) {
+			 const formData = new FormData();
+  			formData.append('file', file);
+  			
+			executeAjax(`season/${currentSeason}/${currentCategory}/team/${teamId}/image`, "PUT", $(this), "ajaxTeamImageUpdated", "ajaxInternalServerError", formData);
+		} else {
+			showResponseAlert('error', 'No image uploaded', false, 1500, "center");		
+		}
+	});
+	
 	//Modal update driver image
 	$(".team .drivers .driver-card").on("click", function() {
 		$("#updateDriverImage img.driver").attr("src", $(this).find(".driver-image-layer img").attr("src"));
+		$("#modalDriverImage").attr("data-currentTeam", $(this).parent().parent().parent().parent().parent().parent().attr("data-id"));
+		$("#modalDriverImage").attr("data-currentDriver", $(this).parent().parent().parent().parent().attr("data-id"));
 		$('#modalDriverImage').modal('toggle');
 	});
 	
 	$("#driver-image-upload").on("change", function(e) {
 		const file = e.target.files[0];
 		showImagePreview("#updateDriverImage img.new", file);
+	});
+	
+	$("#modalDriverImage .save-changes").on("click", function() {
+		const teamId = $("#modalDriverImage").attr("data-currentTeam");
+		const driverId = $("#modalDriverImage").attr("data-currentDriver");
+		const file = document.getElementById("driver-image-upload").files[0];
+		
+		if(file != undefined) {
+			const formData = new FormData();
+  			formData.append('file', file);
+  			
+			executeAjax(`season/${currentSeason}/${currentCategory}/${teamId}/driver/${driverId}/image`, "PUT", $(this), "ajaxDriverImageUpdated", "ajaxInternalServerError", formData);
+		} else {
+			showResponseAlert('error', 'No image uploaded', false, 1500, "center");	
+		}
 	});
 	
 	//Modal add driver
@@ -67,6 +99,7 @@ $( document ).ready(function() {
 		$("#modalAddDriver .add-button").attr("data-teamId", $(teamSelected).attr("data-id"));
 		$("#modalAddDriver").modal('toggle');
 	});
+	
 	$("#modalAddDriver").on('hidden.bs.modal', function() {
 		$("#modalAddDriver .selected-driver select[name='driverReplaced'] option:not(:first-child)").remove();
 		$(`#modalAddDriver .drivers-list button`).parent().toggle(true);
@@ -107,6 +140,7 @@ $( document ).ready(function() {
 		$("#modalAddDriver .add-button").attr("data-driverId", driverId);
 		$("#modalAddDriver .add-button").attr("data-driverName", driverName);
 	});
+	
 	$("#modalAddDriver .add-button").on("click", function() {
 		const step = $(this).attr("data-step");
 		const driverId = $(this).attr('data-driverId');
@@ -138,9 +172,10 @@ $( document ).ready(function() {
 			const number = $("#modalAddDriver .selected-driver input[name='number']").val();
 			const seat = $("#modalAddDriver .selected-driver input[name='seat']").val();
 			const driverReplaced = $("#modalAddDriver .selected-driver select[name='driverReplaced']").val();
-			executeAjax(`season/${currentSeason}/${currentCategory}/add/driver/${driverId}/${teamId}?number=${number}&seat=${seat}&driverReplaced=${driverReplaced}`, "POST", $(this), "ajaxDriverAdded", "ajaxDriverNotAdded");
+			executeAjax(`season/${currentSeason}/${currentCategory}/add/driver/${driverId}/${teamId}?number=${number}&seat=${seat}&driverReplaced=${driverReplaced}`, "POST", $(this), "ajaxDriverAdded", "ajaxInternalServerError");
 		}
 	});
+	
 	$("#modalAddDriver .goback-button").on("click", function() {
 		$(this).hide();
 		$("#modalAddDriver .selected-driver").hide();
@@ -156,12 +191,22 @@ $( document ).ready(function() {
 	});
 			
 	//Modal add team
-	paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
-	
 	$(".teams-and-drivers .admin-features i.add-team").on("click", function() {
+		if(!$("#modalAddTeam .teams-list button").length) {
+			const seasonTeams = $(".teams-and-drivers div.team").map(function() {
+				return $(this).data('id');
+			}).get();
+			
+			const jsonData = {
+				teams: seasonTeams
+			}
+			const base64JsonData = btoa(JSON.stringify(jsonData));
+			executeAjax(`season/other/teams?data=${base64JsonData}`, "GET", $(this), "ajaxTeamsListeds", "ajaxInternalServerError");
+		}
+		
 		csRestoreDefaultValues();
 		$("#modalAddTeam").modal('toggle');
-	});
+ 	});
 			
 	$("#modalAddTeam .search-button").on("click", function(e) {
 		e.preventDefault();
@@ -191,16 +236,6 @@ $( document ).ready(function() {
 		paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
 	});
 	
-	$("#modalAddTeam .teams-list button").on("click", function() {
-		const teamId = $(this).attr("data-id");
-		const teamName = $(this).attr("data-name");
-		const color1 = $(this).attr("data-color1");
-		const color2 = $(this).attr("data-color2");
-		$("#modalAddTeam .add-button").attr("data-teamId", teamId);
-		$("#modalAddTeam .add-button").attr("data-teamName", teamName);
-		$("#modalAddTeam .add-button").attr("data-color1", color1);
-		$("#modalAddTeam .add-button").attr("data-color2", color2);
-	});
 	$("#modalAddTeam .add-button").on("click", function() {
 		const step = $(this).attr("data-step");
 		const teamId = $(this).attr('data-teamId');
@@ -229,9 +264,10 @@ $( document ).ready(function() {
 		if(step == 2) {
 			const color1 = $("#modalAddTeam .team-colors input[name='color1']").val().replace("#", "%23");
 			const color2 = $("#modalAddTeam .team-colors input[name='color2']").val().replace("#", "%23");
-			executeAjax(`season/${currentSeason}/${currentCategory}/add/team/${teamId}?principalColor=${color1}&secondaryColor=${color2}`, "POST", $(this), "ajaxTeamAdded", "ajaxTeamNotAdded");
+			executeAjax(`season/${currentSeason}/${currentCategory}/add/team/${teamId}?principalColor=${color1}&secondaryColor=${color2}`, "POST", $(this), "ajaxTeamAdded", "ajaxInternalServerError");
 		}
 	});
+	
 	$("#modalAddTeam .goback-button").on("click", function() {
 		$(this).hide();
 		$("#modalAddTeam .team-colors").hide();
@@ -283,6 +319,39 @@ function passAddTeamFilter(element, name, country) {
 	return nameCheck && countryCheck;
 }
 
+function updateNewTeamSelected(element) {
+	const teamId = $(element).attr("data-id");
+	const teamName = $(element).attr("data-name");
+	const color1 = $(element).attr("data-color1");
+	const color2 = $(element).attr("data-color2");
+	$("#modalAddTeam .add-button").attr("data-teamId", teamId);
+	$("#modalAddTeam .add-button").attr("data-teamName", teamName);
+	$("#modalAddTeam .add-button").attr("data-color1", color1);
+	$("#modalAddTeam .add-button").attr("data-color2", color2);
+}
+
+function ajaxTeamsListeds(data) {
+	Object.keys(data).forEach(key => {
+		const value = data[key];
+		Object.keys(value).forEach(cId => {
+			const constructor = value[cId];
+			
+			const button = $("<button>").append(generateTeamCardFromJs(constructor.id, constructor.name, constructor.principalColor, constructor.country));
+			$(button)
+				.attr("data-filter", "ok")
+				.attr("data-id", constructor.id)
+				.attr("data-name", constructor.name)
+				.attr("data-color1", constructor.principalColor)
+				.attr("data-color2", constructor.secondaryColor)
+				.attr("onclick", "updateNewTeamSelected(this)");
+			const parentButton = $("<div>").append(button);
+			
+			$("#modalAddTeam .teams-list").append(parentButton);
+		});
+	});
+	paginate(9, $("#modalAddTeam .pagination"), $("#modalAddTeam .teams-list"));
+}
+
 function ajaxDriverAdded() {
 	showResponseAlert("success", "Driver added", false, null, 'top-end');
 	setTimeout(function() {
@@ -290,17 +359,29 @@ function ajaxDriverAdded() {
     }, 3000);
 }
 
-function ajaxDriverNotAdded() {
-	showResponseAlert("error", "Something goes wrong...", false, 1500, "center");
+function ajaxDriverImageUpdated() {
+	const teamId = $("#modalDriverImage").attr("data-currentTeam");
+	const driverId = $("#modalDriverImage").attr("data-currentDriver");
+	const imageSrc = $("#updateDriverImage label[for='driver-image-upload'] img").attr("src");
+	
+	$(`.teams-and-drivers .team[data-id=${teamId}] .driver[data-id=${driverId}] .driver-image-layer img`).attr("src", imageSrc);
+	showResponseAlert("success", "Driver image updated", false, 3000, 'center');
+	$("#modalDriverImage").modal("hide");
 }
 
 function ajaxTeamAdded() {
 	showResponseAlert("success", "Team added", false, null, 'top-end');
+
 	setTimeout(function() {
 		location.reload();
     }, 3000);
 }
 
-function ajaxTeamNotAdded() {
-	showResponseAlert("error", "Something goes wrong...", false, 1500, "center");
+function ajaxTeamImageUpdated() {
+	const teamId = $("#modalTeamImage").attr("data-currentTeam");
+	const imageSrc = $("#updateCarImage label[for='car-image-upload'] img").attr("src");
+	
+	$(`.teams-and-drivers .team[data-id=${teamId}] .brand .car`).attr("src", imageSrc);
+	showResponseAlert("success", "Team image updated", false, 3000, 'center');
+	$("#modalTeamImage").modal("hide");
 }

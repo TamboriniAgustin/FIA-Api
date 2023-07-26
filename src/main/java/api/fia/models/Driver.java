@@ -15,6 +15,7 @@ public class Driver {
 	private Date birthday;
 	private Constructor team;
 	private int lastSeason;
+	private int lastTeam;
 	private int teamSeat;
 	private int number;
 	private int driverReplaced;

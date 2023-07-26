@@ -6,7 +6,6 @@
 	    <link rel="stylesheet" th:href="@{/css/styles-season-details.css}">
 	    
 	    <script th:inline="javascript">
-			// Definir una variable global y asignarle el valor de la variable de Thymeleaf
 			const currentSeason = /*[[${season.year}]]*/ 'default value';
 			const currentCategory = /*[[${#strings.toUpperCase(category.abbr)}]]*/ 'default value';
 	    </script>
@@ -30,14 +29,14 @@
 										<div class="brand text-center">
 											<h4 th:text="${constructor.value.name}"></h4>
 											<img th:src="@{'../../img/teams/'+${constructor.value.id}+'.png'}" class="logo">
-											<img th:src="@{'../../img/teams/cars/'+${season.year}+'/'+${constructor.value.id}+'.png'}" class="car admin-features" onerror="loadDefaultCarImage(this)">
+											<img th:src="@{'../../img/teams/cars/'+${season.year}+'/'+${category.abbr}+'/'+${constructor.value.id}+'.png'}" class="car admin-features" onerror="loadDefaultCarImage(this)" th:data-teamId="${constructor.value.id}">
 											<div class="admin-features">
 												<i class="fa fa-info-circle car-image-info" aria-hidden="true" data-toggle="tooltip" title="Click on the car to add an image"></i>
 											</div>
 										</div>
 										<div class="drivers">
 											<div class="driver" th:each="driver, status: ${constructor.value.drivers.entrySet()}" th:data-id="${driver.value.id}" th:classappend="${driver.value.driverReplaced == 1} ? 'replaced' : ''">
-												<div th:insert="/shared/driver-card :: driver-card(colour=${constructor.value.principalColor}, season=${season.year}, id=${driver.value.id}, number=${driver.value.number}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName}, team=${constructor.value})"></div>
+												<div th:insert="/shared/driver-card :: driver-card(colour=${constructor.value.principalColor}, season=${season.year}, category=${category.abbr}, id=${driver.value.id}, number=${driver.value.number}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName}, team=${constructor.value})"></div>
 											</div>
 											<div class="admin-features">
 												<i class="fa fa-plus-circle add-driver" aria-hidden="true" data-toggle="tooltip" title="Add driver"></i>
@@ -85,7 +84,7 @@
 	      					</form>
 	      				</div>
 	      				<div class="modal-footer">
-	        				<button type="button" class="btn btn-success">Save changes</button>
+	        				<button type="button" class="btn btn-success save-changes">Save changes</button>
 	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
 	      				</div>
 	    			</div>
@@ -110,7 +109,7 @@
 	      					</form>
 	      				</div>
 	      				<div class="modal-footer">
-	        				<button type="button" class="btn btn-success">Save changes</button>
+	        				<button type="button" class="btn btn-success save-changes">Save changes</button>
 	        				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
 	      				</div>
 	    			</div>
@@ -138,9 +137,9 @@
 								</form>
 	      					</div>
 	      					<div class="drivers-list">
-								<div th:each="driver, status: ${drivers.entrySet()}">
-		      						<button th:insert="/shared/driver-card :: driver-card(team=${driver.value.team}, number=${driver.value.number}, season=${driver.value.lastSeason}, id=${driver.value.id}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName})" data-filter="ok" th:data-id="${driver.value.id}" th:data-name="${driver.value.firstName + ' ' + driver.value.lastName}"></button>
-								</div>
+								<!-- <div th:each="driver, status: ${drivers.entrySet()}">
+		      						<button th:insert="/shared/driver-card :: driver-card(team=${driver.value.team}, number=${driver.value.number}, season=${driver.value.lastSeason}, category=${category.abbr}, lastTeam=${driver.value.lastTeam}, id=${driver.value.id}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName})" data-filter="ok" th:data-id="${driver.value.id}" th:data-name="${driver.value.firstName + ' ' + driver.value.lastName}"></button>
+								</div> -->
 	      					</div>
 	      					<div class="selected-driver justify-content-around align-items-center">
 								<div class="selected-driver-card"></div>
@@ -189,9 +188,9 @@
 								</form>
 	      					</div>
 	      					<div class="teams-list">
-								  <div th:each="constructor, status: ${constructors.entrySet()}">
+								  <!-- <div th:each="constructor, status: ${constructors.entrySet()}">
 					      				<button th:insert="/shared/team-card :: team-card(colour=${constructor.value.principalColor}, id=${constructor.value.id}, name=${constructor.value.name}, country=${constructor.value.country})" data-filter="ok" th:data-id="${constructor.value.id}" th:data-name="${constructor.value.name}" th:data-color1="${constructor.value.principalColor}" th:data-color2="${constructor.value.secondaryColor}"></button>
-								  </div>
+								  </div> -->
 	      					</div>
 	      					<div class="team-colors text-center">
 								  <label for="color1">Principal color</label>

@@ -307,6 +307,34 @@ function closeLoadingAlert() {
 	loadingAlert = null;
 }
 
+/************************************************** Team cards **************************************************/
+function generateTeamCardFromJs(id, name, color, country) {
+	const bgImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/teams/backgrounds/${id}.png`);
+	const bgImageLayer = $('<div>').addClass('background-image-layer').append(bgImageLayerImg);
+	
+	const teamImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/teams/${id}.png`);
+	const teamImageLayer = $('<div>').addClass('team-image-layer').append(teamImageLayerImg);
+	
+	const overlayImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/countries/${country}.png`).addClass("flag").attr("data-value", country);
+	const overlay = $('<div>').addClass('overlay').append(overlayImg);
+	
+	const overlayNameName = $('<div>').addClass('name').text(name);
+	const overlayName = $('<div>').addClass('overlay-name').append(overlayNameName);
+	
+	const teamCardBg = $('<div>').addClass('team-card team-card-background')
+		.append(bgImageLayer)
+		.append(teamImageLayer)
+		.append(overlay)
+		.append(overlayName);
+	
+	const teamCardInner = $('<div>').addClass('team-card-inner').append(teamCardBg);
+	
+	const teamCardHTML = $('<div>').addClass('team-card-container').css('--team-color', color)
+	  .append(teamCardInner);
+	
+	return teamCardHTML;
+}
+
 /************************************************** AJAX **************************************************/
 function executeAjax(path, type, obj, okFunction, errorFunction, dataContent) {
 	if(!inAjaxRequest) {
@@ -322,6 +350,8 @@ function executeAjax(path, type, obj, okFunction, errorFunction, dataContent) {
             type: type,
             dataType: 'json',
             data: dataContent,
+            processData: false,
+            contentType: false,
             timeout: 60000,
             success: function(data) {
                 inAjaxRequest = false;
@@ -335,4 +365,8 @@ function executeAjax(path, type, obj, okFunction, errorFunction, dataContent) {
             }
         });
     }
+}
+
+function ajaxInternalServerError() {
+	showResponseAlert("error", "Something goes wrong...", false, 1500, "center");
 }

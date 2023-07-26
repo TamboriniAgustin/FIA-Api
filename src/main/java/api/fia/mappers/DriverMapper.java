@@ -18,6 +18,7 @@ public class DriverMapper implements RowMapper<Driver> {
 		driver.setCountry(rs.getString("driver_country"));
 		driver.setBirthday(rs.getDate("driver_birthday"));
 		driver.setLastSeason(rs.getInt("driver_last_season"));
+		driver.setLastTeam(rs.getInt("driver_last_team"));
 		
 		return driver;
 	}
