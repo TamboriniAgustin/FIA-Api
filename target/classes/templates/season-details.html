@@ -136,11 +136,7 @@
 									</div>
 								</form>
 	      					</div>
-	      					<div class="drivers-list">
-								<!-- <div th:each="driver, status: ${drivers.entrySet()}">
-		      						<button th:insert="/shared/driver-card :: driver-card(team=${driver.value.team}, number=${driver.value.number}, season=${driver.value.lastSeason}, category=${category.abbr}, lastTeam=${driver.value.lastTeam}, id=${driver.value.id}, abbr=${#strings.substring(driver.value.lastName, 0, 3).toUpperCase()}, country=${driver.value.country}, firstName=${driver.value.firstName}, lastName=${driver.value.lastName})" data-filter="ok" th:data-id="${driver.value.id}" th:data-name="${driver.value.firstName + ' ' + driver.value.lastName}"></button>
-								</div> -->
-	      					</div>
+	      					<div class="drivers-list"></div>
 	      					<div class="selected-driver justify-content-around align-items-center">
 								<div class="selected-driver-card"></div>
 								<div class="form text-center">
@@ -187,11 +183,7 @@
 									</div>
 								</form>
 	      					</div>
-	      					<div class="teams-list">
-								  <!-- <div th:each="constructor, status: ${constructors.entrySet()}">
-					      				<button th:insert="/shared/team-card :: team-card(colour=${constructor.value.principalColor}, id=${constructor.value.id}, name=${constructor.value.name}, country=${constructor.value.country})" data-filter="ok" th:data-id="${constructor.value.id}" th:data-name="${constructor.value.name}" th:data-color1="${constructor.value.principalColor}" th:data-color2="${constructor.value.secondaryColor}"></button>
-								  </div> -->
-	      					</div>
+	      					<div class="teams-list"></div>
 	      					<div class="team-colors text-center">
 								  <label for="color1">Principal color</label>
 								  <input type="color" name="color1" class="form-control">

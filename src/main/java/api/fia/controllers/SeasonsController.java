@@ -58,9 +58,9 @@ public class SeasonsController {
 		}
 		
 		//Get the teams and drivers of the season
-		Map<Integer, Driver> otherDrivers = (Map<Integer, Driver>) session.getAttribute("drivers");
+		Map<Integer, Driver> allDrivers = (Map<Integer, Driver>) session.getAttribute("drivers");
 		if(selectedSeason.getConstructors() == null) {
-			Map<Integer, Constructor> constructors = seasonsService.getSeasonConstructors(season, selectedCategory.getId(), otherDrivers);
+			Map<Integer, Constructor> constructors = seasonsService.getSeasonConstructors(season, selectedCategory.getId(), allDrivers);
 			selectedSeason.setConstructors(constructors);
 		}
 		
@@ -68,7 +68,6 @@ public class SeasonsController {
 		model.addAttribute("category", selectedCategory);
 		model.addAttribute("countries", session.getAttribute("countries"));
 		model.addAttribute("season", selectedSeason);
-		model.addAttribute("drivers", otherDrivers);
 		((Map<String, Category>) session.getAttribute("categories")).put(selectedCategory.getAbbr(), selectedCategory);
 		
 		return "season-details";
@@ -91,6 +90,19 @@ public class SeasonsController {
 	            .filter(entry -> !teamsIds.contains(entry.getKey()))
 	            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		List<Map.Entry<Integer, Constructor>> entryList = new ArrayList<>(filteredConstructors.entrySet());
+		
+		return objectMapper.writeValueAsString(entryList);
+	}
+	
+	/** 
+	 * Load all drivers
+	 * **/
+	@GetMapping("/other/drivers")
+	public @ResponseBody String loadOtherDrivers(Model model, HttpSession session) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+		
+        Map<Integer, Driver> drivers = (Map<Integer, Driver>) session.getAttribute("drivers");
+		List<Map.Entry<Integer, Driver>> entryList = new ArrayList<>(drivers.entrySet());
 		
 		return objectMapper.writeValueAsString(entryList);
 	}

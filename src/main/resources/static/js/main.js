@@ -307,6 +307,51 @@ function closeLoadingAlert() {
 	loadingAlert = null;
 }
 
+/************************************************** Driver cards **************************************************/
+function generateDriverCardFromJs(id, firstname, lastname, country, teamId, teamColor, currentSeason, seasonCategory, number) {
+	const helmetImageLayer = $('<div>').addClass('helmet-image-layer');
+	const driverImageLayer = $('<div>').addClass('driver-image-layer');
+	const overlay = $('<div>').addClass('overlay');
+	const overlayName = $('<div>').addClass('overlay-name');
+	
+	if(number > 0) {
+		const overlayNumber = $("<div>").addClass("number").text(number);
+		$(overlay).append(overlayNumber);
+	}
+	const overlayAbbr = $("<div>").addClass("abbr").text(lastname.slice(0, 3).toUpperCase());
+	const overlayCountry = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/countries/${country}.png`).addClass("flag").attr("data-value", country);
+	$(overlay).append(overlayAbbr).append(overlayCountry);
+	
+	if(teamId > 0) {
+		const helmetImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/teams/backgrounds/${teamId}.png`);
+		$(helmetImageLayer).append(helmetImageLayerImg);
+		const driverImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/drivers/${currentSeason}/${seasonCategory}/${teamId}/${id}.png`).attr("onerror", "loadDefaultDriverImage(this)");
+		$(driverImageLayer).append(driverImageLayerImg);
+		const overlayTeam = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/teams/${teamId}.png`).addClass("team");
+		$(overlay).append(overlayTeam);
+	} else {
+		const driverImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/drivers/default.png`);
+		$(driverImageLayer).append(driverImageLayerImg);
+	}
+	
+	const overlayNameFirstname = $('<div>').addClass('first-name').text(firstname);
+	const overlayNameLastname = $('<div>').addClass('last-name').text(lastname);
+	$(overlayName).append(overlayNameFirstname).append(overlayNameLastname);
+	
+	const driverCardBg = $('<div>').addClass('driver-card card-background')
+		.append(helmetImageLayer)
+		.append(driverImageLayer)
+		.append(overlay)
+		.append(overlayName);
+	
+	const driverCardInner = $('<div>').addClass('flip-card-inner').append(driverCardBg);
+	
+	const driverCardHTML = $('<div>').addClass('flip-card').css('--team-color', teamColor)
+		.append(driverCardInner);
+	
+	return driverCardHTML;
+}
+
 /************************************************** Team cards **************************************************/
 function generateTeamCardFromJs(id, name, color, country) {
 	const bgImageLayerImg = $('<img>').attr('src', `${window.location.origin}/${contextPath}/img/teams/backgrounds/${id}.png`);
