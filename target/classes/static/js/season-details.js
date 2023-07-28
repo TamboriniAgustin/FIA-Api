@@ -272,6 +272,82 @@ $( document ).ready(function() {
 		$("#modalAddTeam .pagination").show();
 		$("#modalAddTeam .close-button").show();
 	});
+
+
+	//Show race results
+	$(".season-gps table td.actions #show-gp-results").on("click", function() {
+		const raceContainer = $(this).parent().parent().parent();
+
+		if($(raceContainer).hasClass("active")) {
+			$(raceContainer).removeClass("active");
+			$(raceContainer).next().hide();
+		} else {
+			$(raceContainer).addClass("active");
+			$(raceContainer).next().find(".weekend-results-options button.admin-features").hide();
+			$(raceContainer).next().find(".weekend-results-options button:not(.admin-features)").show();
+			$(raceContainer).next().show();
+		}
+	});
+
+	$(".season-gps table .weekend-results-options .show-qualifying").on("click", function() {
+		$(".season-gps table .weekend-results-options button").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".qualifying-table").show();
+	});
+
+	$(".season-gps table .weekend-results-options .show-sprint-race").on("click", function() {
+		$(".season-gps table .weekend-results-options button").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".sprint-race-table").show();
+	});
+
+	$(".season-gps table .weekend-results-options .show-race").on("click", function() {
+		$(".season-gps table .weekend-results-options button").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".race-table").show();
+	});
+
+	$(".season-gps table .weekend-results-options .show-driver-standings").on("click", function() {
+		$(".season-gps table .weekend-results-options button").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".drivers-standings-table").show();
+	});
+
+	$(".season-gps table .weekend-results-options .show-constructor-standings").on("click", function() {
+		$(".season-gps table .weekend-results-options button").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".constructors-standings-table").show();
+	});
+
+	//Edit race results
+	$(".season-gps table td.actions #config-gp-race").on("click", function() {
+		const raceContainer = $(this).parent().parent().parent();
+
+		if($(raceContainer).hasClass("active")) {
+			$(raceContainer).removeClass("active");
+			$(raceContainer).next().hide();
+		} else {
+			$(raceContainer).addClass("active");
+			$(raceContainer).next().find(".weekend-results-options button:not(.admin-features)").hide();
+			$(raceContainer).next().find(".weekend-results-options button.admin-features").show();
+			$(raceContainer).next().show();
+		}
+	});
 });
 			
 /** Functions **/

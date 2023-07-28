@@ -52,11 +52,1896 @@
 							</div>
 						</li>
 						
+						<!-- Calendar & Results -->
 						<li class="splide__slide">
 							<div class="splide-content">
-								<h1 class="title">CALENDAR & RESULTS <span class="category">FORMULA 2</span> <span class="season">2023</span></h1>
+								<h1 class="title">CALENDAR & RESULTS <span class="category" th:text="${#strings.toUpperCase(category.name)}" th:data-abbr="${category.abbr}"></span> <span class="season" th:text="${season.year}"></span></h1>
+								
+								<div class="season-gps">
+									<table class="table table-striped">
+								  		<thead>
+								    		<tr>
+								      			<th scope="col" width="10%">Round</th>
+								      			<th scope="col" width="20%">Date</th>
+								      			<th scope="col" width="60%">Event</th>
+												<th scope="col" width="10%"></th>
+								    		</tr>
+								  		</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row">1</th>
+												<td>2023.07.26</td>
+												<td class="gp-info">
+												  <div class="d-flex justify-content-start align-items-start">
+													  <img th:src="@{'/img/countries/AR.png'}" class="country">
+													  <div class="gp">														  
+														  <p class="gp-name">Bahrein Grand Prix</p>
+														  <small class="circuit">Bahrein International Circuit</small>
+													  </div>
+												  </div>
+											  </td>
+											  <td class="actions">
+												  <div class="d-flex flex-column justify-content-center align-items-center">
+													  <i id="config-gp-race" class="fa-solid fa-square-pen admin-features" data-toggle="tooltip" data-bs-original-title="Config race"></i>
+													  <i id="show-gp-results" class="fa-solid fa-circle-chevron-down" data-toggle="tooltip" data-bs-original-title="Show results"></i>
+												  </div>
+											  </td>
+										  	</tr>
+											<tr style="display: none;">
+												<td colspan="1" class="weekend-results-options">
+													<img th:src="@{'/img/tracks/monaco.png'}" class="track">
+													<button class="active show-qualifying">Qualifying</button>
+													<button class="show-sprint-race">Sprint race</button>
+													<button class="show-race">Race</button>
+													<button class="show-driver-standings">Driver championship standings</button>
+													<button class="show-constructor-standings">Constructor championship standings</button>
+													<button class="admin-features edit-qualifying" style="display: none;">Edit qualifying</button>
+													<button class="admin-features edit-sprint-race" style="display: none;">Edit Sprint race</button>
+													<button class="admin-features edit-race" style="display: none;">Edit race</button>
+												</td>
+												<td colspan="3" class="weekend-results">
+													<table class="table table-striped qualifying-table">
+														<thead>
+															<tr>
+																<th scope="col">Pos.</th>
+																<th scope="col">Car N°</th>
+																<th scope="col">Driver</th>
+																<th scope="col">Team</th>
+																<th scope="col">Q1</th>
+																<th scope="col">Q2</th>
+																<th scope="col">Q3</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+																<td>1:09:121</td>
+															</tr>
+														</tbody>
+													</table>
+													<table class="table table-striped sprint-race-table" style="display: none;">
+														<thead>
+															<tr>
+																<th scope="col">Pos.</th>
+																<th scope="col">Car N°</th>
+																<th scope="col">Driver</th>
+																<th scope="col">Team</th>
+																<th scope="col">Starting Grid</th>
+																<th scope="col">Fastest lap</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+														</tbody>
+													</table>
+													<table class="table table-striped race-table" style="display: none;">
+														<thead>
+															<tr>
+																<th scope="col">Pos.</th>
+																<th scope="col">Car N°</th>
+																<th scope="col">Driver</th>
+																<th scope="col">Team</th>
+																<th scope="col">Starting Grid</th>
+																<th scope="col">Fastest lap</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>20</td>
+																<td>1:09:121</td>
+															</tr>
+														</tbody>
+													</table>
+													<table class="table table-striped drivers-standings-table" style="display: none;">
+														<thead>
+															<tr>
+																<th scope="col">Pos.</th>
+																<th scope="col">Car N°</th>
+																<th scope="col">Driver</th>
+																<th scope="col">Team</th>
+																<th scope="col">Pts.</th>
+																<th scope="col">Wins</th>
+																<th scope="col">Poles</th>
+																<th scope="col">Podiums</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>21</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start driver">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="driver-name">Max Verstappen</p>
+																	</div>
+																</td>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+														</tbody>
+													</table>
+													<table class="table table-striped constructors-standings-table" style="display: none;">
+														<thead>
+															<tr>
+																<th scope="col">Pos.</th>
+																<th scope="col">Team</th>
+																<th scope="col">Pts.</th>
+																<th scope="col">Wins</th>
+																<th scope="col">Poles</th>
+																<th scope="col">Podiums</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>
+																	<div class="d-flex justify-content-start align-items-start constructor">
+																		<img th:src="@{'/img/countries/AR.png'}" class="country">
+																		<p class="constructor-name">Red Bull Racing</p>
+																	</div>
+																</td>
+																<td>152</td>
+																<td>15</td>
+																<td>12</td>
+																<td>20</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr></tr>
+								  		</tbody>
+									</table>
+								</div>
 							</div>
 						</li>
+
 						<li class="splide__slide">
 							<div class="splide-content">
 								<h1 class="title">STANDINGS <span class="category">FORMULA 2</span> <span class="season">2023</span></h1>

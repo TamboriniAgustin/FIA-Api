@@ -55,6 +55,9 @@
 }
 
 /** Teams **/
+.teams-and-drivers {
+	width: 99.9%;
+}
 .teams-and-drivers .team {
 	display:flex;
 	justify-content: flex-start;
@@ -82,6 +85,8 @@
 .teams-and-drivers .team::-webkit-scrollbar-thumb {
   background-color: var(--team-color);
   outline: 1px solid var(--team-color);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .team .brand {
 	width: 225px;
@@ -411,4 +416,97 @@
 	#addTeamFilters .filter-types #countries-menu {
 		margin-left: 3px;
 	}
+}
+
+/** Grand prixs and races **/
+.season-gps {
+	overflow-x: auto;
+}
+.season-gps .table>:not(:first-child) {
+	border-top: 2px solid var(--background-color);
+}
+.season-gps .table tr.active {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+.season-gps .table tr.active:nth-of-type(odd)>* {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+.season-gps table .gp-info img.country {
+	width: 30px;
+}
+.season-gps table .gp-info .gp {
+	white-space: nowrap;
+}
+.season-gps table .gp-info .gp-name {
+	margin: 0;
+    font-size: 19.5px;
+    font-weight: bold;
+}
+.season-gps table .actions div {
+	height: 53px;
+	gap: 5px;
+}
+.season-gps table .actions div i {
+	margin: 0;
+    cursor: pointer;
+    font-size: 20px;
+	opacity: 0.8;
+    transition: all .2s linear;
+}
+.season-gps table .actions div i:hover {
+	opacity: 1;
+}
+.season-gps table tr.active .actions div i#show-gp-results {
+	transform: rotate(180deg);
+}
+.season-gps table .gp-results-container {
+	gap: 10px;
+}
+.season-gps table .weekend-results-options {
+	box-shadow: none;
+	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.season-gps table .weekend-results-options img.track {
+	width: 100%;
+    height: 100px;
+    background: white;
+}
+.season-gps table .weekend-results-options button {
+	width: 100%;
+    padding: 15px 10px;
+    border: none;
+    outline: none;
+	font-size: 12px;
+	background: var(--background-color);
+    color: var(--text-color);
+	transition: all .2s linear;
+}
+.season-gps table .weekend-results-options button.active {
+	font-weight: bold;
+	border-bottom: 2px solid var(--text-color);
+}
+.season-gps table .weekend-results-options button:hover {
+	background: var(--text-color);
+	color: var(--background-color);
+}
+.season-gps table .weekend-results {
+	background: white;
+	box-shadow: none;
+}
+.season-gps table .weekend-results table.table>:not(caption)>*>* {
+	border-bottom: none;
+}
+.season-gps table .weekend-results .driver img.country, 
+.season-gps table .weekend-results .constructor img.country {
+	width: 25px;
+}
+.season-gps table .weekend-results .driver .driver-name,
+.season-gps table .weekend-results .constructor .constructor-name {
+	margin: 0;
 }
