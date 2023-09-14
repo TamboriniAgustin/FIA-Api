@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	$('[data-toggle="tooltip"]').tooltip();
-	
+
 	//Splide
 	new Splide('.splide', {
 		arrows: false,
@@ -273,7 +273,6 @@ $( document ).ready(function() {
 		$("#modalAddTeam .close-button").show();
 	});
 
-
 	//Show race results
 	$(".season-gps table td.actions #show-gp-results").on("click", function() {
 		const raceContainer = $(this).parent().parent().parent();
@@ -285,6 +284,10 @@ $( document ).ready(function() {
 			$(raceContainer).addClass("active");
 			$(raceContainer).next().find(".weekend-results-options button.admin-features").hide();
 			$(raceContainer).next().find(".weekend-results-options button:not(.admin-features)").show();
+			$(raceContainer).next().find(".weekend-results table").hide();
+			$(raceContainer).next().find(".weekend-results table.qualifying-table").show();
+			$(raceContainer).next().find(".weekend-results-options button").removeClass("active");
+			$(raceContainer).next().find(".weekend-results-options button.show-qualifying").addClass("active");
 			$(raceContainer).next().show();
 		}
 	});
@@ -345,8 +348,113 @@ $( document ).ready(function() {
 			$(raceContainer).addClass("active");
 			$(raceContainer).next().find(".weekend-results-options button:not(.admin-features)").hide();
 			$(raceContainer).next().find(".weekend-results-options button.admin-features").show();
+			$(raceContainer).next().find(".weekend-results table").hide();
+			$(raceContainer).next().find(".weekend-results table.custom-qualifying-table").show();
+			$(raceContainer).next().find(".weekend-results-options button").removeClass("active");
+			$(raceContainer).next().find(".weekend-results-options button.edit-qualifying").addClass("active");
 			$(raceContainer).next().show();
 		}
+	});
+
+	$(".season-gps table .weekend-results table.custom-table td .delete-car").on("click", function() {
+		dropDriverFromResult($(this));
+		$('.tooltip-inner').remove();
+		$(".tooltip-arrow").remove();
+	});
+
+	$(".season-gps table .weekend-results table.custom-table th .new-car").on("click", function() {
+		var cars = $(".drivers .driver-card .overlay .number").map(function() {
+			return $(this).text();
+		}).get();
+		cars = [...new Set(cars)];
+		cars = cars.sort(function(a, b) {
+			return a - b;
+		});		
+
+		addNewCarToResultStep1($(this), cars);
+	});
+
+	$(".season-gps table .weekend-results table.custom-table tbody").sortable({
+        items: "tr.draggable-row",
+        axis: "y",
+        cursor: "move",
+        handle: "th"
+    });
+    $(".season-gps table .weekend-results table.custom-table tbody").disableSelection();
+
+	$(".season-gps table .weekend-results-options .edit-qualifying").on("click", function() {
+		$(".season-gps table .weekend-results-options button.admin-features").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".custom-qualifying-table").show();
+	});
+	$(".season-gps table .weekend-results-options .edit-sprint-race").on("click", function() {
+		$(".season-gps table .weekend-results-options button.admin-features").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".custom-sprint-race").show();
+	});
+	$(".season-gps table .weekend-results-options .edit-race").on("click", function() {
+		$(".season-gps table .weekend-results-options button.admin-features").removeClass("active");
+		$(this).addClass("active");
+
+		const resultsContainer = $(this).parent().next();
+		$(resultsContainer).find("table").hide();
+		$(resultsContainer).find(".custom-race").show();
+	});
+
+	//Add new gp
+	$(".add-grand-prix").on("click", function() {
+		if($(".season-gps table .new-gp").is(":visible")) {
+			$(".season-gps table .new-gp").hide();
+			$(this).removeClass("fa-solid fa-circle-minus").addClass("fa fa-plus-circle");
+		} else {
+			$(".season-gps table .new-gp").show();
+			$(this).removeClass("fa fa-plus-circle").addClass("fa-solid fa-circle-minus");
+		}
+	});
+
+	//Edit gp
+	$(".season-gps table td.actions #config-gp-data").on("click", function() {
+		if($(".season-gps table .edit-round").is(":visible")) {
+			$(".season-gps table .edit-round").hide();
+		} else {
+			const raceContainer = $(this).parent().parent().parent();
+			const currentRoundNumber = $(raceContainer).find("th").text(); 
+			const currentRoundDate = $(raceContainer).find("td:first-of-type").text();
+			const currentRoundGp = $(raceContainer).find("td.gp-info .gp-name").attr("data-id");
+			const currentRoundCircuit = $(raceContainer).find("td.gp-info .circuit").attr("data-id");
+			$(".season-gps table .edit-round input[name='roundNumber']").val(currentRoundNumber);
+			$(".season-gps table .edit-round input[name='roundDate']").val(currentRoundDate);
+			$(".season-gps table .edit-round input[name='roundNumber']").val(currentRoundNumber);
+			$(".season-gps table .edit-round select[name='roundRace']").val(currentRoundGp);
+			$(".season-gps table .edit-round select[name='roundCircuit']").val(currentRoundCircuit);
+			$(".season-gps table .edit-round").show();
+		}
+	});
+
+	//Delete gp
+	$(".season-gps table td.actions #delete-gp").on("click", function() { 
+		$(this).parent().parent().parent().remove();
+		$('.tooltip-inner').remove();
+		$(".tooltip-arrow").remove();
+	});
+
+	//Inputs formats and validations
+	$("input[name='roundDate']").on("input", function() {
+		// Eliminar cualquier caracter que no sea un número o un punto (.)
+		var formattedValue = $(this).val().replace(/[^0-9.]/g, '');
+
+		if(formattedValue.length == 4 || formattedValue.length == 7) {
+			formattedValue += ".";
+		}
+		
+		// Actualizar el valor del campo de entrada
+		$(this).val(formattedValue);
 	});
 });
 			
@@ -422,6 +530,225 @@ function hideCurrentTeamDriver(id, firstName, lastName) {
     const formOption = $("<option>");
     $(formOption).attr("value", id).text(firstName+" "+lastName);
     $("#modalAddDriver .selected-driver select[name='driverReplaced']").append(formOption);
+}
+
+function addNewCarToResultStep1(element, carsNumbers) {
+	//Add the new row
+	const $draggableHandlerIcon = $("<i>");
+	$draggableHandlerIcon.addClass("fa-solid fa-bars");
+
+	const $draggableHandler = $("<th>");
+	$draggableHandler.attr("scope", "row");
+	$draggableHandler.addClass("ui-sortable-handle");
+	$draggableHandler.append($draggableHandlerIcon);
+
+	const $carNumberSelect = $("<select>");
+	$carNumberSelect.attr("id", "newCarNumber");
+	$carNumberSelect.attr("onchange", "addNewCarToResultStep2(this)");
+	$carNumberSelect.addClass("form-control");
+	$carNumberSelect.append("<option selected disabled>N°</option>");
+	carsNumbers.forEach(function(car) {
+		const $option = $("<option>");
+		$option.attr("value", car);
+		$option.text(car);
+		$carNumberSelect.append($option);
+	});
+
+	const $carNumber = $("<td>");
+	$carNumber.attr("colspan", 2);
+	$carNumber.append($carNumberSelect);
+
+	const $driversInputSelect = $("<select>");
+	$driversInputSelect.attr("id", "newCarDrivers");
+	$driversInputSelect.attr("multiple", true);
+	$driversInputSelect.attr("disabled", true);
+	$driversInputSelect.attr("onchange", "addNewCarToResultStep3(this)");
+	$driversInputSelect.addClass("form-control");
+
+	const $driversInputContainer = $("<div>");
+	$driversInputContainer.addClass("d-flex flex-column justify-content-start align-items-start driver");
+	$driversInputContainer.append($driversInputSelect);
+
+	const $drivers = $("<td>");
+	$drivers.attr("colspan", 3);
+	$drivers.append($driversInputContainer);
+
+	const $successButton = $("<button>");
+	$successButton.attr("type", "button");
+	$successButton.attr("disabled", true);
+	$successButton.attr("onclick", "confirmNewCarForResult(this)");
+	$successButton.addClass("btn btn-success");
+	$successButton.text("Save");
+
+	const $cancelButton = $("<button>");
+	$cancelButton.attr("type", "button");
+	$cancelButton.attr("disabled", true);
+	$cancelButton.attr("onclick", "discardNewCarForResult(this)");
+	$cancelButton.addClass("btn btn-danger");
+	$cancelButton.text("Discard");
+
+	const $actionsButtonsContainer = $("<div>");
+	$actionsButtonsContainer.addClass("d-flex flex-column justify-content-center align-items-center actions");
+	$actionsButtonsContainer.append($successButton);
+	$actionsButtonsContainer.append($cancelButton);
+
+	const $actions = $("<td>");
+	$actions.append($actionsButtonsContainer);
+
+	const $row = $("<tr>");
+	$row.addClass("draggable-row active-customization");
+	$row.append($draggableHandler);
+	$row.append($carNumber);
+	$row.append($drivers);
+	$row.append($actions);
+
+	$(element).parent().parent().before($row);
+}
+
+function addNewCarToResultStep2(element) { 
+	const selectedCar = element.value;
+	const carDrivers = $(".teams-and-drivers .team .drivers .driver:not(.replaced)").filter(function() {
+		return $(this).find(".overlay .number").text() == selectedCar;
+	});
+
+	$(element).parent().next().find("#newCarDrivers").empty();
+	carDrivers.each(function() {
+		const driverId = $(this).attr("data-id");
+		const driverName = $(this).find(".overlay-name .last-name").text() + ", " + $(this).find(".overlay-name .first-name").text();
+		
+		const $option = $("<option>");
+		$option.attr("value", driverId);
+		$option.text(driverName);
+		$(element).parent().next().find("#newCarDrivers").append($option);
+	});
+	$(element).parent().next().find("#newCarDrivers").attr("disabled", false);
+}
+
+function addNewCarToResultStep3(element) {
+	const selectedDrivers = $(element).val();
+	if(selectedDrivers.length > 0) {
+		$(element).parent().parent().next().find("button").attr("disabled", false);
+	} else {
+		$(element).parent().parent().next().find("button").attr("disabled", true);
+	}
+}
+
+function confirmNewCarForResult(element) {
+	//Get the car data
+	const carData = $(element).parent().parent().prev().prev().find("#newCarNumber").val();
+	const drivers = $(element).parent().parent().prev().find("#newCarDrivers").val();
+
+	//Add the new row
+	const $draggableHandlerIcon = $("<i>");
+	$draggableHandlerIcon.addClass("fa-solid fa-bars");
+
+	const $draggableHandler = $("<th>");
+	$draggableHandler.attr("scope", "row");
+	$draggableHandler.addClass("ui-sortable-handle");
+	$draggableHandler.append($draggableHandlerIcon);
+
+	const $carNumber = $("<td>");
+	$carNumber.text(carData);
+
+	const $driversContainer = $("<div>");
+	$driversContainer.addClass("d-flex flex-column justify-content-start align-items-start driver");
+	drivers.forEach(function(driverId) {
+		const driver = $(`.teams-and-drivers .team .driver[data-id='${driverId}']:not(.replaced)`);
+		
+		const $driverPicture = $(driver).find(".driver-image-layer img").clone().addClass("picture");
+		const $removeDriverAction = $("<i>");
+		$removeDriverAction.addClass("fa-solid fa-delete-left delete-car");
+		$removeDriverAction.attr("aria-hidden", "true");
+		$removeDriverAction.attr("data-toggle", "tooltip");
+		$removeDriverAction.attr("data-bs-original-title", "Drop driver");
+		$removeDriverAction.attr("aria-label", "Drop driver");
+		$removeDriverAction.attr("onclick", "dropDriverFromResult(this)");
+		$removeDriverAction.tooltip();
+		const $driverName = $("<p>");
+		$driverName.addClass("driver-name");
+		$driverName.text($(driver).find(".overlay-name .first-name").text() + " " + $(driver).find(".overlay-name .last-name").text());
+		$driverName.append($removeDriverAction);
+		const $driverDiv = $("<div>");
+		$driverDiv.addClass("d-flex justify-content-start align-items-start driver");
+		$driverDiv.append($driverPicture);
+		$driverDiv.append($driverName);
+
+		$driversContainer.append($driverDiv);
+	});
+	const $drivers = $("<td>");
+	$drivers.append($driversContainer);
+
+	const $teamElement = $(`.teams-and-drivers .team .driver[data-id='${drivers[0]}']:not(.replaced)`).parent().parent();
+	const $teamLogo = $teamElement.find(".brand .logo").clone();
+	const $teamName = $teamElement.find(".brand h4").text();
+	const $teamContainer = $("<div>");
+	$teamContainer.addClass("d-flex justify-content-start align-items-start constructor");
+	$teamContainer.append($teamLogo);
+	$teamContainer.append($teamName);
+	const $team = $("<td>");
+	$team.append($teamContainer);
+
+	const $row = $("<tr>");
+	$row.addClass("draggable-row active-customization");
+	$row.append($draggableHandler);
+	$row.append($carNumber);
+	$row.append($drivers);
+	$row.append($team);
+
+	//Map the fields for specific rules
+	const raceRules = {
+		tableType: $(element).parent().parent().parent().parent().parent().attr("data-type"),
+		qnumber: $(element).parent().parent().parent().parent().parent().attr("data-qnumbers")
+	}
+	mapRaceRulesFields($row, raceRules);
+
+	$(element).parent().parent().parent().before($row);
+	$(element).parent().parent().parent().remove();
+}
+
+function mapRaceRulesFields(row, rules) {
+	if(rules.tableType == "QUALY") {
+		for (let i=0; i<rules.qnumber; i++) {
+			const $qTime = $("<td>");
+			
+			const $input = $("<input>");
+			$input.addClass("form-control");
+			$input.attr("type", "text");
+			
+			$qTime.append($input);
+			$(row).append($qTime);
+		}
+	} else if(rules.tableType == "RACE") {
+		const $startingGrid = $("<td>");
+		const $startingGridInput = $("<input>");
+		$startingGridInput.addClass("form-control");
+		$startingGridInput.attr("type", "number");
+		$startingGrid.append($startingGridInput);
+
+		const $fastestLap = $("<td>");
+		const $fastestLapInput = $("<input>");
+		$fastestLapInput.addClass("form-control");
+		$fastestLapInput.attr("type", "text");
+		$fastestLap.append($fastestLapInput);
+
+		$(row).append($startingGrid);
+		$(row).append($fastestLap);
+	}
+}
+
+function discardNewCarForResult(element) {
+	$(element).parent().parent().parent().remove();
+}
+
+function dropDriverFromResult(element) {
+	const $driversContainer = $(element).parent().parent().parent();
+	if($driversContainer.children().length > 1) {
+		const $driverContainer = $(element).parent().parent();
+		$driverContainer.remove();
+	} else {
+		const $row = $driversContainer.parent().parent();
+		$row.remove();
+	}
 }
 
 function ajaxTeamsListeds(data) {

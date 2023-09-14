@@ -2,10 +2,10 @@
 -- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 04-05-2022 a las 16:13:46
--- Versión del servidor: 5.7.24
--- Versión de PHP: 7.4.1
+-- Host: localhost:3306
+-- Generation Time: Sep 14, 2023 at 05:57 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,25 +19,199 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `fia`
+-- Database: `fia`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `continents`
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(20) NOT NULL,
+  `category_abbr` varchar(5) NOT NULL,
+  `category_color_text` varchar(10) NOT NULL,
+  `category_color_background` varchar(10) NOT NULL,
+  `category_color_hover` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_abbr`, `category_color_text`, `category_color_background`, `category_color_hover`) VALUES
+(1, 'Formula 1', 'F1', '#FFFFFF', '#E10600', '#000000'),
+(2, 'Formula 2', 'F2', '#FFFFFF', '#0090D0', '#004267'),
+(3, 'Formula 3', 'F3', '#FFFFFF', '#E90300', '#37373F'),
+(4, 'Formula E', 'FE', '#FFFFFF', '#00F', '#00005A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `constructors`
+--
+
+CREATE TABLE `constructors` (
+  `constructor_id` int(11) NOT NULL,
+  `constructor_name` varchar(60) NOT NULL,
+  `constructor_country` int(11) NOT NULL,
+  `constructor_principal_color` varchar(10) DEFAULT NULL,
+  `constructor_secondary_color` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `constructors`
+--
+
+INSERT INTO `constructors` (`constructor_id`, `constructor_name`, `constructor_country`, `constructor_principal_color`, `constructor_secondary_color`) VALUES
+(1, 'Alfa Romeo', 109, '#8f2d3a', '#ffffff'),
+(2, 'Scuderia Ambrosiana', 109, NULL, NULL),
+(3, 'Talbot-Lago', 74, '#0055a6', '#ffffff'),
+(4, 'Ecurie Belge', 21, NULL, NULL),
+(5, 'Maserati', 109, '#b73d47', '#ffffff'),
+(6, 'Scuderia Achille Varzi', 11, NULL, NULL),
+(8, 'Equipe Gordini', 74, NULL, NULL),
+(10, 'Scuderia Ferrari', 109, NULL, NULL),
+(11, 'Scuderia Milano', 109, NULL, NULL),
+(16, 'GA Vandervell', 76, NULL, NULL),
+(17, 'British Racing Motors', 76, NULL, NULL),
+(18, 'OSCA Automobili', 109, NULL, NULL),
+(19, 'AFM', 56, NULL, NULL),
+(22, 'ERA', 76, '#577279', '#000000'),
+(23, 'Ecurie Francorchamps', 21, NULL, NULL),
+(27, 'Connaught Engineering', 76, NULL, NULL),
+(28, 'Ecurie Ecosse', 76, NULL, NULL),
+(32, 'Cooper Car Company', 76, NULL, NULL),
+(36, 'EMW', 56, NULL, NULL),
+(39, 'Mercedes-Benz', 56, NULL, NULL),
+(40, 'Gilby Engineering', 76, NULL, NULL),
+(41, 'Vanwall', 76, NULL, NULL),
+(45, 'Scuderia Lancia', 109, NULL, NULL),
+(46, 'Equipe Nationale Belge', 21, NULL, NULL),
+(47, 'Scuderia Volpini', 109, NULL, NULL),
+(48, 'Scuderia Centro Sud', 109, NULL, NULL),
+(49, 'Automobiles Bugatti', 74, NULL, NULL),
+(52, 'Porsche', 56, NULL, NULL),
+(54, 'Ecurie Maarsbergen', 165, NULL, NULL),
+(55, 'Team Lotus', 76, NULL, NULL),
+(57, 'Kurtis Kraft', 230, NULL, NULL),
+(58, 'Tec-Mec', 109, NULL, NULL),
+(61, 'Aston Martin', 76, NULL, NULL),
+(62, 'Scarab', 230, NULL, NULL),
+(63, 'De Tomaso Automobili', 109, NULL, NULL),
+(66, 'Lola Cars', 76, NULL, NULL),
+(67, 'Brabham Racing Organisation', 76, NULL, NULL),
+(69, 'Automobili Turismo e Sport', 109, NULL, NULL),
+(71, 'Stebro', 38, NULL, NULL),
+(72, 'British Racing Partnership', 76, NULL, NULL),
+(73, 'Honda', 113, NULL, NULL),
+(74, 'Shannon Racing Cars', 76, NULL, NULL),
+(75, 'All American Racers', 230, NULL, NULL),
+(76, 'McLaren', 76, NULL, NULL),
+(77, 'Matra Sports', 74, NULL, NULL),
+(78, 'Bellasi', 43, NULL, NULL),
+(79, 'Tyrrell Racing', 76, NULL, NULL),
+(80, 'Surtees Racing Organisation', 76, NULL, NULL),
+(81, 'March Engineering', 76, NULL, NULL),
+(82, 'Connew Racing Team', 76, NULL, NULL),
+(83, 'Williams Racing Cars', 76, NULL, NULL),
+(84, 'Tecno Racing Team', 109, NULL, NULL),
+(85, 'Team Eifelland', 56, NULL, NULL),
+(86, 'Ensign Racing Team', 76, NULL, NULL),
+(87, 'Shadow Racing Cars', 230, NULL, NULL),
+(88, 'Lyncar', 76, NULL, NULL),
+(89, 'Maki Engineering', 113, NULL, NULL),
+(90, 'Chris Amon Racing', 170, NULL, NULL),
+(91, 'Token Racing', 76, NULL, NULL),
+(92, 'Team Penske', 230, NULL, NULL),
+(93, 'Trojan–Tauranac Racing', 76, NULL, NULL),
+(94, 'Vel\'s Parnelli Jones Racing', 230, NULL, NULL),
+(95, 'Hesketh Racing', 76, NULL, NULL),
+(96, 'Oreste Berta', 11, NULL, NULL),
+(97, 'Fittipaldi Automotive', 31, NULL, NULL),
+(98, 'Embassy Hill Racing', 76, NULL, NULL),
+(99, 'Kojima Engineering', 113, NULL, NULL),
+(100, 'Boro', 165, NULL, NULL),
+(101, 'Equipe Ligier', 74, NULL, NULL),
+(103, 'Apollon', 43, NULL, NULL),
+(104, 'Renault F1 Team', 74, NULL, NULL),
+(105, 'LEC Refrigeration Racing', 76, NULL, NULL),
+(106, 'Walter Wolf Racing', 38, NULL, NULL),
+(107, 'Theodore Racing', 94, NULL, NULL),
+(108, 'Team Merzario', 109, NULL, NULL),
+(109, 'Automobiles Martini', 74, NULL, NULL),
+(110, 'ATS Wheels', 56, NULL, NULL),
+(111, 'Arrows G.P. International', 76, NULL, NULL),
+(112, 'Kauhsen Racing Team', 56, NULL, NULL),
+(113, 'Team Rebaque', 156, NULL, NULL),
+(114, 'Osella Squadra Corse', 109, NULL, NULL),
+(115, 'Toleman Motorsport', 76, NULL, NULL),
+(116, 'RAM Racing', 76, NULL, NULL),
+(117, 'Spirit Racing', 76, NULL, NULL),
+(118, 'Minardi F1 Team', 109, NULL, NULL),
+(119, 'Zakspeed', 56, NULL, NULL),
+(120, 'Automobiles Gonfaronnaises Sportives', 74, NULL, NULL),
+(121, 'Benetton Formula', 76, NULL, NULL),
+(122, 'Scuderia Coloni', 109, NULL, NULL),
+(123, 'EuroBrun Racing', 109, NULL, NULL),
+(124, 'Dallara', 109, NULL, NULL),
+(125, 'Rial Racing', 56, NULL, NULL),
+(126, 'Onyx Grand Prix', 76, NULL, NULL),
+(127, 'Life Racing Engines', 109, NULL, NULL),
+(128, 'Leyton House Racing', 76, NULL, NULL),
+(129, 'Footwork Arrows', 76, NULL, NULL),
+(130, 'Fondmetal', 109, NULL, NULL),
+(131, 'Modena Racing Team', 109, NULL, NULL),
+(132, 'Larrousse F1', 74, NULL, NULL),
+(133, 'Jordan Grand Prix', 101, NULL, NULL),
+(134, 'Andrea Moda Formula', 109, NULL, NULL),
+(135, 'Venturi', 74, NULL, NULL),
+(136, 'Sauber Motorsport', 43, NULL, NULL),
+(137, 'Pacific Racing', 76, NULL, NULL),
+(138, 'Simtek', 76, NULL, NULL),
+(139, 'Forti Corse', 109, NULL, NULL),
+(140, 'Stewart Grand Prix', 76, NULL, NULL),
+(141, 'Prost Grand Prix', 74, NULL, NULL),
+(142, 'British American Racing', 76, NULL, NULL),
+(143, 'Toyota Racing', 113, NULL, NULL),
+(144, 'Jaguar Racing', 76, NULL, NULL),
+(145, 'Red Bull Racing', 13, NULL, NULL),
+(146, 'Super Aguri F1', 113, NULL, NULL),
+(147, 'Midland F1 Racing', 190, NULL, NULL),
+(148, 'Scuderia Toro Rosso', 109, NULL, NULL),
+(149, 'BMW', 56, NULL, NULL),
+(150, 'Spyker F1 Team', 165, NULL, NULL),
+(151, 'Force India', 104, NULL, NULL),
+(152, 'Brawn Grand Prix', 76, NULL, NULL),
+(153, 'Virgin Racing', 76, NULL, NULL),
+(154, 'HRT F1 Team', 67, NULL, NULL),
+(155, 'Marussia F1 Team', 190, NULL, NULL),
+(156, 'Caterham F1 Team', 157, NULL, NULL),
+(157, 'Manor Racing', 76, NULL, NULL),
+(158, 'Haas F1 Team', 230, NULL, NULL),
+(159, 'Racing Point F1 Team', 76, NULL, NULL),
+(160, 'Alpha Tauri', 109, NULL, NULL),
+(161, 'Alpine F1 Team', 74, NULL, NULL),
+(162, 'Alta Car', 76, '#1c6b4f', '#ffffff');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `continents`
 --
 
 CREATE TABLE `continents` (
-  `code` char(2) NOT NULL COMMENT 'Continent code',
-  `name` varchar(255) DEFAULT NULL
+  `continent_code` char(2) NOT NULL COMMENT 'Continent code',
+  `continent_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Volcado de datos para la tabla `continents`
+-- Dumping data for table `continents`
 --
 
-INSERT INTO `continents` (`code`, `name`) VALUES
+INSERT INTO `continents` (`continent_code`, `continent_name`) VALUES
 ('AF', 'Africa'),
 ('AN', 'Antarctica'),
 ('AS', 'Asia'),
@@ -49,21 +223,21 @@ INSERT INTO `continents` (`code`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `countries`
+-- Table structure for table `countries`
 --
 
 CREATE TABLE `countries` (
   `country_id` int(11) NOT NULL,
-  `code` char(2) NOT NULL COMMENT 'Two-letter country code',
-  `name` varchar(64) NOT NULL COMMENT 'English country name',
-  `continent_code` char(2) NOT NULL
+  `country_code` char(2) NOT NULL COMMENT 'Two-letter country code',
+  `country_name` varchar(64) NOT NULL COMMENT 'English country name',
+  `country_continent_code` char(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Volcado de datos para la tabla `countries`
+-- Dumping data for table `countries`
 --
 
-INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
+INSERT INTO `countries` (`country_id`, `country_code`, `country_name`, `country_continent_code`) VALUES
 (1, 'AD', 'Andorra', 'EU'),
 (2, 'AE', 'United Arab Emirates', 'AS'),
 (3, 'AF', 'Afghanistan', 'AS'),
@@ -97,7 +271,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (31, 'BR', 'Brazil', 'SA'),
 (32, 'BS', 'Bahamas', 'NA'),
 (33, 'BT', 'Bhutan', 'AS'),
-(34, 'BV', 'Bouvet Island', 'AN'),
 (35, 'BW', 'Botswana', 'AF'),
 (36, 'BY', 'Belarus', 'EU'),
 (37, 'BZ', 'Belize', 'NA'),
@@ -149,7 +322,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (83, 'GL', 'Greenland', 'NA'),
 (84, 'GM', 'Gambia', 'AF'),
 (85, 'GN', 'Guinea', 'AF'),
-(86, 'GP', 'Guadeloupe', 'NA'),
 (87, 'GQ', 'Equatorial Guinea', 'AF'),
 (88, 'GR', 'Greece', 'EU'),
 (89, 'GS', 'South Georgia and South Sandwich Islands', 'AN'),
@@ -158,7 +330,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (92, 'GW', 'Guinea-Bissau', 'AF'),
 (93, 'GY', 'Guyana', 'SA'),
 (94, 'HK', 'Hong Kong', 'AS'),
-(95, 'HM', 'Heard and McDonald Islands', 'AN'),
 (96, 'HN', 'Honduras', 'NA'),
 (97, 'HR', 'Croatia', 'EU'),
 (98, 'HT', 'Haiti', 'NA'),
@@ -168,7 +339,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (102, 'IL', 'Israel', 'AS'),
 (103, 'IM', 'Isle of Man', 'EU'),
 (104, 'IN', 'India', 'AS'),
-(105, 'IO', 'British Indian Ocean Territory', 'AS'),
 (106, 'IQ', 'Iraq', 'AS'),
 (107, 'IR', 'Iran', 'AS'),
 (108, 'IS', 'Iceland', 'EU'),
@@ -242,7 +412,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (176, 'PH', 'Philippines', 'AS'),
 (177, 'PK', 'Pakistan', 'AS'),
 (178, 'PL', 'Poland', 'EU'),
-(179, 'PM', 'Saint Pierre and Miquelon', 'NA'),
 (180, 'PN', 'Pitcairn', 'OC'),
 (181, 'PR', 'Puerto Rico', 'NA'),
 (182, 'PS', 'Palestine', 'AS'),
@@ -250,7 +419,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (184, 'PW', 'Palau', 'OC'),
 (185, 'PY', 'Paraguay', 'SA'),
 (186, 'QA', 'Qatar', 'AS'),
-(187, 'RE', 'Reunion', 'AF'),
 (188, 'RO', 'Romania', 'EU'),
 (189, 'RS', 'Serbia', 'EU'),
 (190, 'RU', 'Russian Federation', 'EU'),
@@ -263,7 +431,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (197, 'SG', 'Singapore', 'AS'),
 (198, 'SH', 'Saint Helena', 'AF'),
 (199, 'SI', 'Slovenia', 'EU'),
-(200, 'SJ', 'Svalbard and Jan Mayen Islands', 'EU'),
 (201, 'SK', 'Slovakia', 'EU'),
 (202, 'SL', 'Sierra Leone', 'AF'),
 (203, 'SM', 'San Marino', 'EU'),
@@ -292,7 +459,6 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 (226, 'TZ', 'Tanzania', 'AF'),
 (227, 'UA', 'Ukraine', 'EU'),
 (228, 'UG', 'Uganda', 'AF'),
-(229, 'UM', 'United States Minor Outlying Islands', 'OC'),
 (230, 'US', 'United States of America', 'NA'),
 (231, 'UY', 'Uruguay', 'SA'),
 (232, 'UZ', 'Uzbekistan', 'AS'),
@@ -314,7 +480,7 @@ INSERT INTO `countries` (`country_id`, `code`, `name`, `continent_code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `drivers`
+-- Table structure for table `drivers`
 --
 
 CREATE TABLE `drivers` (
@@ -326,7 +492,7 @@ CREATE TABLE `drivers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `drivers`
+-- Dumping data for table `drivers`
 --
 
 INSERT INTO `drivers` (`driver_id`, `driver_name`, `driver_lastname`, `driver_country`, `driver_birthday`) VALUES
@@ -1077,28 +1243,191 @@ INSERT INTO `drivers` (`driver_id`, `driver_name`, `driver_lastname`, `driver_co
 (745, 'Yuji', 'Ide', 113, '1975-01-21'),
 (746, 'Yuki', 'Tsunoda', 113, '2000-05-11'),
 (747, 'Yves', 'Giraud-Cabantous', 74, '1904-10-08'),
-(748, 'Zsolt', 'Baumgartner', 99, '1981-01-01');
+(748, 'Zsolt', 'Baumgartner', 99, '1981-01-01'),
+(749, 'Johnnie', 'Parsons', 230, '1918-07-04'),
+(750, 'Bill', 'Holland', 230, '1907-12-18'),
+(751, 'Mauri', 'Rose', 230, '1906-05-26'),
+(752, 'Cecil', 'Green', 230, '1919-09-30'),
+(753, 'Lee', 'Wallard', 230, '1910-09-07'),
+(754, 'Joie', 'Chitwood', 230, '1912-04-14'),
+(755, 'Tony', 'Bettenhausen', 230, '1916-09-02'),
+(756, 'Walt', 'Faulkner', 230, '1918-02-06'),
+(757, 'George', 'Connor', 230, '1906-08-16'),
+(758, 'Paul', 'Russo', 230, '1914-04-14'),
+(759, 'Pat', 'Flaherty', 230, '1926-01-06');
+
+-- --------------------------------------------------------
 
 --
--- Índices para tablas volcadas
+-- Table structure for table `season_constructors`
+--
+
+CREATE TABLE `season_constructors` (
+  `season_year` int(11) NOT NULL,
+  `season_category` int(11) NOT NULL,
+  `season_constructor` int(11) NOT NULL,
+  `season_constructor_principal_color` varchar(10) NOT NULL,
+  `season_constructor_secondary_color` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `season_constructors`
+--
+
+INSERT INTO `season_constructors` (`season_year`, `season_category`, `season_constructor`, `season_constructor_principal_color`, `season_constructor_secondary_color`) VALUES
+(1950, 1, 1, '#8f2d3a', '#ffffff'),
+(1950, 1, 3, '#0055a6', '#ffffff'),
+(1950, 1, 5, '#b73d47', '#ffffff'),
+(1950, 1, 22, '#577279', '#000000'),
+(1950, 1, 162, '#1c6b4f', '#ffffff');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `season_gps`
+--
+
+CREATE TABLE `season_gps` (
+  `season_year` int(11) NOT NULL,
+  `season_category` int(11) NOT NULL,
+  `gp_id` int(11) NOT NULL,
+  `gp_name` varchar(30) NOT NULL,
+  `gp_country` int(11) NOT NULL,
+  `gp_track` int(11) NOT NULL,
+  `gp_length` int(11) NOT NULL,
+  `gp_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `season_gps`
+--
+
+INSERT INTO `season_gps` (`season_year`, `season_category`, `gp_id`, `gp_name`, `gp_country`, `gp_track`, `gp_length`, `gp_date`) VALUES
+(1950, 1, 1, 'British Grand Prix', 76, 1, 70, '1950-05-13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tracks`
+--
+
+CREATE TABLE `tracks` (
+  `track_id` int(11) NOT NULL,
+  `track_name` varchar(60) NOT NULL,
+  `track_country` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tracks`
+--
+
+INSERT INTO `tracks` (`track_id`, `track_name`, `track_country`) VALUES
+(1, 'Silverstone Circuit', 76),
+(2, 'Circuit de Monaco', 137),
+(3, 'Indianapolis Motor Speedway', 230),
+(4, 'Bremgarten Circuit', 43);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `track_variants`
+--
+
+CREATE TABLE `track_variants` (
+  `variant_id` int(11) NOT NULL,
+  `track_id` int(11) NOT NULL,
+  `variant_course` varchar(30) NOT NULL,
+  `variant_length` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `track_variants`
+--
+
+INSERT INTO `track_variants` (`variant_id`, `track_id`, `variant_course`, `variant_length`) VALUES
+(1, 1, 'Permanent racing facility', 4649);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transfer_market`
+--
+
+CREATE TABLE `transfer_market` (
+  `transfer_id` int(11) NOT NULL,
+  `transfer_season` int(11) NOT NULL,
+  `driver_id` int(11) NOT NULL,
+  `driver_number` int(11) NOT NULL,
+  `driver_replace` int(11) DEFAULT NULL,
+  `constructor_id` int(11) NOT NULL,
+  `constructor_seat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `transfer_market`
+--
+
+INSERT INTO `transfer_market` (`transfer_id`, `transfer_season`, `driver_id`, `driver_number`, `driver_replace`, `constructor_id`, `constructor_seat`) VALUES
+(1, 1950, 405, 1, NULL, 1, 1),
+(2, 1950, 71, 21, NULL, 5, 7),
+(3, 1950, 76, 12, NULL, 22, 5),
+(4, 1950, 90, 10, NULL, 5, 5),
+(5, 1950, 136, 11, NULL, 22, 4),
+(6, 1950, 148, 6, NULL, 5, 3),
+(7, 1950, 151, 5, NULL, 5, 2),
+(8, 1950, 186, 20, NULL, 5, 6),
+(9, 1950, 207, 17, NULL, 3, 4),
+(10, 1950, 236, 24, NULL, 162, 2),
+(11, 1950, 268, 2, NULL, 1, 2),
+(12, 1950, 374, 10, NULL, 5, 4),
+(13, 1950, 375, 23, NULL, 162, 1),
+(14, 1950, 391, 18, NULL, 3, 5),
+(15, 1950, 440, 8, NULL, 22, 1),
+(16, 1950, 447, 19, NULL, 5, 1),
+(17, 1950, 448, 15, NULL, 3, 2),
+(18, 1950, 455, 3, NULL, 1, 3),
+(19, 1950, 581, 9, NULL, 22, 2),
+(20, 1950, 589, 16, NULL, 3, 3),
+(21, 1950, 608, 4, NULL, 1, 4),
+(22, 1950, 712, 9, NULL, 22, 3),
+(23, 1950, 747, 14, NULL, 3, 1);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `continents`
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `category_name` (`category_name`),
+  ADD UNIQUE KEY `category_abbr` (`category_abbr`);
+
+--
+-- Indexes for table `constructors`
+--
+ALTER TABLE `constructors`
+  ADD PRIMARY KEY (`constructor_id`),
+  ADD UNIQUE KEY `constructor_name` (`constructor_name`),
+  ADD KEY `constructor_country` (`constructor_country`);
+
+--
+-- Indexes for table `continents`
 --
 ALTER TABLE `continents`
-  ADD PRIMARY KEY (`code`);
+  ADD PRIMARY KEY (`continent_code`);
 
 --
--- Indices de la tabla `countries`
+-- Indexes for table `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`country_id`),
-  ADD UNIQUE KEY `idx_code` (`code`) USING BTREE,
-  ADD KEY `idx_continent_code` (`continent_code`) USING BTREE;
+  ADD UNIQUE KEY `idx_code` (`country_code`) USING BTREE,
+  ADD KEY `idx_continent_code` (`country_continent_code`) USING BTREE;
 
 --
--- Indices de la tabla `drivers`
+-- Indexes for table `drivers`
 --
 ALTER TABLE `drivers`
   ADD PRIMARY KEY (`driver_id`),
@@ -1106,36 +1435,147 @@ ALTER TABLE `drivers`
   ADD KEY `driver_country` (`driver_country`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indexes for table `season_constructors`
+--
+ALTER TABLE `season_constructors`
+  ADD PRIMARY KEY (`season_year`,`season_category`,`season_constructor`),
+  ADD KEY `season_category` (`season_category`),
+  ADD KEY `season_constructor` (`season_constructor`);
+
+--
+-- Indexes for table `season_gps`
+--
+ALTER TABLE `season_gps`
+  ADD PRIMARY KEY (`season_year`,`season_category`,`gp_id`),
+  ADD KEY `season_category` (`season_category`),
+  ADD KEY `gp_country` (`gp_country`),
+  ADD KEY `gp_circuit` (`gp_track`);
+
+--
+-- Indexes for table `tracks`
+--
+ALTER TABLE `tracks`
+  ADD PRIMARY KEY (`track_id`),
+  ADD KEY `track_country` (`track_country`);
+
+--
+-- Indexes for table `track_variants`
+--
+ALTER TABLE `track_variants`
+  ADD PRIMARY KEY (`variant_id`,`track_id`),
+  ADD KEY `track_id` (`track_id`);
+
+--
+-- Indexes for table `transfer_market`
+--
+ALTER TABLE `transfer_market`
+  ADD PRIMARY KEY (`transfer_id`),
+  ADD KEY `constructor_id` (`constructor_id`),
+  ADD KEY `driver_id` (`driver_id`),
+  ADD KEY `driver_replace` (`driver_replace`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `countries`
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `constructors`
+--
+ALTER TABLE `constructors`
+  MODIFY `constructor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+
+--
+-- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 
 --
--- AUTO_INCREMENT de la tabla `drivers`
+-- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=749;
+  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=760;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT for table `tracks`
+--
+ALTER TABLE `tracks`
+  MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `track_variants`
+--
+ALTER TABLE `track_variants`
+  MODIFY `variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `transfer_market`
+--
+ALTER TABLE `transfer_market`
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `countries`
+-- Constraints for table `constructors`
+--
+ALTER TABLE `constructors`
+  ADD CONSTRAINT `constructors_ibfk_1` FOREIGN KEY (`constructor_country`) REFERENCES `countries` (`country_id`);
+
+--
+-- Constraints for table `countries`
 --
 ALTER TABLE `countries`
-  ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`continent_code`) REFERENCES `continents` (`code`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`country_continent_code`) REFERENCES `continents` (`continent_code`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `drivers`
+-- Constraints for table `drivers`
 --
 ALTER TABLE `drivers`
   ADD CONSTRAINT `drivers_ibfk_1` FOREIGN KEY (`driver_country`) REFERENCES `countries` (`country_id`);
+
+--
+-- Constraints for table `season_constructors`
+--
+ALTER TABLE `season_constructors`
+  ADD CONSTRAINT `season_constructors_ibfk_1` FOREIGN KEY (`season_category`) REFERENCES `categories` (`category_id`),
+  ADD CONSTRAINT `season_constructors_ibfk_2` FOREIGN KEY (`season_constructor`) REFERENCES `constructors` (`constructor_id`);
+
+--
+-- Constraints for table `season_gps`
+--
+ALTER TABLE `season_gps`
+  ADD CONSTRAINT `season_gps_ibfk_1` FOREIGN KEY (`season_category`) REFERENCES `categories` (`category_id`),
+  ADD CONSTRAINT `season_gps_ibfk_2` FOREIGN KEY (`gp_country`) REFERENCES `countries` (`country_id`),
+  ADD CONSTRAINT `season_gps_ibfk_3` FOREIGN KEY (`gp_track`) REFERENCES `tracks` (`track_id`);
+
+--
+-- Constraints for table `tracks`
+--
+ALTER TABLE `tracks`
+  ADD CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`track_country`) REFERENCES `countries` (`country_id`);
+
+--
+-- Constraints for table `track_variants`
+--
+ALTER TABLE `track_variants`
+  ADD CONSTRAINT `track_variants_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`track_id`);
+
+--
+-- Constraints for table `transfer_market`
+--
+ALTER TABLE `transfer_market`
+  ADD CONSTRAINT `transfer_market_ibfk_1` FOREIGN KEY (`constructor_id`) REFERENCES `constructors` (`constructor_id`),
+  ADD CONSTRAINT `transfer_market_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `drivers` (`driver_id`),
+  ADD CONSTRAINT `transfer_market_ibfk_3` FOREIGN KEY (`driver_replace`) REFERENCES `drivers` (`driver_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

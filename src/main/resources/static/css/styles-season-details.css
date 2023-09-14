@@ -502,11 +502,49 @@
 .season-gps table .weekend-results table.table>:not(caption)>*>* {
 	border-bottom: none;
 }
-.season-gps table .weekend-results .driver img.country, 
-.season-gps table .weekend-results .constructor img.country {
+.season-gps table .weekend-results .driver img.picture {
+	width: 25px;
+}
+.season-gps table .weekend-results .constructor img.logo {
 	width: 25px;
 }
 .season-gps table .weekend-results .driver .driver-name,
 .season-gps table .weekend-results .constructor .constructor-name {
 	margin: 0;
+}
+.season-gps table .weekend-results table td input {
+	height: 100%;
+    background: transparent;
+}
+.season-gps table .weekend-results table.custom-table tr.draggable-row {
+	cursor: grab;
+}
+.season-gps table .weekend-results table.custom-table tr.draggable-row i {
+	color: var(--background-color);
+}
+.season-gps table .weekend-results table.custom-table tr.draggable-row i.delete-car {
+	cursor: pointer;
+	color: #e30000;
+}
+.season-gps table .weekend-results table.custom-table tr:not(.draggable-row) i {
+	font-size: 20px;
+	cursor: pointer;
+}
+.season-gps table .weekend-results table.custom-table tr .actions {
+	gap: 18px;
+}
+.season-gps table .weekend-results table.custom-table tr .actions button {
+	width: 100%;
+}
+.season-gps table .weekend-results table.custom-table {
+	min-width: 860px;
+}
+
+.season-gps table .new-gp,
+.season-gps table .edit-round {
+	display: none;
+}
+.season-gps table .new-gp td.gp-info div,
+.season-gps table .edit-round td.gp-info div {
+	gap: 10px;
 }

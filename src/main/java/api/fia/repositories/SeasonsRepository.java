@@ -24,8 +24,9 @@ public class SeasonsRepository {
 			+ "season_constructor_principal_color, season_constructor_secondary_color) VALUES (?, ?, ?, ?, ?)";
 	private static final String SELECT_SEASONS = "SELECT DISTINCT season_year FROM season_constructors WHERE season_category = ?";
 	private static final String SELECT_CONSTRUCTORS = "SELECT season_year, season_category, season_constructor, constructor_name, "
-			+ "season_constructor_principal_color, season_constructor_secondary_color FROM season_constructors JOIN constructors ON "
-			+ "season_constructor = constructor_id WHERE season_year = ? AND season_category = ? ORDER BY constructor_name ASC";
+			+ "season_constructor_principal_color, season_constructor_secondary_color FROM season_constructors JOIN "
+			+ "constructors ON season_constructor = constructor_id WHERE season_year = ? AND season_category = ? ORDER BY "
+			+ "constructor_name ASC";
 	private static final String SELECT_DRIVERS_FROM_CONSTRUCTOR = "SELECT tm.transfer_id, tm.transfer_season, tm.driver_id, tm.driver_number, "
 			+ "tm.driver_replace, tm.constructor_id, tm.constructor_seat, d.driver_name, d.driver_lastname, d.driver_birthday, "
 			+ "cn.country_code AS driver_country FROM transfer_market tm "
